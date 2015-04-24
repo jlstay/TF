@@ -1,0 +1,2893 @@
+// VISA specification version 3.0 class definitions for LabVIEW 6.x
+
+class: "VISA object"
+flags: 3
+
+ method: "VISA Close" noInvoke
+
+// First come all the I/O classes
+
+class: "I/O Session"
+super: "VISA object"
+flags: 2
+ attribute: "Queue Len"
+    "General Settings:Maximum Queue Length"
+    uL readwrite local 3FFF0005
+    // const: VI_ATTR_MAX_QUEUE_LENGTH
+    "This property specifies the maximum number of events that can be queued at any time on the given session. This property is Read/Write until the first time VISA Enable Event is called on a session. Thereafter, it is Read Only."
+ attribute: "Rsrc Lock State"
+    "General Settings:Resource Lock State"
+    uL enum {Unlocked=0, Exclusive=1, Shared=2} readonly global 3FFF0004
+    // const: VI_ATTR_RSRC_LOCK_STATE
+    "This property reflects the current locking state of the resource that is associated with the given session."
+ attribute: "Rsrc Name"
+    "General Settings:Resource Name"
+    string readonly global BFFF0002
+    // const: VI_ATTR_RSRC_NAME
+    "This property is the unique identifier for a resource."
+ attribute: "Rsrc Class"
+    "General Settings:Resource Class"
+    string readonly global BFFF0001
+    // const: VI_ATTR_RSRC_CLASS
+    "This property specifies the resource class of the resource string used to open the given session.  For example, if the resource string for a given session is COM1 or ASRL1::INSTR, this property will return INSTR, regardless of the class of the I/O control."
+ attribute: "Timeout"
+    "General Settings:Timeout Value"
+    uL readwrite local 3FFF001A
+    // const: VI_ATTR_TMO_VALUE
+    "This property specifies the minimum timeout value, in milliseconds, to use when accessing the device. Note that the actual timeout used may be higher than the one requested."
+ attribute: "User Data"
+    "General Settings:User Data"
+    uL readwrite local 3FFF0007
+    // const: VI_ATTR_USER_DATA
+    "This property is a data value for the private use of an application, and is unique per session. This property is not used by VISA for any purpose."
+ attribute: "Intf Num"
+    "Interface Information:Interface Number"
+    uW readonly global 3FFF0176
+    // const: VI_ATTR_INTF_NUM
+    "This property value specifies the board number for the given interface."
+ attribute: "Intf Type"
+    "Interface Information:Interface Type"
+    uW enum {GPIB=1, VXI=2, GPIB-VXI=3, Serial=4, PXI=5, TCPIP=6, USB=7, FireWire=9} readonly global 3FFF0171
+    // const: VI_ATTR_INTF_TYPE
+    "This property value specifies the interface type of the given session."
+ attribute: "Intf Inst Name"
+    "Interface Information:Interface Description"
+    string readonly global BFFF00E9
+    // const: VI_ATTR_INTF_INST_NAME
+    "This property specifies human-readable text describing the given interface.
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Impl Version"
+    "Version Information:Version of Implementation"
+    uL readonly  global 3FFF0003
+    // const: VI_ATTR_RSRC_IMPL_VERSION
+    "This property is the version that uniquely identifies each of the different revisions or implementations. This property is defined by the individual manufacturer and increments with each new revision."
+ attribute: "Spec Version"
+    "Version Information:Version of Specification"
+    uL readonly  global 3FFF0170
+    // const: VI_ATTR_RSRC_SPEC_VERSION
+    "This property is the version that uniquely identifies the version of the VISA specification to which the implementation is compliant."
+ attribute: "Rsrc Manf Id"
+    "Version Information:Resource Manufacturer Identification"
+    uW readonly global 3FFF0175
+    // const: VI_ATTR_RSRC_MANF_ID
+    "This property value corresponds to the VXI manufacturer ID of the manufacturer that created the VISA implementation."
+ attribute: "Rsrc Manf Name"
+    "Version Information:Resource Manufacturer Name"
+    string readonly global BFFF0174
+    // const: VI_ATTR_RSRC_MANF_NAME
+    "This property is the name of the manufacturer that created the implementation.
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+
+ method: "VISA Status Description" noInvoke
+ method: "VISA Open" noInvoke
+ method: "VISA Lock" noInvoke
+ method: "VISA Unlock" noInvoke
+ method: "VISA Enable Event" noInvoke
+ method: "VISA Disable Event" noInvoke
+ method: "VISA Wait on Event" noInvoke
+ method: "VISA Discard Events" noInvoke
+
+// There is INSTR and its many derivations (GPIB, VXI, Serial, PXI, TCPIP)
+
+class: "Instr"
+super: "I/O Session"
+classString: "?*::(INSTR|SOCKET)"
+ attribute: "Intf Parent Num"
+    "Interface Information:Interface Number of Parent"
+    uW readonly global 3FFF0101
+    // const: VI_ATTR_INTF_PARENT_NUM
+    "This property value specifies the board number of the parent device.
+
+<B>Note:</B> In the Instr class, this property is valid for only GPIB-VXI resources."
+ attribute: "Trigger Id"
+    "General Settings:Trigger Identifier"
+    iW enum {Software=-1, TTL0=0, TTL1=1, TTL2=2, TTL3=3, TTL4=4, TTL5=5, TTL6=6, TTL7=7, ECL0=8, ECL1=9} readwrite local 3FFF0177
+    // const: VI_ATTR_TRIG_ID
+    "This property specifies which trigger mechanism to use. In VXI systems, for example, you can choose between software triggers and hardware triggers on a specific trigger line.
+
+<B>Note:</B> In the Instr class, this property is valid for only GPIB-VXI, VXI, and PXI resources."
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property.
+
+<B>Note:</B> In the Instr class, this property is valid for only GPIB, GPIB-VXI, and VXI resources."
+ attribute: "Manf Name"
+    "General Settings:Manufacturer Name"
+    string readonly global BFFF0072
+    // const: VI_ATTR_MANF_NAME
+    "This string property is the manufacturer's name. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions.
+
+<B>Note:</B> In the Instr class, this property is valid for only GPIB-VXI, VXI, PXI/PCI, FireWire, and USB resources."
+ attribute: "Model Name"
+    "General Settings:Model Name"
+    string readonly global BFFF0077
+    // const: VI_ATTR_MODEL_NAME
+    "This string property is the model name of the device. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions.
+
+<B>Note:</B> In the Instr class, this property is valid for only GPIB-VXI, VXI, PXI/PCI, FireWire, and USB resources."
+ attribute: "Manf Id"
+    "General Settings:Manufacturer Identification"
+    uW readonly global 3FFF00D9
+    // const: VI_ATTR_MANF_ID
+    "This property value corresponds to the ID of the manufacturer that created the device.
+
+<B>Note:</B> In the Instr class, this property is valid for only GPIB-VXI, VXI, PXI/PCI, and USB resources."
+ attribute: "Model Code"
+    "General Settings:Model Code"
+    uW readonly global 3FFF00DF
+    // const: VI_ATTR_MODEL_CODE
+    "This property value is the device model code assigned by the manufacturer.
+
+<B>Note:</B> In the Instr class, this property is valid for only GPIB-VXI, VXI, PXI/PCI, and USB resources."
+ attribute: "Slot"
+    "General Settings:Slot"
+    iW readonly global 3FFF00E8
+    // const: VI_ATTR_SLOT
+    "This property value is the physical slot location of the device. If the slot is unknown, the value returned will be -1.
+
+<B>Note:</B> In the Instr class, this property is valid for only GPIB-VXI, VXI, and PXI/PCI resources."
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "Suppress End En"
+    "Message Based Settings:Suppress End Enable"
+    bool readwrite local 3FFF0036
+    // const: VI_ATTR_SUPPRESS_END_EN
+    "This property is relevant only in VISA Read and related operations.
+
+For all session types on which this property is supported, if this property is set to TRUE, read will not terminate due to an END condition. However, a read may still terminate successfully if the property 'TermChar En' is set to TRUE. Otherwise, read will not terminate until all of the requested data is received (or an error occurs).
+
+On Serial Instr sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'ASRL End In'.
+
+On USB Raw sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'USB End In'.
+
+On TCP/IP Socket sessions, if this property is set to FALSE, if NI-VISA reads some data and then detects a pause in the arrival of data packets, it will terminate the read operation. On TCP/IP Socket sessions, this property defaults to TRUE in NI-VISA.
+
+On VXI Instr sessions, if this property is set to FALSE, the END bit terminates read operations."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+ attribute: "Win Base Addr"
+    "Register Based Settings:Window Base Address"
+    uL readonly local 3FFF0098
+    // const: VI_ATTR_WIN_BASE_ADDR
+    "This property value is the base interface address to which this window is mapped."
+ attribute: "Win Size"
+    "Register Based Settings:Window Size"
+    uL readonly local 3FFF009A
+    // const: VI_ATTR_WIN_SIZE
+    "This property value is the size of the region mapped to this window."
+ attribute: "Win Access"
+    "Register Based Settings:Window Access"
+    uW enum {"Not Mapped"=1, "Use Peek/Poke Operations"=2, "Can Dereference Pointer"=3, "Pointer value is byte-swapped"=4} readonly local 3FFF00C3
+    // const: VI_ATTR_WIN_ACCESS
+    "This property value reflects whether the current session has a mapped window, and if so, whether accesses through this window can be achieved through direct pointer dereferences."
+ attribute: "Src Increment"
+    "Register Based Settings:Source Increment Count"
+    iL readwrite local 3FFF0040
+    // const: VI_ATTR_SRC_INCREMENT
+    "This property specifies the number of elements by which to increment the source address on block move operations. Valid values are 0 and 1."
+ attribute: "Dest Increment"
+    "Register Based Settings:Destination Increment Count"
+    iL readwrite local 3FFF0041
+    // const: VI_ATTR_DEST_INCREMENT
+    "This property specifies the number of elements by which to increment the destination address on block move operations. Valid values are 0 and 1."
+ attribute: "FDC Channel"
+    "VME/VXI Settings:Fast Data Channel:Channel Number"
+    uW readwrite local 3FFF000D
+    // const: VI_ATTR_FDC_CHNL
+    "This property specifies which FDC channel will be used to transfer data buffers. Valid values are 0-7."
+ attribute: "FDC Mode"
+    "VME/VXI Settings:Fast Data Channel:Channel Mode"
+    uW enum {Normal=1, Stream=2} readwrite local 3FFF000F
+    // const: VI_ATTR_FDC_MODE
+    "This property specifies whether FDC transfers will use normal or streaming mode."
+ attribute: "FDC Use Pair"
+    "VME/VXI Settings:Fast Data Channel:Use Channel Pairs"
+    bool readwrite local 3FFF0013
+    // const: VI_ATTR_FDC_USE_PAIR
+    "This property specifies whether transfers will use a pair of FDC channels. If not set, only one FDC channel will be used."
+ attribute: "Primary Addr"
+    "GPIB Settings:Primary Address"
+    uW readonly global 3FFF0172
+    // const: VI_ATTR_GPIB_PRIMARY_ADDR
+    "This property value is the primary address of the GPIB device used by the given session."
+ attribute: "Secondary Addr"
+    "GPIB Settings:Secondary Address"
+    uW readonly global 3FFF0173
+    // const: VI_ATTR_GPIB_SECONDARY_ADDR
+    "This property value is the secondary address of the GPIB device used by the given session. If the device does not have a secondary address, then the value of this property is 65535 (0xFFFF)."
+ attribute: "Readdress"
+    "GPIB Settings:Readdressing"
+    bool readwrite local 3FFF001B
+    // const: VI_ATTR_GPIB_READDR_EN
+    "This property specifies whether the device is to be readdressed before every transfer."
+ attribute: "Unaddress"
+    "GPIB Settings:Unaddressing"
+    bool readwrite local 3FFF0184
+    // const: VI_ATTR_GPIB_UNADDR_EN
+    "This property specifies whether to unaddress the device (UNT and UNL) after each read or write operation."
+ attribute: "REN State"
+    "GPIB Settings:Line REN State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0181
+    // const: VI_ATTR_GPIB_REN_STATE
+    "This property returns the current state of the GPIB REN interface line."
+ attribute: "Mainframe LA"
+    "VME/VXI Settings:Mainframe Logical Address"
+    iW readonly global 3FFF0070
+    // const: VI_ATTR_MAINFRAME_LA
+    "This property value is the lowest logical address in the mainframe in which the device resides."
+ attribute: "Mem Base"
+    "VME/VXI Settings:VXI Memory Base Address"
+    uL readonly global 3FFF00AD
+    // const: VI_ATTR_MEM_BASE
+    "This property value is the base address of the device in VXI memory space."
+ attribute: "Mem Size"
+    "VME/VXI Settings:VXI Memory Size"
+    uL readonly global 3FFF00DD
+    // const: VI_ATTR_MEM_SIZE
+    "This property value is the size of memory requested by the device in VXI memory space."
+ attribute: "Mem Space"
+    "VME/VXI Settings:VXI Memory Address Space"
+    uW enum {A16=1, A24=2, A32=3} readonly global 3FFF00DE
+    // const: VI_ATTR_MEM_SPACE
+    "This property value is the VXI address space used by the device."
+ attribute: "VXI LA"
+    "VME/VXI Settings:VXI Logical Address"
+    iW readonly global 3FFF00D5
+    // const: VI_ATTR_VXI_LA
+    "This property value is the logical address of the VXI device."
+ attribute: "Immediate Serv"
+    "VME/VXI Settings:Immediate Servant"
+    bool readonly global 3FFF0100
+    // const: VI_ATTR_IMMEDIATE_SERV
+    "This property value reflects whether the VXI device is an immediate servant of the local controller."
+ attribute: "Cmdr LA"
+    "VME/VXI Settings:VXI Commander Logical Address"
+    iW readonly global 3FFF006B
+    // const: VI_ATTR_CMDR_LA
+    "This property value is the logical address of the commander of the VXI device."
+ attribute: "Src Access Priv"
+    "VME/VXI Settings:Source Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF003C
+    // const: VI_ATTR_SRC_ACCESS_PRIV
+    "This property specifies the address modifier to be used in high-level access operations, such as VISA In X and VISA Move In X, when reading from the source."
+ attribute: "Dest Access Priv"
+    "VME/VXI Settings:Destination Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF0039
+    // const: VI_ATTR_DEST_ACCESS_PRIV
+    "This property specifies the address modifier to be used in high-level access operations, such as VISA Out X and VISA Move Out X, when writing to the destination."
+ attribute: "Win Access Priv"
+    "VME/VXI Settings:Window Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF0045
+    // const: VI_ATTR_WIN_ACCESS_PRIV
+    "This property specifies the address modifier to be used in low-level access operations, such as VISA Map Address, VISA Peek X and VISA Poke X, when accessing the mapped window."
+ attribute: "Src Byte Order"
+    "VME/VXI Settings:Source Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF003D
+    // const: VI_ATTR_SRC_BYTE_ORDER
+    "This property specifies the byte order to be used in high-level access operations, such as VISA In X and VISA Move In X, when reading from the source."
+ attribute: "Dest Byte Order"
+    "VME/VXI Settings:Destination Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF003A
+    // const: VI_ATTR_DEST_BYTE_ORDER
+    "This property specifies the byte order to be used in high-level access operations, such as VISA Out X and VISA Move Out X, when writing to the destination."
+ attribute: "Win Byte Order"
+    "VME/VXI Settings:Window Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF0047
+    // const: VI_ATTR_WIN_BYTE_ORDER
+    "This property specifies the byte order to be used in low-level access operations, such as VISA Map Address, VISA Peek X and VISA Poke X, when accessing the mapped window."
+ attribute: "VXI Trig Supp"
+    "VME/VXI Settings:Supported VXI Trigger Lines"
+    uL readonly global 3FFF0194
+    // const: VI_ATTR_VXI_TRIG_SUPPORT
+    "This property shows which VXI trigger lines this implementation supports. This is a bit vector with bits 0-9 corresponding to TTL0 through ECL1."
+ attribute: "VXI Dev Class"
+    "VME/VXI Settings:VXI Device Class"
+    uW enum {Memory=0, Extended=1, Message=2, Register=3, Other=4} readonly global 3FFF006C
+    // const: VI_ATTR_VXI_DEV_CLASS
+    "This specifies which class the VXI or VME device is a member of."
+ attribute: "Bytes at Port"
+    "Serial Settings:Number of Bytes at Serial Port"
+    uL readonly global 3FFF00AC
+    // const: VI_ATTR_ASRL_AVAIL_NUM
+    "This property specifies the number of bytes currently available at the serial port used by this session."
+ attribute: "Baud"
+    "Serial Settings:Baud Rate"
+    uL readwrite global 3FFF0021
+    // const: VI_ATTR_ASRL_BAUD
+    "This property specifies the baud rate of the given communications port."
+ attribute: "Data Bits"
+    "Serial Settings:Data Bits"
+    uW readwrite global 3FFF0022
+    // const: VI_ATTR_ASRL_DATA_BITS
+    "This property specifies the number of data bits contained in each frame. Valid values are 5-8."
+ attribute: "Parity"
+    "Serial Settings:Parity"
+    uW enum {None=0, Odd=1, Even=2, Mark=3, Space=4} readwrite global 3FFF0023
+    // const: VI_ATTR_ASRL_PARITY
+    "This property specifies the parity used with every frame that is transmitted or received. Valid values are:  (0) Parity None, (1) Parity Odd, (2) Parity Even, (3) Parity Mark, (4) Parity Space."
+ attribute: "Stop Bits"
+    "Serial Settings:Stop Bits"
+    uW enum {1.0=10, 1.5=15, 2.0=20} readwrite global 3FFF0024
+    // const: VI_ATTR_ASRL_STOP_BITS
+    "This property specifies the number of stop bits used to indicate the end of a frame. Valid values are:  (10) Stop One, (15) Stop One-and-a-Half, (20) Stop Two."
+ attribute: "Flow Cntrl"
+    "Serial Settings:Flow Control"
+    uW enum {None=0, XON/XOFF=1, RTS/CTS=2, "XON/XOFF & RTS/CTS"=3, DTR/DSR=4, "XON/XOFF & DTR/DSR"=5} readwrite global 3FFF0025
+    // const: VI_ATTR_ASRL_FLOW_CNTRL
+    "This property specifies the flow control method used for both transmitting and receiving data. Valid values are:  (0) Flow None, (1) Flow XON/XOFF, (2) Flow RTS/CTS, (3) Flow XON/XOFF and RTS/CTS, (4) Flow DTR/DSR, (5) Flow XON/XOFF and DTR/DSR. Certain values or combinations of values may not be supported by all serial ports and/or operating systems."
+ attribute: "ASRL End In"
+    "Serial Settings:End Mode for Reads"
+    uW enum {None=0, "Last Bit"=1, "TermChar"=2} readwrite local 3FFF00B3
+    // const: VI_ATTR_ASRL_END_IN
+    "This property specifies the method used to terminate read operations. Valid values are:  (0) End None, (1) End Last Bit, (2) End TermChar. If the value is (2) End TermChar, then the value of the property TermChar En is ignored."
+ attribute: "ASRL End Out"
+    "Serial Settings:End Mode for Writes"
+    uW enum {None=0, "Last Bit"=1, "TermChar"=2, Break=3} readwrite local 3FFF00B4
+    // const: VI_ATTR_ASRL_END_OUT
+    "This property specifies the method used to terminate write operations. Valid values are:  (0) End None, (1) End Last Bit, (2) End Add TermChar, (3) End Break."
+ attribute: "XON Char"
+    "Serial Settings:Flow Control XON Character"
+    uB readwrite global 3FFF00C1
+    // const: VI_ATTR_ASRL_XON_CHAR
+    "This property specifies the value of the XON character used for XON/XOFF flow control (both directions). If XON/XOFF flow control (software handshaking) is not being used, the value of this property is ignored."
+ attribute: "XOFF Char"
+    "Serial Settings:Flow Control XOFF Character"
+    uB readwrite global 3FFF00C2
+    // const: VI_ATTR_ASRL_XOFF_CHAR
+    "This property specifies the value of the XOFF character used for XON/XOFF flow control (both directions). If XON/XOFF flow control (software handshaking) is not being used, the value of this property is ignored."
+ attribute: "Replace Char"
+    "Serial Settings:Error Replacement Character"
+    uB readwrite global 3FFF00BE
+    // const: VI_ATTR_ASRL_REPLACE_CHAR
+    "This property specifies the character to be used to replace incoming characters that arrive with errors (such as a parity error)."
+ attribute: "Discard NUL"
+    "Serial Settings:Discard NUL Characters"
+    bool readwrite global 3FFF00B0
+    // const: VI_ATTR_ASRL_DISCARD_NULL
+    "This property specifies whether to discard each data byte whose value is 0. If enabled, NUL characters are discarded. Otherwise, they are treated as normal data characters. For binary transfers, disable this property."
+ attribute: "Break Len"
+    "Serial Settings:Break Length"
+    iW readwrite local 3FFF01BD
+    // const: VI_ATTR_ASRL_BREAK_LEN
+    "This property controls the duration (in milliseconds) of the break signal asserted when ASRL End Out is set to Break (3). Valid values are 1-500."
+ attribute: "Allow Transmit"
+    "Serial Settings:Allow Transmit"
+    bool readwrite global 3FFF01BE
+    // const: VI_ATTR_ASRL_ALLOW_TRANSMIT
+    "If disabled (F), the serial port suspends transmission as if an XOFF character has been received. If enabled (T), it resumes transmission as if an XON character has been received. If XON/XOFF flow control (software handshaking) is not being used, it is invalid to disable this property."
+ attribute: "Wire Mode"
+    "Serial Settings:Wire Mode"
+    iW enum {Unknown=-1, RS485/Wire4=0, RS485/Wire2-EchoDTR=1, RS485/Wire2-CtrlDTR=2, RS485/Wire2-Auto=3, RS232/DTE=128, RS232/DCE=129, RS232/AUTO=130} readwrite global 3FFF01BF
+    // const: VI_ATTR_ASRL_WIRE_MODE
+    "This property represents the current wire/transceiver mode. For RS-485 hardware, this property is valid only with the RS-485 serial driver developed by National Instruments. For RS-232 hardware, the values RS232/DCE and RS232/AUTO are valid only with RS-232 serial drivers developed by National Instruments and documented to support this feature with the corresponding National Instruments hardware. When this feature is not supported, RS232/DTE is the only valid value."
+ attribute: "Break State"
+    "Serial Settings:Modem Line Settings:Break State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF01BC
+    // const: VI_ATTR_ASRL_BREAK_STATE
+    "This property lets you manually control the serial port's break state. If asserted, it suspends character transmission and places the transmission line in a break state until this property is unasserted. If you want VISA to send a break signal after each write operation automatically, use the Break Len and ASRL End Out properties instead."
+ attribute: "CTS State"
+    "Serial Settings:Modem Line Settings:Line CTS State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF00AE
+    // const: VI_ATTR_ASRL_CTS_STATE
+    "This property shows the current state of the Clear To Send (CTS) input signal."
+ attribute: "DCD State"
+    "Serial Settings:Modem Line Settings:Line DCD State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF00AF
+    // const: VI_ATTR_ASRL_DCD_STATE
+    "This property represents the current state of the Data Carrier Detect (DCD) input signal. This is often used by modems to indicate the detection of a carrier (modem) on the phone line. This is also known as Receive Line Signal Detect (RLSD). This property is Read Only except when the Wire Mode property is set to RS232/DCE, or RS232/AUTO with the hardware currently in the DCE state."
+ attribute: "DSR State"
+    "Serial Settings:Modem Line Settings:Line DSR State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF00B1
+    // const: VI_ATTR_ASRL_DSR_STATE
+    "This property shows the current state of the Data Set Ready (DSR) input signal."
+ attribute: "DTR State"
+    "Serial Settings:Modem Line Settings:Line DTR State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF00B2
+    // const: VI_ATTR_ASRL_DTR_STATE
+    "This property is used to manually assert or unassert the Data Terminal Ready (DTR) output signal."
+ attribute: "RI State"
+    "Serial Settings:Modem Line Settings:Line RI State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF00BF
+    // const: VI_ATTR_ASRL_RI_STATE
+    "This property represents the current state of the Ring Indicator (RI) input signal. The RI signal is often used by modems to indicate that the telephone line is ringing. This property is Read Only except when the Wire Mode property is set to RS232/DCE, or RS232/AUTO with the hardware currently in the DCE state."
+ attribute: "RTS State"
+    "Serial Settings:Modem Line Settings:Line RTS State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF00C0
+    // const: VI_ATTR_ASRL_RTS_STATE
+    "This property is used to manually assert or unassert the Request To Send (RTS) output signal. When the flow control is set to hardware handshaking, it is invalid to change this property."
+ attribute: "Is Connected"
+    "Serial Settings:Is Port Connected"
+    bool readonly global 3FFF01BB
+    // const: VI_ATTR_ASRL_CONNECTED
+    "This property specifies whether the port is properly connected to another port or device. This property is valid only with serial drivers developed by National Instruments and documented to support this feature with the corresponding National Instruments hardware."
+ attribute: "Device Num"
+    "PXI/PCI Settings:PCI Device Number"
+    uW readonly global 3FFF0201
+    // const: VI_ATTR_PXI_DEV_NUM
+    "This property specifies the PCI device number of the PXI/PCI resource."
+ attribute: "Function Num"
+    "PXI/PCI Settings:PCI Function Number"
+    uW readonly global 3FFF0202
+    // const: VI_ATTR_PXI_FUNC_NUM
+    "This property specifies the PCI function number of the PXI/PCI resource. For most devices this will be 0, but a multifunction device may have a function number up to 7. The meaning of a function number other than 0 is device-specific."
+ attribute: "Bus Num"
+    "PXI/PCI Settings:PCI Bus Number"
+    uW readonly global 3FFF0205
+    // const: VI_ATTR_PXI_BUS_NUM
+    "This property specifies the PCI bus number of the PXI/PCI resource."
+ attribute: "Chassis Num"
+    "PXI/PCI Settings:PXI Chassis Number"
+    iW readonly global 3FFF0206
+    // const: VI_ATTR_PXI_CHASSIS
+    "This property specifies the PXI chassis number of this device."
+ attribute: "Slot Path"
+    "PXI/PCI Settings:Slot Path"
+    string readonly global BFFF0207
+    // const: VI_ATTR_PXI_SLOTPATH
+    "This property specifies the slot path of this device."
+ attribute: "Loc Bus Left"
+    "PXI/PCI Settings:Slot Local Bus Left"
+    iW readonly global 3FFF0208
+    // const: VI_ATTR_PXI_SLOT_LBUS_LEFT
+    "This property specifies the slot number or special feature connected to the local bus left lines of this device."
+ attribute: "Loc Bus Right"
+    "PXI/PCI Settings:Slot Local Bus Right"
+    iW readonly global 3FFF0209
+    // const: VI_ATTR_PXI_SLOT_LBUS_RIGHT
+    "This property specifies the slot number or special feature connected to the local bus right lines of this device."
+ attribute: "Trig Bus"
+    "PXI/PCI Settings:Trigger Bus Number"
+    iW readonly global 3FFF020A
+    // const: VI_ATTR_PXI_TRIG_BUS
+    "This property specifies the trigger bus number of this device."
+ attribute: "Star Trig Bus"
+    "PXI/PCI Settings:Star Trigger Bus Number"
+    iW readonly global 3FFF020B
+    // const: VI_ATTR_PXI_STAR_TRIG_BUS
+    "This property specifies the star trigger bus number of this device."
+ attribute: "Star Trig Line"
+    "PXI/PCI Settings:Star Trigger Line"
+    iW readonly global 3FFF020C
+    // const: VI_ATTR_PXI_STAR_TRIG_LINE
+    "This property specifies the PXI_STAR line connected to this device."
+ attribute: "BAR0 Type"
+    "PXI/PCI Settings:PCI Resources:BAR0 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0211
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR0
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR1 Type"
+    "PXI/PCI Settings:PCI Resources:BAR1 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0212
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR1
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR2 Type"
+    "PXI/PCI Settings:PCI Resources:BAR2 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0213
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR2
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR3 Type"
+    "PXI/PCI Settings:PCI Resources:BAR3 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0214
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR3
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR4 Type"
+    "PXI/PCI Settings:PCI Resources:BAR4 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0215
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR4
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR5 Type"
+    "PXI/PCI Settings:PCI Resources:BAR5 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0216
+    // const: VI_ATTR_PXI_MEM_BASE_BAR5
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR0 Base"
+    "PXI/PCI Settings:PCI Resources:BAR0 Address Base"
+    uL readonly global 3FFF0221
+    // const: VI_ATTR_PXI_MEM_BASE_BAR0
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR1 Base"
+    "PXI/PCI Settings:PCI Resources:BAR1 Address Base"
+    uL readonly global 3FFF0222
+    // const: VI_ATTR_PXI_MEM_BASE_BAR1
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR2 Base"
+    "PXI/PCI Settings:PCI Resources:BAR2 Address Base"
+    uL readonly global 3FFF0223
+    // const: VI_ATTR_PXI_MEM_BASE_BAR2
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR3 Base"
+    "PXI/PCI Settings:PCI Resources:BAR3 Address Base"
+    uL readonly global 3FFF0224
+    // const: VI_ATTR_PXI_MEM_BASE_BAR3
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR4 Base"
+    "PXI/PCI Settings:PCI Resources:BAR4 Address Base"
+    uL readonly global 3FFF0225
+    // const: VI_ATTR_PXI_MEM_BASE_BAR4
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR5 Base"
+    "PXI/PCI Settings:PCI Resources:BAR5 Address Base"
+    uL readonly global 3FFF0226
+    // const: VI_ATTR_PXI_MEM_BASE_BAR5
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR0 Size"
+    "PXI/PCI Settings:PCI Resources:BAR0 Address Size"
+    uL readonly global 3FFF0231
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR0
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR1 Size"
+    "PXI/PCI Settings:PCI Resources:BAR1 Address Size"
+    uL readonly global 3FFF0232
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR1
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR2 Size"
+    "PXI/PCI Settings:PCI Resources:BAR2 Address Size"
+    uL readonly global 3FFF0233
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR2
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR3 Size"
+    "PXI/PCI Settings:PCI Resources:BAR3 Address Size"
+    uL readonly global 3FFF0234
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR3
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR4 Size"
+    "PXI/PCI Settings:PCI Resources:BAR4 Address Size"
+    uL readonly global 3FFF0235
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR4
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR5 Size"
+    "PXI/PCI Settings:PCI Resources:BAR5 Address Size"
+    uL readonly global 3FFF0236
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR5
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "TCP Addr"
+    "TCP/IP Settings:Dot-Notation Address"
+    string readonly global BFFF0195
+    // const: VI_ATTR_TCPIP_ADDR
+    "This is the TCPIP address of the device to which the session is connected. This string is formatted in dot notation."
+ attribute: "TCP Hostname"
+    "TCP/IP Settings:Computer Hostname"
+    string readonly global BFFF0196
+    // const: VI_ATTR_TCPIP_HOSTNAME
+    "This specifies the host name of the device. If no host name is available, this property returns an empty string."
+ attribute: "TCP NoDelay"
+    "TCP/IP Settings:No Packet Delay"
+    bool readwrite local 3FFF019A
+    // const: VI_ATTR_TCPIP_NODELAY
+    "The Nagle algorithm is disabled when this property is enabled (and vice versa). The Nagle algorithm improves network performance by buffering written data until a full-size packet can be sent. This property is enabled by default in VISA to verify that writes get flushed immediately."
+ attribute: "TCP KeepAlive"
+    "TCP/IP Settings:Keep-Alive Packets"
+    bool readwrite local 3FFF019B
+    // const: VI_ATTR_TCPIP_KEEPALIVE
+    "Setting this property to TRUE requests that a TCP/IP provider enable the use of keep-alive packets on TCP connections. After the system detects that a connection was dropped, VISA will return a lost connection error code on subsequent I/O calls on the session. The time required for the system to detect that the connection was dropped is dependent on the system and is not settable."
+ attribute: "TCP DevName"
+    "TCP/IP Settings:LAN Device Name"
+    string readonly global BFFF0199
+    // const: VI_ATTR_TCPIP_DEVICE_NAME
+    "This specifies the LAN device name used by the VXI-11 protocol (for example, inst0) during connection."
+ attribute: "Is 488.2"
+    "Message Based Settings:Is 488.2 Compliant"
+    bool readonly global 3FFF019F
+    // const: VI_ATTR_4882_COMPLIANT
+    "This property specifies whether the device is 488.2 compliant."
+ attribute: "USB Serial Num"
+    "USB Settings:Serial Number"
+    string readonly global BFFF01A0
+    // const: VI_ATTR_USB_SERIAL_NUM
+    "This property specifies the USB serial number of this device."
+ attribute: "USB Intfc Num"
+    "USB Settings:USB Interface Number"
+    iW readonly global 3FFF01A1
+    // const: VI_ATTR_USB_INTFC_NUM
+    "This property specifies the USB interface number used by the given session."
+ attribute: "USB Prot"
+    "USB Settings:USB Protocol"
+    iW readonly global 3FFF01A7
+    // const: VI_ATTR_USB_PROTOCOL
+    "This property specifies the USB protocol used by the given session."
+ attribute: "USB Max Intr Size"
+    "USB Settings:Maximum Interrupt Size"
+    uW readwrite local 3FFF01AF
+    // const: VI_ATTR_USB_MAX_INTR_SIZE
+    "This property specifies the maximum size of data that will be stored by any given USB interrupt. If a USB interrupt contains more data than this size, the data in excess of this size will be lost."
+ attribute: "1394 Dest Upper"
+    "FireWire Settings:Destination Upper Offset"
+     uW readwrite local 3FFF01F0
+    // const: VI_ATTR_FIREWIRE_DEST_UPPER_OFFSET
+    "This property specifies the upper 16 bits of the 48-bit destination address for a FireWire device."
+ attribute: "1394 Src Upper"
+    "FireWire Settings:Source Upper Offset"
+     uW readwrite local 3FFF01F1
+    // const: VI_ATTR_FIREWIRE_SRC_UPPER_OFFSET
+    "This property specifies the upper 16 bits of the 48-bit source address for a FireWire device."
+ attribute: "1394 Win Upper"
+    "FireWire Settings:Window Upper Offset"
+     uW readwrite local 3FFF01F2
+    // const: VI_ATTR_FIREWIRE_WIN_UPPER_OFFSET
+    "This property specifies the upper 16 bits of the 48-bit address for a FireWire device when a window is mapped."
+ attribute: "1394 Vendor"
+    "FireWire Settings:Vendor ID"
+     uL readonly global 3FFF01F3
+    // const: VI_ATTR_FIREWIRE_VENDOR_ID
+    "This property specifies the vendor ID for a FireWire device."
+ attribute: "1394 Lower Chip"
+    "FireWire Settings:Lower Chip ID"
+     uL readonly global 3FFF01F4
+    // const: VI_ATTR_FIREWIRE_LOWER_CHIP_ID
+    "This property specifies the lower chip ID for a FireWire device."
+ attribute: "1394 Upper Chip"
+    "FireWire Settings:Upper Chip ID"
+     uB readonly global 3FFF01F5
+    // const: VI_ATTR_FIREWIRE_UPPER_CHIP_ID
+    "This property specifies the upper chip ID for a FireWire device."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Clear" noInvoke
+ method: "VISA Read STB" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA In 32" noInvoke
+ method: "VISA In 16" noInvoke
+ method: "VISA In 8" noInvoke
+ method: "VISA Out 32" noInvoke
+ method: "VISA Out 16" noInvoke
+ method: "VISA Out 8" noInvoke
+ method: "VISA Map Address" noInvoke
+ method: "VISA Unmap Address" noInvoke
+ method: "VISA Peek 32" noInvoke
+ method: "VISA Peek 16" noInvoke
+ method: "VISA Peek 8" noInvoke
+ method: "VISA Poke 32" noInvoke
+ method: "VISA Poke 16" noInvoke
+ method: "VISA Poke 8" noInvoke
+ method: "VISA Move In 8" noInvoke
+ method: "VISA Move In 16" noInvoke
+ method: "VISA Move In 32" noInvoke
+ method: "VISA Move Out 8" noInvoke
+ method: "VISA Move Out 16" noInvoke
+ method: "VISA Move Out 32" noInvoke
+ method: "VISA Mem Alloc" noInvoke
+ method: "VISA Mem Free" noInvoke
+ method: "VISA Set I/O Buffer Size" noInvoke
+ method: "VISA Flush I/O Buffer" noInvoke
+ method: "VISA GPIB Control REN" noInvoke
+ method: "VISA VXI Cmd or Query" noInvoke
+ method: "VISA USB Control Out" noInvoke
+ method: "VISA USB Control In" noInvoke
+
+class: "GPIB Instr"
+super: "I/O Session"
+classString: "GPIB?*::INSTR"
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+ attribute: "Primary Addr"
+    "GPIB Settings:Primary Address"
+    uW readonly global 3FFF0172
+    // const: VI_ATTR_GPIB_PRIMARY_ADDR
+    "This property value is the primary address of the GPIB device used by the given session."
+ attribute: "Secondary Addr"
+    "GPIB Settings:Secondary Address"
+    uW readonly global 3FFF0173
+    // const: VI_ATTR_GPIB_SECONDARY_ADDR
+    "This property value is the secondary address of the GPIB device used by the given session. If the device does not have a secondary address, then the value of this property is 65535 (0xFFFF)."
+ attribute: "Readdress"
+    "GPIB Settings:Readdressing"
+    bool readwrite local 3FFF001B
+    // const: VI_ATTR_GPIB_READDR_EN
+    "This property specifies whether the device is to be readdressed before every transfer."
+ attribute: "Unaddress"
+    "GPIB Settings:Unaddressing"
+    bool readwrite local 3FFF0184
+    // const: VI_ATTR_GPIB_UNADDR_EN
+    "This property specifies whether to unaddress the device (UNT and UNL) after each read or write operation."
+ attribute: "REN State"
+    "GPIB Settings:Line REN State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0181
+    // const: VI_ATTR_GPIB_REN_STATE
+    "This property returns the current state of the GPIB REN interface line."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Clear" noInvoke
+ method: "VISA Read STB" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA GPIB Control REN" noInvoke
+
+class: "VXI/GPIB-VXI MBD Instr"
+super: "I/O Session"
+classString: "?*VXI?*::INSTR"
+ attribute: "Intf Parent Num"
+    "Interface Information:Interface Number of Parent"
+    uW readonly global 3FFF0101
+    // const: VI_ATTR_INTF_PARENT_NUM
+    "This property value specifies the board number of the parent device."
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "Trigger Id"
+    "General Settings:Trigger Identifier"
+    iW enum {Software=-1, TTL0=0, TTL1=1, TTL2=2, TTL3=3, TTL4=4, TTL5=5, TTL6=6, TTL7=7, ECL0=8, ECL1=9} readwrite local 3FFF0177
+    // const: VI_ATTR_TRIG_ID
+    "This property specifies which trigger mechanism to use. In VXI systems, for example, you can choose between software triggers and hardware triggers on a specific trigger line."
+ attribute: "Manf Name"
+    "General Settings:Manufacturer Name"
+    string readonly global BFFF0072
+    // const: VI_ATTR_MANF_NAME
+    "This string property is the manufacturer's name. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Model Name"
+    "General Settings:Model Name"
+    string readonly global BFFF0077
+    // const: VI_ATTR_MODEL_NAME
+    "This string property is the model name of the device. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Manf Id"
+    "General Settings:Manufacturer Identification"
+    uW readonly global 3FFF00D9
+    // const: VI_ATTR_MANF_ID
+    "This property value corresponds to the ID of the manufacturer that created the device."
+ attribute: "Model Code"
+    "General Settings:Model Code"
+    uW readonly global 3FFF00DF
+    // const: VI_ATTR_MODEL_CODE
+    "This property value is the device model code assigned by the manufacturer."
+ attribute: "Slot"
+    "General Settings:Slot"
+    iW readonly global 3FFF00E8
+    // const: VI_ATTR_SLOT
+    "This property value is the physical slot location of the device. If the slot is unknown, the value returned will be -1."
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "Suppress End En"
+    "Message Based Settings:Suppress End Enable"
+    bool readwrite local 3FFF0036
+    // const: VI_ATTR_SUPPRESS_END_EN
+    "This property is relevant only in VISA Read and related operations.
+
+For all session types on which this property is supported, if this property is set to TRUE, read will not terminate due to an END condition. However, a read may still terminate successfully if the property 'TermChar En' is set to TRUE. Otherwise, read will not terminate until all of the requested data is received (or an error occurs).
+
+On Serial Instr sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'ASRL End In'.
+
+On USB Raw sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'USB End In'.
+
+On TCP/IP Socket sessions, if this property is set to FALSE, if NI-VISA reads some data and then detects a pause in the arrival of data packets, it will terminate the read operation. On TCP/IP Socket sessions, this property defaults to TRUE in NI-VISA.
+
+On VXI Instr sessions, if this property is set to FALSE, the END bit terminates read operations."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+ attribute: "Win Base Addr"
+    "Register Based Settings:Window Base Address"
+    uL readonly local 3FFF0098
+    // const: VI_ATTR_WIN_BASE_ADDR
+    "This property value is the base interface address to which this window is mapped."
+ attribute: "Win Size"
+    "Register Based Settings:Window Size"
+    uL readonly local 3FFF009A
+    // const: VI_ATTR_WIN_SIZE
+    "This property value is the size of the region mapped to this window."
+ attribute: "Win Access"
+    "Register Based Settings:Window Access"
+    uW enum {"Not Mapped"=1, "Use Peek/Poke Operations"=2, "Can Dereference Pointer"=3, "Pointer value is byte-swapped"=4} readonly local 3FFF00C3
+    // const: VI_ATTR_WIN_ACCESS
+    "This property value reflects whether the current session has a mapped window, and if so, whether accesses through this window can be achieved through direct pointer dereferences."
+ attribute: "Src Increment"
+    "Register Based Settings:Source Increment Count"
+    iL readwrite local 3FFF0040
+    // const: VI_ATTR_SRC_INCREMENT
+    "This property specifies the number of elements by which to increment the source address on block move operations. Valid values are 0 and 1."
+ attribute: "Dest Increment"
+    "Register Based Settings:Destination Increment Count"
+    iL readwrite local 3FFF0041
+    // const: VI_ATTR_DEST_INCREMENT
+    "This property specifies the number of elements by which to increment the destination address on block move operations. Valid values are 0 and 1."
+ attribute: "FDC Channel"
+    "VME/VXI Settings:Fast Data Channel:Channel Number"
+    uW readwrite local 3FFF000D
+    // const: VI_ATTR_FDC_CHNL
+    "This property specifies which FDC channel will be used to transfer data buffers. Valid values are 0-7."
+ attribute: "FDC Mode"
+    "VME/VXI Settings:Fast Data Channel:Channel Mode"
+    uW enum {Normal=1, Stream=2} readwrite local 3FFF000F
+    // const: VI_ATTR_FDC_MODE
+    "This property specifies whether FDC transfers will use normal or streaming mode."
+ attribute: "FDC Use Pair"
+    "VME/VXI Settings:Fast Data Channel:Use Channel Pairs"
+    bool readwrite local 3FFF0013
+    // const: VI_ATTR_FDC_USE_PAIR
+    "This property specifies whether transfers will use a pair of FDC channels. If not set, only one FDC channel will be used."
+ attribute: "Primary Addr"
+    "GPIB Settings:Primary Address"
+    uW readonly global 3FFF0172
+    // const: VI_ATTR_GPIB_PRIMARY_ADDR
+    "This property value is the primary address of the GPIB device used by the given session."
+ attribute: "Secondary Addr"
+    "GPIB Settings:Secondary Address"
+    uW readonly global 3FFF0173
+    // const: VI_ATTR_GPIB_SECONDARY_ADDR
+    "This property value is the secondary address of the GPIB device used by the given session. If the device does not have a secondary address, then the value of this property is 65535 (0xFFFF)."
+ attribute: "Readdress"
+    "GPIB Settings:Readdressing"
+    bool readwrite local 3FFF001B
+    // const: VI_ATTR_GPIB_READDR_EN
+    "This property specifies whether the device is to be readdressed before every transfer."
+ attribute: "Unaddress"
+    "GPIB Settings:Unaddressing"
+    bool readwrite local 3FFF0184
+    // const: VI_ATTR_GPIB_UNADDR_EN
+    "This property specifies whether to unaddress the device (UNT and UNL) after each read or write operation."
+ attribute: "REN State"
+    "GPIB Settings:REN State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0181
+    // const: VI_ATTR_GPIB_REN_STATE
+    "This property returns the current state of the GPIB REN interface line."
+ attribute: "Mainframe LA"
+    "VME/VXI Settings:Mainframe Logical Address"
+    iW readonly global 3FFF0070
+    // const: VI_ATTR_MAINFRAME_LA
+    "This property value is the lowest logical address in the mainframe in which the device resides."
+ attribute: "Mem Base"
+    "VME/VXI Settings:VXI Memory Base Address"
+    uL readonly global 3FFF00AD
+    // const: VI_ATTR_MEM_BASE
+    "This property value is the base address of the device in VXI memory space."
+ attribute: "Mem Size"
+    "VME/VXI Settings:VXI Memory Size"
+    uL readonly global 3FFF00DD
+    // const: VI_ATTR_MEM_SIZE
+    "This property value is the size of memory requested by the device in VXI memory space."
+ attribute: "Mem Space"
+    "VME/VXI Settings:VXI Memory Address Space"
+    uW enum {A16=1, A24=2, A32=3} readonly global 3FFF00DE
+    // const: VI_ATTR_MEM_SPACE
+    "This property value is the VXI address space used by the device."
+ attribute: "VXI LA"
+    "VME/VXI Settings:VXI Logical Address"
+    iW readonly global 3FFF00D5
+    // const: VI_ATTR_VXI_LA
+    "This property value is the logical address of the VXI device."
+ attribute: "Immediate Serv"
+    "VME/VXI Settings:Immediate Servant"
+    bool readonly global 3FFF0100
+    // const: VI_ATTR_IMMEDIATE_SERV
+    "This property value reflects whether the VXI device is an immediate servant of the local controller."
+ attribute: "Cmdr LA"
+    "VME/VXI Settings:VXI Commander Logical Address"
+    iW readonly global 3FFF006B
+    // const: VI_ATTR_CMDR_LA
+    "This property value is the logical address of the commander of the VXI device."
+ attribute: "Src Access Priv"
+    "VME/VXI Settings:Source Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF003C
+    // const: VI_ATTR_SRC_ACCESS_PRIV
+    "This property specifies the address modifier to be used in high-level access operations, such as VISA In X and VISA Move In X, when reading from the source."
+ attribute: "Dest Access Priv"
+    "VME/VXI Settings:Destination Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF0039
+    // const: VI_ATTR_DEST_ACCESS_PRIV
+    "This property specifies the address modifier to be used in high-level access operations, such as VISA Out X and VISA Move Out X, when writing to the destination."
+ attribute: "Win Access Priv"
+    "VME/VXI Settings:Window Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF0045
+    // const: VI_ATTR_WIN_ACCESS_PRIV
+    "This property specifies the address modifier to be used in low-level access operations, such as VISA Map Address, VISA Peek X and VISA Poke X, when accessing the mapped window."
+ attribute: "Src Byte Order"
+    "VME/VXI Settings:Source Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF003D
+    // const: VI_ATTR_SRC_BYTE_ORDER
+    "This property specifies the byte order to be used in high-level access operations, such as VISA In X and VISA Move In X, when reading from the source."
+ attribute: "Dest Byte Order"
+    "VME/VXI Settings:Destination Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF003A
+    // const: VI_ATTR_DEST_BYTE_ORDER
+    "This property specifies the byte order to be used in high-level access operations, such as VISA Out X and VISA Move Out X, when writing to the destination."
+ attribute: "Win Byte Order"
+    "VME/VXI Settings:Window Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF0047
+    // const: VI_ATTR_WIN_BYTE_ORDER
+    "This property specifies the byte order to be used in low-level access operations, such as VISA Map Address, VISA Peek X and VISA Poke X, when accessing the mapped window."
+ attribute: "VXI Trig Supp"
+    "VME/VXI Settings:Supported VXI Trigger Lines"
+    uL readonly global 3FFF0194
+    // const: VI_ATTR_VXI_TRIG_SUPPORT
+    "This property shows which VXI trigger lines this implementation supports. This is a bit vector with bits 0-9 corresponding to TTL0 through ECL1."
+ attribute: "VXI Dev Class"
+    "VME/VXI Settings:VXI Device Class"
+    uW enum {Memory=0, Extended=1, Message=2, Register=3, Other=4} readonly global 3FFF006C
+    // const: VI_ATTR_VXI_DEV_CLASS
+    "This specifies which class the VXI or VME device is a member of."
+ attribute: "Is 488.2"
+    "Message Based Settings:Is 488.2 Compliant"
+    bool readonly global 3FFF019F
+    // const: VI_ATTR_4882_COMPLIANT
+    "This property specifies whether the device is 488.2 compliant."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Clear" noInvoke
+ method: "VISA Read STB" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA In 32" noInvoke
+ method: "VISA In 16" noInvoke
+ method: "VISA In 8" noInvoke
+ method: "VISA Out 32" noInvoke
+ method: "VISA Out 16" noInvoke
+ method: "VISA Out 8" noInvoke
+ method: "VISA Map Address" noInvoke
+ method: "VISA Unmap Address" noInvoke
+ method: "VISA Peek 32" noInvoke
+ method: "VISA Peek 16" noInvoke
+ method: "VISA Peek 8" noInvoke
+ method: "VISA Poke 32" noInvoke
+ method: "VISA Poke 16" noInvoke
+ method: "VISA Poke 8" noInvoke
+ method: "VISA Move In 8" noInvoke
+ method: "VISA Move In 16" noInvoke
+ method: "VISA Move In 32" noInvoke
+ method: "VISA Move Out 8" noInvoke
+ method: "VISA Move Out 16" noInvoke
+ method: "VISA Move Out 32" noInvoke
+ method: "VISA Mem Alloc" noInvoke
+ method: "VISA Mem Free" noInvoke
+ method: "VISA VXI Cmd or Query" noInvoke
+
+class: "VXI/GPIB-VXI/VME RBD Instr"
+super: "I/O Session"
+classString: "?*VXI?*::INSTR"
+ attribute: "Intf Parent Num"
+    "Interface Information:Interface Number of Parent"
+    uW readonly global 3FFF0101
+    // const: VI_ATTR_INTF_PARENT_NUM
+    "This property value specifies the board number of the parent device."
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "Trigger Id"
+    "General Settings:Trigger Identifier"
+    iW enum {Software=-1, TTL0=0, TTL1=1, TTL2=2, TTL3=3, TTL4=4, TTL5=5, TTL6=6, TTL7=7, ECL0=8, ECL1=9} readwrite local 3FFF0177
+    // const: VI_ATTR_TRIG_ID
+    "This property specifies which trigger mechanism to use. In VXI systems, for example, you can choose between software triggers and hardware triggers on a specific trigger line."
+ attribute: "Manf Name"
+    "General Settings:Manufacturer Name"
+    string readonly global BFFF0072
+    // const: VI_ATTR_MANF_NAME
+    "This string property is the manufacturer's name. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Model Name"
+    "General Settings:Model Name"
+    string readonly global BFFF0077
+    // const: VI_ATTR_MODEL_NAME
+    "This string property is the model name of the device. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Manf Id"
+    "General Settings:Manufacturer Identification"
+    uW readonly global 3FFF00D9
+    // const: VI_ATTR_MANF_ID
+    "This property value corresponds to the ID of the manufacturer that created the device."
+ attribute: "Model Code"
+    "General Settings:Model Code"
+    uW readonly global 3FFF00DF
+    // const: VI_ATTR_MODEL_CODE
+    "This property value is the device model code assigned by the manufacturer."
+ attribute: "Slot"
+    "General Settings:Slot"
+    iW readonly global 3FFF00E8
+    // const: VI_ATTR_SLOT
+    "This property value is the physical slot location of the device. If the slot is unknown, the value returned will be -1."
+ attribute: "Primary Addr"
+    "GPIB Settings:Primary Address"
+    uW readonly global 3FFF0172
+    // const: VI_ATTR_GPIB_PRIMARY_ADDR
+    "This property value is the primary address of the GPIB device used by the given session."
+ attribute: "Secondary Addr"
+    "GPIB Settings:Secondary Address"
+    uW readonly global 3FFF0173
+    // const: VI_ATTR_GPIB_SECONDARY_ADDR
+    "This property value is the secondary address of the GPIB device used by the given session. If the device does not have a secondary address, then the value of this property is 65535 (0xFFFF)."
+ attribute: "REN State"
+    "GPIB Settings:REN State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0181
+    // const: VI_ATTR_GPIB_REN_STATE
+    "This property returns the current state of the GPIB REN interface line."
+ attribute: "Win Base Addr"
+    "Register Based Settings:Window Base Address"
+    uL readonly local 3FFF0098
+    // const: VI_ATTR_WIN_BASE_ADDR
+    "This property value is the base interface address to which this window is mapped."
+ attribute: "Win Size"
+    "Register Based Settings:Window Size"
+    uL readonly local 3FFF009A
+    // const: VI_ATTR_WIN_SIZE
+    "This property value is the size of the region mapped to this window."
+ attribute: "Win Access"
+    "Register Based Settings:Window Access"
+    uW enum {"Not Mapped"=1, "Use Peek/Poke Operations"=2, "Can Dereference Pointer"=3, "Pointer value is byte-swapped"=4} readonly local 3FFF00C3
+    // const: VI_ATTR_WIN_ACCESS
+    "This property value reflects whether the current session has a mapped window, and if so, whether accesses through this window can be achieved through direct pointer dereferences."
+ attribute: "Src Increment"
+    "Register Based Settings:Source Increment Count"
+    iL readwrite local 3FFF0040
+    // const: VI_ATTR_SRC_INCREMENT
+    "This property specifies the number of elements by which to increment the source address on block move operations. Valid values are 0 and 1."
+ attribute: "Dest Increment"
+    "Register Based Settings:Destination Increment Count"
+    iL readwrite local 3FFF0041
+    // const: VI_ATTR_DEST_INCREMENT
+    "This property specifies the number of elements by which to increment the destination address on block move operations. Valid values are 0 and 1."
+ attribute: "Mainframe LA"
+    "VME/VXI Settings:Mainframe Logical Address"
+    iW readonly global 3FFF0070
+    // const: VI_ATTR_MAINFRAME_LA
+    "This property value is the lowest logical address in the mainframe in which the device resides."
+ attribute: "Mem Base"
+    "VME/VXI Settings:VXI Memory Base Address"
+    uL readonly global 3FFF00AD
+    // const: VI_ATTR_MEM_BASE
+    "This property value is the base address of the device in VXI memory space."
+ attribute: "Mem Size"
+    "VME/VXI Settings:VXI Memory Size"
+    uL readonly global 3FFF00DD
+    // const: VI_ATTR_MEM_SIZE
+    "This property value is the size of memory requested by the device in VXI memory space."
+ attribute: "Mem Space"
+    "VME/VXI Settings:VXI Memory Address Space"
+    uW enum {A16=1, A24=2, A32=3} readonly global 3FFF00DE
+    // const: VI_ATTR_MEM_SPACE
+    "This property value is the VXI address space used by the device."
+ attribute: "VXI LA"
+    "VME/VXI Settings:VXI Logical Address"
+    iW readonly global 3FFF00D5
+    // const: VI_ATTR_VXI_LA
+    "This property value is the logical address of the VXI device."
+ attribute: "Immediate Serv"
+    "VME/VXI Settings:Immediate Servant"
+    bool readonly global 3FFF0100
+    // const: VI_ATTR_IMMEDIATE_SERV
+    "This property value reflects whether the VXI device is an immediate servant of the local controller."
+ attribute: "Cmdr LA"
+    "VME/VXI Settings:VXI Commander Logical Address"
+    iW readonly global 3FFF006B
+    // const: VI_ATTR_CMDR_LA
+    "This property value is the logical address of the commander of the VXI device."
+ attribute: "Src Access Priv"
+    "VME/VXI Settings:Source Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF003C
+    // const: VI_ATTR_SRC_ACCESS_PRIV
+    "This property specifies the address modifier to be used in high-level access operations, such as VISA In X and VISA Move In X, when reading from the source."
+ attribute: "Dest Access Priv"
+    "VME/VXI Settings:Destination Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF0039
+    // const: VI_ATTR_DEST_ACCESS_PRIV
+    "This property specifies the address modifier to be used in high-level access operations, such as VISA Out X and VISA Move Out X, when writing to the destination."
+ attribute: "Win Access Priv"
+    "VME/VXI Settings:Window Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF0045
+    // const: VI_ATTR_WIN_ACCESS_PRIV
+    "This property specifies the address modifier to be used in low-level access operations, such as VISA Map Address, VISA Peek X and VISA Poke X, when accessing the mapped window."
+ attribute: "Src Byte Order"
+    "VME/VXI Settings:Source Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF003D
+    // const: VI_ATTR_SRC_BYTE_ORDER
+    "This property specifies the byte order to be used in high-level access operations, such as VISA In X and VISA Move In X, when reading from the source."
+ attribute: "Dest Byte Order"
+    "VME/VXI Settings:Destination Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF003A
+    // const: VI_ATTR_DEST_BYTE_ORDER
+    "This property specifies the byte order to be used in high-level access operations, such as VISA Out X and VISA Move Out X, when writing to the destination."
+ attribute: "Win Byte Order"
+    "VME/VXI Settings:Window Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF0047
+    // const: VI_ATTR_WIN_BYTE_ORDER
+    "This property specifies the byte order to be used in low-level access operations, such as VISA Map Address, VISA Peek X and VISA Poke X, when accessing the mapped window."
+ attribute: "VXI Trig Supp"
+    "VME/VXI Settings:Supported VXI Trigger Lines"
+    uL readonly global 3FFF0194
+    // const: VI_ATTR_VXI_TRIG_SUPPORT
+    "This property shows which VXI trigger lines this implementation supports. This is a bit vector with bits 0-9 corresponding to TTL0 through ECL1."
+ attribute: "VXI Dev Class"
+    "VME/VXI Settings:VXI Device Class"
+    uW enum {Memory=0, Extended=1, Message=2, Register=3, Other=4} readonly global 3FFF006C
+    // const: VI_ATTR_VXI_DEV_CLASS
+    "This specifies which class the VXI or VME device is a member of."
+
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA In 32" noInvoke
+ method: "VISA In 16" noInvoke
+ method: "VISA In 8" noInvoke
+ method: "VISA Out 32" noInvoke
+ method: "VISA Out 16" noInvoke
+ method: "VISA Out 8" noInvoke
+ method: "VISA Map Address" noInvoke
+ method: "VISA Unmap Address" noInvoke
+ method: "VISA Peek 32" noInvoke
+ method: "VISA Peek 16" noInvoke
+ method: "VISA Peek 8" noInvoke
+ method: "VISA Poke 32" noInvoke
+ method: "VISA Poke 16" noInvoke
+ method: "VISA Poke 8" noInvoke
+ method: "VISA Move In 8" noInvoke
+ method: "VISA Move In 16" noInvoke
+ method: "VISA Move In 32" noInvoke
+ method: "VISA Move Out 8" noInvoke
+ method: "VISA Move Out 16" noInvoke
+ method: "VISA Move Out 32" noInvoke
+ method: "VISA Mem Alloc" noInvoke
+ method: "VISA Mem Free" noInvoke
+
+class: "PXI Instr"
+super: "I/O Session"
+classString: "PXI?*::INSTR"
+ attribute: "Trigger Id"
+    "General Settings:Trigger Identifier"
+    iW enum {Software=-1, TTL0=0, TTL1=1, TTL2=2, TTL3=3, TTL4=4, TTL5=5, TTL6=6, TTL7=7, ECL0=8, ECL1=9} readwrite local 3FFF0177
+    // const: VI_ATTR_TRIG_ID
+    "This property specifies which trigger mechanism to use. In VXI systems, for example, you can choose between software triggers and hardware triggers on a specific trigger line."
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "Manf Name"
+    "General Settings:Manufacturer Name"
+    string readonly global BFFF0072
+    // const: VI_ATTR_MANF_NAME
+    "This string property is the manufacturer's name. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Model Name"
+    "General Settings:Model Name"
+    string readonly global BFFF0077
+    // const: VI_ATTR_MODEL_NAME
+    "This string property is the model name of the device. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Manf Id"
+    "General Settings:Manufacturer Identification"
+    uW readonly global 3FFF00D9
+    // const: VI_ATTR_MANF_ID
+    "This property value corresponds to the ID of the manufacturer that created the device."
+ attribute: "Model Code"
+    "General Settings:Model Code"
+    uW readonly global 3FFF00DF
+    // const: VI_ATTR_MODEL_CODE
+    "This property value is the device model code assigned by the manufacturer."
+ attribute: "Slot"
+    "General Settings:Slot"
+    iW readonly global 3FFF00E8
+    // const: VI_ATTR_SLOT
+    "This property value is the physical slot location of the device. If the slot is unknown, the value returned will be -1."
+ attribute: "Win Base Addr"
+    "Register Based Settings:Window Base Address"
+    uL readonly local 3FFF0098
+    // const: VI_ATTR_WIN_BASE_ADDR
+    "This property value is the base interface address to which this window is mapped."
+ attribute: "Win Size"
+    "Register Based Settings:Window Size"
+    uL readonly local 3FFF009A
+    // const: VI_ATTR_WIN_SIZE
+    "This property value is the size of the region mapped to this window."
+ attribute: "Win Access"
+    "Register Based Settings:Window Access"
+    uW enum {"Not Mapped"=1, "Use Peek/Poke Operations"=2, "Can Dereference Pointer"=3, "Pointer value is byte-swapped"=4} readonly local 3FFF00C3
+    // const: VI_ATTR_WIN_ACCESS
+    "This property value reflects whether the current session has a mapped window, and if so, whether accesses through this window can be achieved through direct pointer dereferences."
+ attribute: "Src Increment"
+    "Register Based Settings:Source Increment Count"
+    iL readwrite local 3FFF0040
+    // const: VI_ATTR_SRC_INCREMENT
+    "This property specifies the number of elements by which to increment the source address on block move operations. Valid values are 0 and 1."
+ attribute: "Dest Increment"
+    "Register Based Settings:Destination Increment Count"
+    iL readwrite local 3FFF0041
+    // const: VI_ATTR_DEST_INCREMENT
+    "This property specifies the number of elements by which to increment the destination address on block move operations. Valid values are 0 and 1."
+ attribute: "Device Num"
+    "PXI/PCI Settings:PCI Device Number"
+    uW readonly global 3FFF0201
+    // const: VI_ATTR_PXI_DEV_NUM
+    "This property specifies the PCI device number of the PXI/PCI resource."
+ attribute: "Function Num"
+    "PXI/PCI Settings:PCI Function Number"
+    uW readonly global 3FFF0202
+    // const: VI_ATTR_PXI_FUNC_NUM
+    "This property specifies the PCI function number of the PXI/PCI resource. For most devices this will be 0, but a multifunction device may have a function number up to 7. The meaning of a function number other than 0 is device-specific."
+ attribute: "Bus Num"
+    "PXI/PCI Settings:PCI Bus Number"
+    uW readonly global 3FFF0205
+    // const: VI_ATTR_PXI_BUS_NUM
+    "This property specifies the PCI bus number of the PXI/PCI resource."
+ attribute: "Chassis Num"
+    "PXI/PCI Settings:PXI Chassis Number"
+    iW readonly global 3FFF0206
+    // const: VI_ATTR_PXI_CHASSIS
+    "This property specifies the PXI chassis number of this device."
+ attribute: "Slot Path"
+    "PXI/PCI Settings:Slot Path"
+    string readonly global BFFF0207
+    // const: VI_ATTR_PXI_SLOTPATH
+    "This property specifies the slot path of this device."
+ attribute: "Loc Bus Left"
+    "PXI/PCI Settings:Slot Local Bus Left"
+    iW readonly global 3FFF0208
+    // const: VI_ATTR_PXI_SLOT_LBUS_LEFT
+    "This property specifies the slot number or special feature connected to the local bus left lines of this device."
+ attribute: "Loc Bus Right"
+    "PXI/PCI Settings:Slot Local Bus Right"
+    iW readonly global 3FFF0209
+    // const: VI_ATTR_PXI_SLOT_LBUS_RIGHT
+    "This property specifies the slot number or special feature connected to the local bus right lines of this device."
+ attribute: "Trig Bus"
+    "PXI/PCI Settings:Trigger Bus Number"
+    iW readonly global 3FFF020A
+    // const: VI_ATTR_PXI_TRIG_BUS
+    "This property specifies the trigger bus number of this device."
+ attribute: "Star Trig Bus"
+    "PXI/PCI Settings:Star Trigger Bus Number"
+    iW readonly global 3FFF020B
+    // const: VI_ATTR_PXI_STAR_TRIG_BUS
+    "This property specifies the star trigger bus number of this device."
+ attribute: "Star Trig Line"
+    "PXI/PCI Settings:Star Trigger Line"
+    iW readonly global 3FFF020C
+    // const: VI_ATTR_PXI_STAR_TRIG_LINE
+    "This property specifies the PXI_STAR line connected to this device."
+ attribute: "BAR0 Type"
+    "PXI/PCI Settings:PCI Resources:BAR0 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0211
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR0
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR1 Type"
+    "PXI/PCI Settings:PCI Resources:BAR1 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0212
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR1
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR2 Type"
+    "PXI/PCI Settings:PCI Resources:BAR2 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0213
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR2
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR3 Type"
+    "PXI/PCI Settings:PCI Resources:BAR3 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0214
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR3
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR4 Type"
+    "PXI/PCI Settings:PCI Resources:BAR4 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0215
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR4
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR5 Type"
+    "PXI/PCI Settings:PCI Resources:BAR5 Address Type"
+    uW enum {None=0, Memory=1, I/O=2} readonly global 3FFF0216
+    // const: VI_ATTR_PXI_MEM_TYPE_BAR5
+    "This property specifies what type of address requirements (memory or I/O) the device has for this Base Address Register. If the device does not request addresses in this space, the value will be VI_PXI_ADDR_NONE(0)."
+ attribute: "BAR0 Base"
+    "PXI/PCI Settings:PCI Resources:BAR0 Address Base"
+    uL readonly global 3FFF0221
+    // const: VI_ATTR_PXI_MEM_BASE_BAR0
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR1 Base"
+    "PXI/PCI Settings:PCI Resources:BAR1 Address Base"
+    uL readonly global 3FFF0222
+    // const: VI_ATTR_PXI_MEM_BASE_BAR1
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR2 Base"
+    "PXI/PCI Settings:PCI Resources:BAR2 Address Base"
+    uL readonly global 3FFF0223
+    // const: VI_ATTR_PXI_MEM_BASE_BAR2
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR3 Base"
+    "PXI/PCI Settings:PCI Resources:BAR3 Address Base"
+    uL readonly global 3FFF0224
+    // const: VI_ATTR_PXI_MEM_BASE_BAR3
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR4 Base"
+    "PXI/PCI Settings:PCI Resources:BAR4 Address Base"
+    uL readonly global 3FFF0225
+    // const: VI_ATTR_PXI_MEM_BASE_BAR4
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR5 Base"
+    "PXI/PCI Settings:PCI Resources:BAR5 Address Base"
+    uL readonly global 3FFF0226
+    // const: VI_ATTR_PXI_MEM_BASE_BAR5
+    "This property specifies the system-assigned base this device uses in the given space. If the device does not request addresses in this space, the value of this property is meaningless."
+ attribute: "BAR0 Size"
+    "PXI/PCI Settings:PCI Resources:BAR0 Address Size"
+    uL readonly global 3FFF0231
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR0
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR1 Size"
+    "PXI/PCI Settings:PCI Resources:BAR1 Address Size"
+    uL readonly global 3FFF0232
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR1
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR2 Size"
+    "PXI/PCI Settings:PCI Resources:BAR2 Address Size"
+    uL readonly global 3FFF0233
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR2
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR3 Size"
+    "PXI/PCI Settings:PCI Resources:BAR3 Address Size"
+    uL readonly global 3FFF0234
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR3
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR4 Size"
+    "PXI/PCI Settings:PCI Resources:BAR4 Address Size"
+    uL readonly global 3FFF0235
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR4
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+ attribute: "BAR5 Size"
+    "PXI/PCI Settings:PCI Resources:BAR5 Address Size"
+    uL readonly global 3FFF0236
+    // const: VI_ATTR_PXI_MEM_SIZE_BAR5
+    "This property specifies the requested address size of this device in the given space. If the device does not request addresses in this space, the value is meaningless. If this value cannot be safely determined, the value will be 0xFFFFFFFF."
+
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA In 32" noInvoke
+ method: "VISA In 16" noInvoke
+ method: "VISA In 8" noInvoke
+ method: "VISA Out 32" noInvoke
+ method: "VISA Out 16" noInvoke
+ method: "VISA Out 8" noInvoke
+ method: "VISA Map Address" noInvoke
+ method: "VISA Unmap Address" noInvoke
+ method: "VISA Peek 32" noInvoke
+ method: "VISA Peek 16" noInvoke
+ method: "VISA Peek 8" noInvoke
+ method: "VISA Poke 32" noInvoke
+ method: "VISA Poke 16" noInvoke
+ method: "VISA Poke 8" noInvoke
+ method: "VISA Move In 8" noInvoke
+ method: "VISA Move In 16" noInvoke
+ method: "VISA Move In 32" noInvoke
+ method: "VISA Move Out 8" noInvoke
+ method: "VISA Move Out 16" noInvoke
+ method: "VISA Move Out 32" noInvoke
+
+class: "Serial Instr"
+super: "I/O Session"
+classString: "ASRL?*::INSTR"
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "Suppress End En"
+    "Message Based Settings:Suppress End Enable"
+    bool readwrite local 3FFF0036
+    // const: VI_ATTR_SUPPRESS_END_EN
+    "This property is relevant only in VISA Read and related operations.
+
+For all session types on which this property is supported, if this property is set to TRUE, read will not terminate due to an END condition. However, a read may still terminate successfully if the property 'TermChar En' is set to TRUE. Otherwise, read will not terminate until all of the requested data is received (or an error occurs).
+
+On Serial Instr sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'ASRL End In'.
+
+On USB Raw sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'USB End In'.
+
+On TCP/IP Socket sessions, if this property is set to FALSE, if NI-VISA reads some data and then detects a pause in the arrival of data packets, it will terminate the read operation. On TCP/IP Socket sessions, this property defaults to TRUE in NI-VISA.
+
+On VXI Instr sessions, if this property is set to FALSE, the END bit terminates read operations."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+ attribute: "Bytes at Port"
+    "Serial Settings:Number of Bytes at Serial Port"
+    uL readonly global 3FFF00AC
+    // const: VI_ATTR_ASRL_AVAIL_NUM
+    "This property specifies the number of bytes currently available at the serial port used by this session."
+ attribute: "Baud"
+    "Serial Settings:Baud Rate"
+    uL readwrite global 3FFF0021
+    // const: VI_ATTR_ASRL_BAUD
+    "This property specifies the baud rate of the given communications port."
+ attribute: "Data Bits"
+    "Serial Settings:Data Bits"
+    uW readwrite global 3FFF0022
+    // const: VI_ATTR_ASRL_DATA_BITS
+    "This property specifies the number of data bits contained in each frame. Valid values are 5-8."
+ attribute: "Parity"
+    "Serial Settings:Parity"
+    uW enum {None=0, Odd=1, Even=2, Mark=3, Space=4} readwrite global 3FFF0023
+    // const: VI_ATTR_ASRL_PARITY
+    "This property specifies the parity used with every frame that is transmitted or received. Valid values are:  (0) Parity None, (1) Parity Odd, (2) Parity Even, (3) Parity Mark, (4) Parity Space."
+ attribute: "Stop Bits"
+    "Serial Settings:Stop Bits"
+    uW enum {1.0=10, 1.5=15, 2.0=20} readwrite global 3FFF0024
+    // const: VI_ATTR_ASRL_STOP_BITS
+    "This property specifies the number of stop bits used to indicate the end of a frame. Valid values are:  (10) Stop One, (15) Stop One-and-a-Half, (20) Stop Two."
+ attribute: "Flow Cntrl"
+    "Serial Settings:Flow Control"
+    uW enum {None=0, XON/XOFF=1, RTS/CTS=2, "XON/XOFF & RTS/CTS"=3, DTR/DSR=4, "XON/XOFF & DTR/DSR"=5} readwrite global 3FFF0025
+    // const: VI_ATTR_ASRL_FLOW_CNTRL
+    "This property specifies the flow control method used for both transmitting and receiving data. Valid values are:  (0) Flow None, (1) Flow XON/XOFF, (2) Flow RTS/CTS, (3) Flow XON/XOFF and RTS/CTS, (4) Flow DTR/DSR, (5) Flow XON/XOFF and DTR/DSR. Certain values or combinations of values may not be supported by all serial ports and/or operating systems."
+ attribute: "ASRL End In"
+    "Serial Settings:End Mode for Reads"
+    uW enum {None=0, "Last Bit"=1, "TermChar"=2} readwrite local 3FFF00B3
+    // const: VI_ATTR_ASRL_END_IN
+    "This property specifies the method used to terminate read operations. Valid values are:  (0) End None, (1) End Last Bit, (2) End TermChar. If the value is (2) End TermChar, then the value of the property TermChar En is ignored."
+ attribute: "ASRL End Out"
+    "Serial Settings:End Mode for Writes"
+    uW enum {None=0, "Last Bit"=1, "TermChar"=2, Break=3} readwrite local 3FFF00B4
+    // const: VI_ATTR_ASRL_END_OUT
+    "This property specifies the method used to terminate write operations. Valid values are:  (0) End None, (1) End Last Bit, (2) End Add TermChar, (3) End Break."
+ attribute: "XON Char"
+    "Serial Settings:Flow Control XON Character"
+    uB readwrite global 3FFF00C1
+    // const: VI_ATTR_ASRL_XON_CHAR
+    "This property specifies the value of the XON character used for XON/XOFF flow control (both directions). If XON/XOFF flow control (software handshaking) is not being used, the value of this property is ignored."
+ attribute: "XOFF Char"
+    "Serial Settings:Flow Control XOFF Character"
+    uB readwrite global 3FFF00C2
+    // const: VI_ATTR_ASRL_XOFF_CHAR
+    "This property specifies the value of the XOFF character used for XON/XOFF flow control (both directions). If XON/XOFF flow control (software handshaking) is not being used, the value of this property is ignored."
+ attribute: "Replace Char"
+    "Serial Settings:Error Replacement Character"
+    uB readwrite global 3FFF00BE
+    // const: VI_ATTR_ASRL_REPLACE_CHAR
+    "This property specifies the character to be used to replace incoming characters that arrive with errors (such as a parity error)."
+ attribute: "Discard NUL"
+    "Serial Settings:Discard NUL Characters"
+    bool readwrite global 3FFF00B0
+    // const: VI_ATTR_ASRL_DISCARD_NULL
+    "This property specifies whether to discard each data byte whose value is 0. If enabled, NUL characters are discarded. Otherwise, they are treated as normal data characters. For binary transfers, disable this property."
+ attribute: "Break Len"
+    "Serial Settings:Break Length"
+    iW readwrite local 3FFF01BD
+    // const: VI_ATTR_ASRL_BREAK_LEN
+    "This property controls the duration (in milliseconds) of the break signal asserted when ASRL End Out is set to Break (3). Valid values are 1-500."
+ attribute: "Allow Transmit"
+    "Serial Settings:Allow Transmit"
+    bool readwrite global 3FFF01BE
+    // const: VI_ATTR_ASRL_ALLOW_TRANSMIT
+    "If disabled (F), the serial port suspends transmission as if an XOFF character has been received. If enabled (T), it resumes transmission as if an XON character has been received. If XON/XOFF flow control (software handshaking) is not being used, it is invalid to disable this property."
+ attribute: "Wire Mode"
+    "Serial Settings:Wire Mode"
+    iW enum {Unknown=-1, RS485/Wire4=0, RS485/Wire2-EchoDTR=1, RS485/Wire2-CtrlDTR=2, RS485/Wire2-Auto=3, RS232/DTE=128, RS232/DCE=129, RS232/AUTO=130} readwrite global 3FFF01BF
+    // const: VI_ATTR_ASRL_WIRE_MODE
+    "This property represents the current wire/transceiver mode. For RS-485 hardware, this property is valid only with the RS-485 serial driver developed by National Instruments. For RS-232 hardware, the values RS232/DCE and RS232/AUTO are valid only with RS-232 serial drivers developed by National Instruments and documented to support this feature with the corresponding National Instruments hardware. When this feature is not supported, RS232/DTE is the only valid value."
+ attribute: "Break State"
+    "Serial Settings:Modem Line Settings:Break State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF01BC
+    // const: VI_ATTR_ASRL_BREAK_STATE
+    "This property lets you manually control the serial port's break state. If asserted, it suspends character transmission and places the transmission line in a break state until this property is unasserted. If you want VISA to send a break signal after each write operation automatically, use the Break Len and ASRL End Out properties instead."
+ attribute: "CTS State"
+    "Serial Settings:Modem Line Settings:Line CTS State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF00AE
+    // const: VI_ATTR_ASRL_CTS_STATE
+    "This property shows the current state of the Clear To Send (CTS) input signal."
+ attribute: "DCD State"
+    "Serial Settings:Modem Line Settings:Line DCD State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF00AF
+    // const: VI_ATTR_ASRL_DCD_STATE
+    "This property represents the current state of the Data Carrier Detect (DCD) input signal. This is often used by modems to indicate the detection of a carrier (modem) on the phone line. This is also known as Receive Line Signal Detect (RLSD). This property is Read Only except when the Wire Mode property is set to RS232/DCE, or RS232/AUTO with the hardware currently in the DCE state."
+ attribute: "DSR State"
+    "Serial Settings:Modem Line Settings:Line DSR State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF00B1
+    // const: VI_ATTR_ASRL_DSR_STATE
+    "This property shows the current state of the Data Set Ready (DSR) input signal."
+ attribute: "DTR State"
+    "Serial Settings:Modem Line Settings:Line DTR State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF00B2
+    // const: VI_ATTR_ASRL_DTR_STATE
+    "This property is used to manually assert or unassert the Data Terminal Ready (DTR) output signal."
+ attribute: "RI State"
+    "Serial Settings:Modem Line Settings:Line RI State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF00BF
+    // const: VI_ATTR_ASRL_RI_STATE
+    "This property represents the current state of the Ring Indicator (RI) input signal. The RI signal is often used by modems to indicate that the telephone line is ringing. This property is Read Only except when the Wire Mode property is set to RS232/DCE, or RS232/AUTO with the hardware currently in the DCE state."
+ attribute: "RTS State"
+    "Serial Settings:Modem Line Settings:Line RTS State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readwrite global 3FFF00C0
+    // const: VI_ATTR_ASRL_RTS_STATE
+    "This property is used to manually assert or unassert the Request To Send (RTS) output signal. When the flow control is set to hardware handshaking, it is invalid to change this property."
+ attribute: "Is Connected"
+    "Serial Settings:Is Port Connected"
+    bool readonly global 3FFF01BB
+    // const: VI_ATTR_ASRL_CONNECTED
+    "This property specifies whether the port is properly connected to another port or device. This property is valid only with serial drivers developed by National Instruments and documented to support this feature with the corresponding National Instruments hardware."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Clear" noInvoke
+ method: "VISA Read STB" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA Set I/O Buffer Size" noInvoke
+ method: "VISA Flush I/O Buffer" noInvoke
+
+class: "TCP/IP Instr"
+super: "I/O Session"
+classString: "TCPIP?*::INSTR"
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+ attribute: "TCP Addr"
+    "TCP/IP Settings:Dot-Notation Address"
+    string readonly global BFFF0195
+    // const: VI_ATTR_TCPIP_ADDR
+    "This is the TCPIP address of the device to which the session is connected. This string is formatted in dot notation."
+ attribute: "TCP Hostname"
+    "TCP/IP Settings:Computer Hostname"
+    string readonly global BFFF0196
+    // const: VI_ATTR_TCPIP_HOSTNAME
+    "This specifies the host name of the device. If no host name is available, this property returns an empty string."
+ attribute: "TCP NoDelay"
+    "TCP/IP Settings:No Packet Delay"
+    bool readwrite local 3FFF019A
+    // const: VI_ATTR_TCPIP_NODELAY
+    "The Nagle algorithm is disabled when this property is enabled (and vice versa). The Nagle algorithm improves network performance by buffering written data until a full-size packet can be sent. This property is enabled by default in VISA to verify that writes get flushed immediately."
+ attribute: "TCP KeepAlive"
+    "TCP/IP Settings:Keep-Alive Packets"
+    bool readwrite local 3FFF019B
+    // const: VI_ATTR_TCPIP_KEEPALIVE
+    "Setting this property to TRUE requests that a TCP/IP provider enable the use of keep-alive packets on TCP connections. After the system detects that a connection was dropped, VISA will return a lost connection error code on subsequent I/O calls on the session. The time required for the system to detect that the connection was dropped is dependent on the system and is not settable."
+ attribute: "TCP DevName"
+    "TCP/IP Settings:LAN Device Name"
+    string readonly global BFFF0199
+    // const: VI_ATTR_TCPIP_DEVICE_NAME
+    "This specifies the LAN device name used by the VXI-11 protocol (for example, inst0) during connection."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Clear" noInvoke
+ method: "VISA Read STB" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA Set I/O Buffer Size" noInvoke
+ method: "VISA Flush I/O Buffer" noInvoke
+
+
+class: "USB Instr"
+super: "I/O Session"
+classString: "USB?*::INSTR"
+ attribute: "Manf Name"
+    "General Settings:Manufacturer Name"
+    string readonly global BFFF0072
+    // const: VI_ATTR_MANF_NAME
+    "This string property is the manufacturer's name. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Model Name"
+    "General Settings:Model Name"
+    string readonly global BFFF0077
+    // const: VI_ATTR_MODEL_NAME
+    "This string property is the model name of the device. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Manf Id"
+    "General Settings:Manufacturer Identification"
+    uW readonly global 3FFF00D9
+    // const: VI_ATTR_MANF_ID
+    "This property value corresponds to the ID of the manufacturer that created the device."
+ attribute: "Model Code"
+    "General Settings:Model Code"
+    uW readonly global 3FFF00DF
+    // const: VI_ATTR_MODEL_CODE
+    "This property value is the device model code assigned by the manufacturer."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "Is 488.2"
+    "Message Based Settings:Is 488.2 Compliant"
+    bool readonly global 3FFF019F
+    // const: VI_ATTR_4882_COMPLIANT
+    "This property specifies whether the device is 488.2 compliant."
+ attribute: "USB Serial Num"
+    "USB Settings:Serial Number"
+    string readonly global BFFF01A0
+    // const: VI_ATTR_USB_SERIAL_NUM
+    "This property specifies the USB serial number of this device."
+ attribute: "USB Intfc Num"
+    "USB Settings:USB Interface Number"
+    iW readonly global 3FFF01A1
+    // const: VI_ATTR_USB_INTFC_NUM
+    "This property specifies the USB interface number used by the given session."
+ attribute: "USB Prot"
+    "USB Settings:USB Protocol"
+    iW readonly global 3FFF01A7
+    // const: VI_ATTR_USB_PROTOCOL
+    "This property specifies the USB protocol used by the given session."
+ attribute: "USB Max Intr Size"
+    "USB Settings:Maximum Interrupt Size"
+    uW readwrite local 3FFF01AF
+    // const: VI_ATTR_USB_MAX_INTR_SIZE
+    "This property specifies the maximum size of data that will be stored by any given USB interrupt. If a USB interrupt contains more data than this size, the data in excess of this size will be lost."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Clear" noInvoke
+ method: "VISA Read STB" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA GPIB Control REN" noInvoke
+ method: "VISA USB Control Out" noInvoke
+ method: "VISA USB Control In" noInvoke
+
+// There are other I/O classes (MEMACC, INTFC, BACKPLANE, SERVANT, SOCKET)
+
+class: "VXI/GPIB-VXI/VME MemAcc"
+super: "I/O Session"
+classString: "?*VXI?*::MEMACC"
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "Intf Parent Num"
+    "Interface Information:Interface Number of Parent"
+    uW readonly global 3FFF0101
+    // const: VI_ATTR_INTF_PARENT_NUM
+    "This property value specifies the board number of the parent device."
+ attribute: "Primary Addr"
+    "GPIB Settings:Primary Address"
+    uW readonly global 3FFF0172
+    // const: VI_ATTR_GPIB_PRIMARY_ADDR
+    "This property value is the primary address of the GPIB controller used by the given session."
+ attribute: "Secondary Addr"
+    "GPIB Settings:Secondary Address"
+    uW readonly global 3FFF0173
+    // const: VI_ATTR_GPIB_SECONDARY_ADDR
+    "This property value is the secondary address of the GPIB controller used by the given session. If the controller does not have a secondary address, then the value of this property is 65535 (0xFFFF)."
+ attribute: "REN State"
+    "GPIB Settings:REN State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0181
+    // const: VI_ATTR_GPIB_REN_STATE
+    "This property returns the current state of the GPIB REN interface line."
+ attribute: "Win Base Addr"
+    "Register Based Settings:Window Base Address"
+    uL readonly local 3FFF0098
+    // const: VI_ATTR_WIN_BASE_ADDR
+    "This property value is the base interface address to which this window is mapped."
+ attribute: "Win Size"
+    "Register Based Settings:Window Size"
+    uL readonly local 3FFF009A
+    // const: VI_ATTR_WIN_SIZE
+    "This property value is the size of the region mapped to this window."
+ attribute: "Win Access"
+    "Register Based Settings:Window Access"
+    uW enum {"Not Mapped"=1, "Use Peek/Poke Operations"=2, "Can Dereference Pointer"=3, "Pointer value is byte-swapped"=4} readonly local 3FFF00C3
+    // const: VI_ATTR_WIN_ACCESS
+    "This property value reflects whether the current session has a mapped window, and if so, whether accesses through this window can be achieved through direct pointer dereferences."
+ attribute: "Src Increment"
+    "Register Based Settings:Source Increment Count"
+    iL readwrite local 3FFF0040
+    // const: VI_ATTR_SRC_INCREMENT
+    "This property specifies the number of elements by which to increment the source address on block move operations. Valid values are 0 and 1."
+ attribute: "Dest Increment"
+    "Register Based Settings:Destination Increment Count"
+    iL readwrite local 3FFF0041
+    // const: VI_ATTR_DEST_INCREMENT
+    "This property specifies the number of elements by which to increment the destination address on block move operations. Valid values are 0 and 1."
+ attribute: "VXI LA"
+    "VME/VXI Settings:VXI Logical Address"
+    iW readonly global 3FFF00D5
+    // const: VI_ATTR_VXI_LA
+    "This property value is the logical address of the local VXI controller."
+ attribute: "Src Access Priv"
+    "VME/VXI Settings:Source Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF003C
+    // const: VI_ATTR_SRC_ACCESS_PRIV
+    "This property specifies the address modifier to be used in high-level access operations, such as VISA In X and VISA Move In X, when reading from the source."
+ attribute: "Dest Access Priv"
+    "VME/VXI Settings:Destination Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF0039
+    // const: VI_ATTR_DEST_ACCESS_PRIV
+    "This property specifies the address modifier to be used in high-level access operations, such as VISA Out X and VISA Move Out X, when writing to the destination."
+ attribute: "Win Access Priv"
+    "VME/VXI Settings:Window Access Privilege"
+    uW enum {Data/Privileged=0, Data/NonPrivileged=1, Program/Privileged=2, Program/NonPrivileged=3, Block/Privileged=4, Block/NonPrivileged=5, D64/Privileged=6, D64/NonPrivileged=7} readwrite local 3FFF0045
+    // const: VI_ATTR_WIN_ACCESS_PRIV
+    "This property specifies the address modifier to be used in low-level access operations, such as VISA Map Address, VISA Peek X and VISA Poke X, when accessing the mapped window."
+ attribute: "Src Byte Order"
+    "VME/VXI Settings:Source Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF003D
+    // const: VI_ATTR_SRC_BYTE_ORDER
+    "This property specifies the byte order to be used in high-level access operations, such as VISA In X and VISA Move In X, when reading from the source."
+ attribute: "Dest Byte Order"
+    "VME/VXI Settings:Destination Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF003A
+    // const: VI_ATTR_DEST_BYTE_ORDER
+    "This property specifies the byte order to be used in high-level access operations, such as VISA Out X and VISA Move Out X, when writing to the destination."
+ attribute: "Win Byte Order"
+    "VME/VXI Settings:Window Byte Order"
+    uW enum {"Big Endian"=0, "Little Endian"=1} readwrite local 3FFF0047
+    // const: VI_ATTR_WIN_BYTE_ORDER
+    "This property specifies the byte order to be used in low-level access operations, such as VISA Map Address, VISA Peek X and VISA Poke X, when accessing the mapped window."
+
+ method: "VISA In 32" noInvoke
+ method: "VISA In 16" noInvoke
+ method: "VISA In 8" noInvoke
+ method: "VISA Out 32" noInvoke
+ method: "VISA Out 16" noInvoke
+ method: "VISA Out 8" noInvoke
+ method: "VISA Map Address" noInvoke
+ method: "VISA Unmap Address" noInvoke
+ method: "VISA Peek 32" noInvoke
+ method: "VISA Peek 16" noInvoke
+ method: "VISA Peek 8" noInvoke
+ method: "VISA Poke 32" noInvoke
+ method: "VISA Poke 16" noInvoke
+ method: "VISA Poke 8" noInvoke
+ method: "VISA Move" noInvoke
+ method: "VISA Move In 8" noInvoke
+ method: "VISA Move In 16" noInvoke
+ method: "VISA Move In 32" noInvoke
+ method: "VISA Move Out 8" noInvoke
+ method: "VISA Move Out 16" noInvoke
+ method: "VISA Move Out 32" noInvoke
+
+class: "PXI MemAcc"
+super: "I/O Session"
+classString: "PXI?*::MEMACC"
+ attribute: "Win Base Addr"
+    "Register Based Settings:Window Base Address"
+    uL readonly local 3FFF0098
+    // const: VI_ATTR_WIN_BASE_ADDR
+    "This property value is the base interface address to which this window is mapped."
+ attribute: "Win Size"
+    "Register Based Settings:Window Size"
+    uL readonly local 3FFF009A
+    // const: VI_ATTR_WIN_SIZE
+    "This property value is the size of the region mapped to this window."
+ attribute: "Win Access"
+    "Register Based Settings:Window Access"
+    uW enum {"Not Mapped"=1, "Use Peek/Poke Operations"=2, "Can Dereference Pointer"=3, "Pointer value is byte-swapped"=4} readonly local 3FFF00C3
+    // const: VI_ATTR_WIN_ACCESS
+    "This property value reflects whether the current session has a mapped window, and if so, whether accesses through this window can be achieved through direct pointer dereferences."
+ attribute: "Src Increment"
+    "Register Based Settings:Source Increment Count"
+    iL readwrite local 3FFF0040
+    // const: VI_ATTR_SRC_INCREMENT
+    "This property specifies the number of elements by which to increment the source address on block move operations. Valid values are 0 and 1."
+ attribute: "Dest Increment"
+    "Register Based Settings:Destination Increment Count"
+    iL readwrite local 3FFF0041
+    // const: VI_ATTR_DEST_INCREMENT
+    "This property specifies the number of elements by which to increment the destination address on block move operations. Valid values are 0 and 1."
+
+ method: "VISA In 32" noInvoke
+ method: "VISA In 16" noInvoke
+ method: "VISA In 8" noInvoke
+ method: "VISA Out 32" noInvoke
+ method: "VISA Out 16" noInvoke
+ method: "VISA Out 8" noInvoke
+ method: "VISA Map Address" noInvoke
+ method: "VISA Unmap Address" noInvoke
+ method: "VISA Peek 32" noInvoke
+ method: "VISA Peek 16" noInvoke
+ method: "VISA Peek 8" noInvoke
+ method: "VISA Poke 32" noInvoke
+ method: "VISA Poke 16" noInvoke
+ method: "VISA Poke 8" noInvoke
+ method: "VISA Move In 8" noInvoke
+ method: "VISA Move In 16" noInvoke
+ method: "VISA Move In 32" noInvoke
+ method: "VISA Move Out 8" noInvoke
+ method: "VISA Move Out 16" noInvoke
+ method: "VISA Move Out 32" noInvoke
+ method: "VISA Mem Alloc" noInvoke
+ method: "VISA Mem Free" noInvoke
+
+class: "VXI/GPIB-VXI Backplane"
+super: "I/O Session"
+classString: "?*VXI?*::BACKPLANE"
+ attribute: "Trigger Id"
+    "General Settings:Trigger Identifier"
+    iW enum {Software=-1, TTL0=0, TTL1=1, TTL2=2, TTL3=3, TTL4=4, TTL5=5, TTL6=6, TTL7=7, ECL0=8, ECL1=9} readwrite local 3FFF0177
+    // const: VI_ATTR_TRIG_ID
+    "This property specifies which trigger mechanism to use. In VXI systems, for example, you can choose between software triggers and hardware triggers on a specific trigger line."
+ attribute: "Primary Addr"
+    "GPIB Settings:Primary Address"
+    uW readonly global 3FFF0172
+    // const: VI_ATTR_GPIB_PRIMARY_ADDR
+    "This property value is the primary address of the GPIB device used by the given session."
+ attribute: "Secondary Addr"
+    "GPIB Settings:Secondary Address"
+    uW readonly global 3FFF0173
+    // const: VI_ATTR_GPIB_SECONDARY_ADDR
+    "This property value is the secondary address of the GPIB device used by the given session. If the device does not have a secondary address, then the value of this property is 65535 (0xFFFF)."
+ attribute: "Intf Parent Num"
+    "Interface Information:Interface Number of Parent"
+    uW readonly global 3FFF0101
+    // const: VI_ATTR_INTF_PARENT_NUM
+    "This property value specifies the board number of the parent device."
+ attribute: "Mainframe LA"
+    "VME/VXI Settings:Mainframe Logical Address"
+    iW readonly global 3FFF0070
+    // const: VI_ATTR_MAINFRAME_LA
+    "This property value is the lowest logical address in the mainframe in which the device resides."
+ attribute: "VXI Trig Supp"
+    "VME/VXI Settings:Supported VXI Trigger Lines"
+    uL readonly global 3FFF0194
+    // const: VI_ATTR_VXI_TRIG_SUPPORT
+    "This property shows which VXI trigger lines this implementation supports. This is a bit vector with bits 0-9 corresponding to TTL0 through ECL1."
+ attribute: "VXI Trig Status"
+    "VME/VXI Settings:Asserted VXI Trigger Lines"
+    uL readonly global 3FFF008D
+    // const: VI_ATTR_VXI_TRIG_STATUS
+    "This property shows the current state of the VXI trigger lines. This is a bit vector with bits 0-9 corresponding to TTL0 through ECL1."
+ attribute: "VXI/VME Interrupt Status"
+    "VME/VXI Settings:Asserted VXI/VME Interrupt Lines"
+    uL readonly global 3FFF008B
+    // const: VI_ATTR_VXI_VME_INTR_STATUS
+    "This property shows the current state of the VXI/VME interrupt lines. This is a bit vector with bits 0-6 corresponding to interrupt lines 1-7."
+ attribute: "VXI/VME Sysfail State"
+    "VME/VXI Settings:VXI/VME System Failure State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0094
+    // const: VI_ATTR_VXI_VME_SYSFAIL_STATE
+    "This property shows the current state of the VXI/VME SYSFAIL (SYStem FAILure) backplane line."
+
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA Assert Interrupt Signal" noInvoke
+ method: "VISA Assert Utility Signal" noInvoke
+ method: "VISA Map Trigger" noInvoke
+ method: "VISA Unmap Trigger" noInvoke
+
+class: "PXI Backplane"
+super: "I/O Session"
+classString: "PXI?*::BACKPLANE"
+ attribute: "Manf Name"
+    "General Settings:Manufacturer Name"
+    string readonly global BFFF0072
+    // const: VI_ATTR_MANF_NAME
+    "This string property is the manufacturer's name. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Model Name"
+    "General Settings:Model Name"
+    string readonly global BFFF0077
+    // const: VI_ATTR_MODEL_NAME
+    "This string property is the model name of the device. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Chassis Num"
+    "PXI/PCI Settings:PXI Chassis Number"
+    iW readonly global 3FFF0206
+    // const: VI_ATTR_PXI_CHASSIS
+    "This property specifies the PXI chassis number of this device."
+ attribute: "Trig Bus"
+    "PXI/PCI Settings:Trigger Bus Number"
+    iW readwrite local 3FFF020A
+    // const: VI_ATTR_PXI_TRIG_BUS
+    "This property specifies the trigger bus number of this device."
+ attribute: "Src Trig Bus"
+    "PXI/PCI Settings:Source Trigger Bus Number"
+    iW readwrite local 3FFF020D
+    // const: VI_ATTR_PXI_SRC_TRIG_BUS
+    "This property specifies the segment to use to qualify the trigger source in VISA Map Trigger."
+ attribute: "Dest Trig Bus"
+    "PXI/PCI Settings:Destination Trigger Bus Number"
+    iW readwrite local 3FFF020E
+    // const: VI_ATTR_PXI_DEST_TRIG_BUS
+    "This property specifies the segment to use to qualify the trigger destination in VISA Map Trigger."
+ attribute: "Trigger Id"
+    "General Settings:Trigger Identifier"
+    iW enum {Software=-1, TTL0=0, TTL1=1, TTL2=2, TTL3=3, TTL4=4, TTL5=5, TTL6=6, TTL7=7, ECL0=8, ECL1=9} readwrite local 3FFF0177
+    // const: VI_ATTR_TRIG_ID
+    "This property specifies which trigger mechanism to use. In VXI systems, for example, you can choose between software triggers and hardware triggers on a specific trigger line."
+
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA Map Trigger" noInvoke
+ method: "VISA Unmap Trigger" noInvoke
+
+class: "VXI Servant"
+super: "I/O Session"
+classString: "?*VXI?*::SERVANT"
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "Device STB"
+    "Message Based Settings:Device Status Byte"
+    uB readwrite global 3FFF0189
+    // const: VI_ATTR_DEV_STATUS_BYTE
+    "This property specifies the 488-style status byte of the local controller or device associated with this session. If this property is written and bit 6 (0x40) is set, this device or controller will assert a service request (SRQ) on the interface."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+ attribute: "Cmdr LA"
+    "VME/VXI Settings:VXI Commander Logical Address"
+    iW readonly global 3FFF006B
+    // const: VI_ATTR_CMDR_LA
+    "This property value is the logical address of the commander of the VXI device."
+ attribute: "VXI LA"
+    "VME/VXI Settings:VXI Logical Address"
+    iW readonly global 3FFF00D5
+    // const: VI_ATTR_VXI_LA
+    "This property value is the logical address of the VXI device."
+ attribute: "VXI/VME Sysfail State"
+    "VME/VXI Settings:VXI/VME System Failure State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0094
+    // const: VI_ATTR_VXI_VME_SYSFAIL_STATE
+    "This property shows the current state of the VXI/VME SYSFAIL (SYStem FAILure) backplane line."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Assert Interrupt Signal" noInvoke
+ method: "VISA Assert Utility Signal" noInvoke
+
+class: "GPIB BoardInterface"
+super: "I/O Session"
+classString: "GPIB?*::INTFC"
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "Primary Addr"
+    "GPIB Settings:Primary Address"
+    uW readwrite global 3FFF0172
+    // const: VI_ATTR_GPIB_PRIMARY_ADDR
+    "This property value is the primary address of the GPIB interface used by the given session."
+ attribute: "Secondary Addr"
+    "GPIB Settings:Secondary Address"
+    uW readwrite global 3FFF0173
+    // const: VI_ATTR_GPIB_SECONDARY_ADDR
+    "This property value is the secondary address of the GPIB interface used by the given session. If the interface does not have a secondary address, then the value of this property is 65535 (0xFFFF)."
+ attribute: "ATN State"
+    "GPIB Settings:Line ATN State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0057
+    // const: VI_ATTR_GPIB_ATN_STATE
+    "This property returns the current state of the GPIB ATN interface line."
+ attribute: "NDAC State"
+    "GPIB Settings:Line NDAC State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0062
+    // const: VI_ATTR_GPIB_NDAC_STATE
+    "This property returns the current state of the GPIB NDAC interface line."
+ attribute: "REN State"
+    "GPIB Settings:Line REN State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0181
+    // const: VI_ATTR_GPIB_REN_STATE
+    "This property returns the current state of the GPIB REN interface line."
+ attribute: "SRQ State"
+    "GPIB Settings:Line SRQ State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0067
+    // const: VI_ATTR_GPIB_SRQ_STATE
+    "This property returns the current state of the GPIB SRQ interface line."
+ attribute: "CIC State"
+    "GPIB Settings:CIC State"
+    bool readonly global 3FFF005E
+    // const: VI_ATTR_GPIB_CIC_STATE
+    "This property shows whether the specified GPIB interface is currently CIC (Controller In Charge)."
+ attribute: "SysCntrl State"
+    "GPIB Settings:System Controller State"
+    bool readwrite global 3FFF0068
+    // const: VI_ATTR_GPIB_SYS_CNTRL_STATE
+    "This property shows whether the specified GPIB interface is currently the system controller."
+ attribute: "Address State"
+    "GPIB Settings:Addressed State"
+    uW enum {Unaddressed=0, Talker=1, Listener=2} readonly global 3FFF005C
+    // const: VI_ATTR_GPIB_ADDR_STATE
+    "This property shows whether the specified GPIB interface is currently addressed to talk (1) or listen (2), or is not addressed (0)."
+ attribute: "HS488 Cbl Len"
+    "GPIB Settings:HS488 Cable Length"
+    iW readwrite global 3FFF0069
+    // const: VI_ATTR_GPIB_HS488_CBL_LEN
+    "This property specifies the total number of meters (1-15) of GPIB cable used in the specified GPIB interface. The value 0 means that HS488 is disabled, and -1 means HS488 is not implemented."
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "Device STB"
+    "Message Based Settings:Device Status Byte"
+    uB readwrite global 3FFF0189
+    // const: VI_ATTR_DEV_STATUS_BYTE
+    "This property specifies the 488-style status byte of the local controller or device associated with this session. If this property is written and bit 6 (0x40) is set, this device or controller will assert a service request (SRQ) on the interface."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA GPIB Control ATN" noInvoke
+ method: "VISA GPIB Control REN" noInvoke
+ method: "VISA GPIB Pass Control" noInvoke
+ method: "VISA GPIB Send IFC" noInvoke
+ method: "VISA GPIB Command" noInvoke
+
+class: "GPIB Servant"
+super: "I/O Session"
+classString: "GPIB?*::SERVANT"
+ attribute: "Allow DMA"
+    "General Settings:Allow DMA Transfers"
+    bool readwrite local 3FFF001E
+    // const: VI_ATTR_DMA_ALLOW_EN
+    "This property specifies whether I/O accesses should attempt to use DMA (T) or Programmed I/O (F). In some implementations, this property may have global effects even though it is documented to be a local property."
+ attribute: "Primary Addr"
+    "GPIB Settings:Primary Address"
+    uW readwrite global 3FFF0172
+    // const: VI_ATTR_GPIB_PRIMARY_ADDR
+    "This property value is the primary address of the GPIB interface used by the given session."
+ attribute: "Secondary Addr"
+    "GPIB Settings:Secondary Address"
+    uW readwrite global 3FFF0173
+    // const: VI_ATTR_GPIB_SECONDARY_ADDR
+    "This property value is the secondary address of the GPIB interface used by the given session. If the interface does not have a secondary address, then the value of this property is 65535 (0xFFFF)."
+ attribute: "REN State"
+    "GPIB Settings:Line REN State"
+    iW enum {Unknown=-1, Unasserted=0, Asserted=1} readonly global 3FFF0181
+    // const: VI_ATTR_GPIB_REN_STATE
+    "This property returns the current state of the GPIB REN interface line."
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "Device STB"
+    "Message Based Settings:Device Status Byte"
+    uB readwrite global 3FFF0189
+    // const: VI_ATTR_DEV_STATUS_BYTE
+    "This property specifies the 488-style status byte of the local controller or device associated with this session. If this property is written and bit 6 (0x40) is set, this device or controller will assert a service request (SRQ) on the interface."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+ attribute: "Address State"
+    "GPIB Settings:Addressed State"
+    uW enum {Unaddressed=0, Talker=1, Listener=2} readonly global 3FFF005C
+    // const: VI_ATTR_GPIB_ADDR_STATE
+    "This property shows whether the specified GPIB interface is currently addressed to talk (1) or listen (2), or is not addressed (0)."
+ attribute: "HS488 Cbl Len"
+    "GPIB Settings:HS488 Cable Length"
+    iW readwrite global 3FFF0069
+    // const: VI_ATTR_GPIB_HS488_CBL_LEN
+    "This property specifies the total number of meters (1-15) of GPIB cable used in the specified GPIB interface. The value 0 means that HS488 is disabled, and -1 means HS488 is not implemented."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+
+class: "TCP/IP Socket"
+super: "I/O Session"
+classString: "TCPIP?*::SOCKET"
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "Send End En"
+    "Message Based Settings:Send End Enable"
+    bool readwrite local 3FFF0016
+    // const: VI_ATTR_SEND_END_EN
+    "This property specifies whether to send an END indicator on the last byte of each write operation. This property is relevant only in VISA Write and related operations.
+
+On Serial Instr sessions, if this property is set to FALSE, the write will transmit the exact contents of the user buffer, without modifying it and without appending anything to the data being written. If this property is set to TRUE, VISA will perform the behavior described in the property 'ASRL End Out'.
+
+On GPIB, VXI, GPIB-VXI, TCP/IP Instr, and USB Instr sessions, if this property is set to TRUE, VISA will include the 488.2 defined 'end of message' terminator."
+ attribute: "Suppress End En"
+    "Message Based Settings:Suppress End Enable"
+    bool readwrite local 3FFF0036
+    // const: VI_ATTR_SUPPRESS_END_EN
+    "This property is relevant only in VISA Read and related operations.
+
+For all session types on which this property is supported, if this property is set to TRUE, read will not terminate due to an END condition. However, a read may still terminate successfully if the property 'TermChar En' is set to TRUE. Otherwise, read will not terminate until all of the requested data is received (or an error occurs).
+
+On Serial Instr sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'ASRL End In'.
+
+On USB Raw sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'USB End In'.
+
+On TCP/IP Socket sessions, if this property is set to FALSE, if NI-VISA reads some data and then detects a pause in the arrival of data packets, it will terminate the read operation. On TCP/IP Socket sessions, this property defaults to TRUE in NI-VISA.
+
+On VXI Instr sessions, if this property is set to FALSE, the END bit terminates read operations."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "File Append En"
+    "Message Based Settings:File Append Enable"
+    bool readwrite local 3FFF0192
+    // const: VI_ATTR_FILE_APPEND_EN
+    "This property specifies whether VISA Read To File will overwrite (truncate) or append when opening a file."
+ attribute: "TCP Addr"
+    "TCP/IP Settings:Dot-Notation Address"
+    string readonly global BFFF0195
+    // const: VI_ATTR_TCPIP_ADDR
+    "This is the TCPIP address of the device to which the session is connected. This string is formatted in dot notation."
+ attribute: "TCP Hostname"
+    "TCP/IP Settings:Computer Hostname"
+    string readonly global BFFF0196
+    // const: VI_ATTR_TCPIP_HOSTNAME
+    "This specifies the host name of the device. If no host name is available, this property returns an empty string."
+ attribute: "TCP Port"
+    "TCP/IP Settings:Port Number"
+    uW readonly global 3FFF0197
+    // const: VI_ATTR_TCPIP_PORT
+    "This specifies the port number for a given TCPIP address. For a TCPIP SOCKET resource, this is a required part of the address/resource string."
+ attribute: "TCP NoDelay"
+    "TCP/IP Settings:No Packet Delay"
+    bool readwrite local 3FFF019A
+    // const: VI_ATTR_TCPIP_NODELAY
+    "The Nagle algorithm is disabled when this property is enabled (and vice versa). The Nagle algorithm improves network performance by buffering written data until a full-size packet can be sent. This property is enabled by default in VISA to verify that writes get flushed immediately."
+ attribute: "TCP KeepAlive"
+    "TCP/IP Settings:Keep-Alive Packets"
+    bool readwrite local 3FFF019B
+    // const: VI_ATTR_TCPIP_KEEPALIVE
+    "Setting this property to TRUE requests that a TCP/IP provider enable the use of keep-alive packets on TCP connections. After the system detects that a connection was dropped, VISA will return a lost connection error code on subsequent I/O calls on the session. The time required for the system to detect that the connection was dropped is dependent on the system and is not settable."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Clear" noInvoke
+ method: "VISA Read STB" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA Set I/O Buffer Size" noInvoke
+ method: "VISA Flush I/O Buffer" noInvoke
+
+class: "USB Raw"
+super: "I/O Session"
+classString: "USB?*::RAW"
+ attribute: "Manf Name"
+    "General Settings:Manufacturer Name"
+    string readonly global BFFF0072
+    // const: VI_ATTR_MANF_NAME
+    "This string property is the manufacturer's name. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Model Name"
+    "General Settings:Model Name"
+    string readonly global BFFF0077
+    // const: VI_ATTR_MODEL_NAME
+    "This string property is the model name of the device. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Manf Id"
+    "General Settings:Manufacturer Identification"
+    uW readonly global 3FFF00D9
+    // const: VI_ATTR_MANF_ID
+    "This property value corresponds to the ID of the manufacturer that created the device."
+ attribute: "Model Code"
+    "General Settings:Model Code"
+    uW readonly global 3FFF00DF
+    // const: VI_ATTR_MODEL_CODE
+    "This property value is the device model code assigned by the manufacturer."
+ attribute: "Suppress End En"
+    "Message Based Settings:Suppress End Enable"
+    bool readwrite local 3FFF0036
+    // const: VI_ATTR_SUPPRESS_END_EN
+    "This property is relevant only in VISA Read and related operations.
+
+For all session types on which this property is supported, if this property is set to TRUE, read will not terminate due to an END condition. However, a read may still terminate successfully if the property 'TermChar En' is set to TRUE. Otherwise, read will not terminate until all of the requested data is received (or an error occurs).
+
+On Serial Instr sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'ASRL End In'.
+
+On USB Raw sessions, if this property is set to FALSE, VISA will perform the behavior described in the property 'USB End In'.
+
+On TCP/IP Socket sessions, if this property is set to FALSE, if NI-VISA reads some data and then detects a pause in the arrival of data packets, it will terminate the read operation. On TCP/IP Socket sessions, this property defaults to TRUE in NI-VISA.
+
+On VXI Instr sessions, if this property is set to FALSE, the END bit terminates read operations."
+ attribute: "IO Prot"
+    "Message Based Settings:IO Protocol"
+    uW enum {Normal=1, VXI/FDC=2, GPIB/HS488=3, "Serial-TCPIP-USB/488 Strings"=4, "USBTMC/Vendor-Specific"=5} readwrite local 3FFF001C
+    // const: VI_ATTR_IO_PROT
+    "This property specifies which protocol to use. In VXI, you can choose normal word serial or fast data channel. In GPIB, you can choose normal or high-speed HS-488 transfers. In serial, TCPIP, or USB, you can choose normal transfers or 488.2-defined strings. In USBTMC, you can choose normal or vendor-specific transfers."
+ attribute: "TermChar"
+    "Message Based Settings:Termination Character"
+    uB readwrite local 3FFF0018
+    // const: VI_ATTR_TERMCHAR
+    "This property specifies a character that, when read, causes a read operation to terminate. The termination character must also be enabled."
+ attribute: "TermChar En"
+    "Message Based Settings:Termination Character Enable"
+    bool readwrite local 3FFF0038
+    // const: VI_ATTR_TERMCHAR_EN
+    "This property specifies whether a read operation should terminate when the termination character is received."
+ attribute: "USB Serial Num"
+    "USB Settings:Serial Number"
+    string readonly global BFFF01A0
+    // const: VI_ATTR_USB_SERIAL_NUM
+    "This property specifies the USB serial number of this device."
+ attribute: "USB Intfc Num"
+    "USB Settings:USB Interface Number"
+    iW readonly global 3FFF01A1
+    // const: VI_ATTR_USB_INTFC_NUM
+    "This property specifies the USB interface number used by the given session."
+ attribute: "USB Prot"
+    "USB Settings:USB Protocol"
+    iW readonly global 3FFF01A7
+    // const: VI_ATTR_USB_PROTOCOL
+    "This property specifies the USB protocol used by the given session."
+ attribute: "USB Max Intr Size"
+    "USB Settings:Maximum Interrupt Size"
+    uW readwrite local 3FFF01AF
+    // const: VI_ATTR_USB_MAX_INTR_SIZE
+    "This property specifies the maximum size of data that will be stored by any given USB interrupt. If a USB interrupt contains more data than this size, the data in excess of this size will be lost."
+ attribute: "USB Class"
+    "USB Settings:USB Class"
+    iW readonly global 3FFF01A5
+    // const: VI_ATTR_USB_CLASS
+    "This property specifies the USB class used by the given session."
+ attribute: "USB Subclass"
+    "USB Settings:USB Subclass"
+    iW readonly global 3FFF01A6
+    // const: VI_ATTR_USB_SUBCLASS
+    "This property specifies the USB subclass used by the given session."
+ attribute: "USB Alt Setting"
+    "USB Settings:Alternate Setting"
+    iW readwrite global 3FFF01A8
+    // const: VI_ATTR_USB_ALT_SETTING
+    "This property specifies the USB alternate setting used by this USB interface."
+ attribute: "USB Num Intfcs"
+    "USB Settings:Number of Interfaces"
+    iW readonly global 3FFF01AA
+    // const: VI_ATTR_USB_NUM_INTFCS
+    "This property specifies the number of interfaces supported by this USB device."
+ attribute: "USB Num Pipes"
+    "USB Settings:Number of Pipes"
+    iW readonly global 3FFF01AB
+    // const: VI_ATTR_USB_NUM_PIPES
+    "This property specifies the number of pipes supported by this USB interface."
+ attribute: "USB End In"
+    "USB Settings:End Mode for Reads"
+    uW enum {None=0, Short=4, "Short or Count"=5} readwrite local 3FFF01A9
+    // const: VI_ATTR_USB_END_IN
+    "This property specifies the method used to terminate read operations. Valid values are:  (0) End None, (4) End Short, (5) End Short or Count. Use (0) End None to receive all requested data bytes regardless of any short packets. Use (4) End Short if the device will send a zero (short) packet if the last data packet is full. Use (5) End Short or Count if the device does not send zero packets."
+ attribute: "USB Control Pipe"
+    "USB Settings:Control Pipe"
+    iW readwrite local 3FFF01B0
+    // const: VI_ATTR_USB_CTRL_PIPE
+    "This property specifies the endpoint address of the USB control pipe used by the given session. A value of 0 signifies that the default control pipe will be used. This endpoint is used in VISA USB Control In and VISA USB Control Out operations."
+ attribute: "USB Out"
+    "USB Settings:Out Pipe"
+    iW readwrite local 3FFF01A2
+    // const: VI_ATTR_USB_BULK_OUT_PIPE
+    "This property specifies the endpoint number of the USB bulk-out or interrupt-out pipe used by the given session. This endpoint is used in VISA Write and related operations."
+ attribute: "USB Bulk-In"
+    "USB Settings:Bulk-In Pipe"
+    iW readwrite local 3FFF01A3
+    // const: VI_ATTR_USB_BULK_IN_PIPE
+    "This property specifies the endpoint number of the USB bulk-in pipe used by the given session. This endpoint is used in VISA Read and related operations."
+ attribute: "USB Intr-In"
+    "USB Settings:Interrupt-In Pipe"
+    iW readwrite local 3FFF01A4
+    // const: VI_ATTR_USB_INTR_IN_PIPE
+    "This property specifies the endpoint number of the USB interrupt-in pipe used by the given session. This endpoint is used in VISA Enable Event for the USB Interrupt Event."
+ attribute: "USB Out Stat"
+    "USB Settings:Out Pipe Status"
+    iW enum {Unknown=-1, Ready=0, Stalled=1} readwrite local 3FFF01AC
+    // const: VI_ATTR_USB_BULK_OUT_STATUS
+    "This property specifies whether the USB bulk-out or interrupt-out pipe used by the given session is stalled or ready."
+ attribute: "USB Bulk-In Stat"
+    "USB Settings:Bulk-In Pipe Status"
+    iW enum {Unknown=-1, Ready=0, Stalled=1} readwrite local 3FFF01AD
+    // const: VI_ATTR_USB_BULK_IN_STATUS
+    "This property specifies whether the USB bulk-in pipe used by the given session is stalled or ready."
+ attribute: "USB Intr-In Stat"
+    "USB Settings:Interrupt-In Pipe Status"
+    iW enum {Unknown=-1, Ready=0, Stalled=1} readwrite local 3FFF01AE
+    // const: VI_ATTR_USB_INTR_IN_STATUS
+    "This property specifies whether the USB interrupt-in pipe used by the given session is stalled or ready."
+
+ method: "VISA Read" noInvoke
+ method: "VISA Write" noInvoke
+ method: "VISA Read To File" noInvoke
+ method: "VISA Write From File" noInvoke
+ method: "VISA Clear" noInvoke
+ method: "VISA Read STB" noInvoke
+ method: "VISA Assert Trigger" noInvoke
+ method: "VISA USB Control Out" noInvoke
+ method: "VISA USB Control In" noInvoke
+
+
+class: "FireWire Instr"
+super: "I/O Session"
+classString: "FIREWIRE?*::INSTR"
+ attribute: "Manf Name"
+    "General Settings:Manufacturer Name"
+    string readonly global BFFF0072
+    // const: VI_ATTR_MANF_NAME
+    "This string property is the manufacturer's name. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Model Name"
+    "General Settings:Model Name"
+    string readonly global BFFF0077
+    // const: VI_ATTR_MODEL_NAME
+    "This string property is the model name of the device. 
+
+<B>Note:</B> The value of this property should be used for display purposes only and not for programmatic decisions, as the value can be different between VISA implementations and/or revisions."
+ attribute: "Src Increment"
+    "Register Based Settings:Source Increment Count"
+    iL readwrite local 3FFF0040
+    // const: VI_ATTR_SRC_INCREMENT
+    "This property specifies the number of elements by which to increment the source address on block move operations. Valid values are 0 and 1."
+ attribute: "Dest Increment"
+    "Register Based Settings:Destination Increment Count"
+    iL readwrite local 3FFF0041
+    // const: VI_ATTR_DEST_INCREMENT
+    "This property specifies the number of elements by which to increment the destination address on block move operations. Valid values are 0 and 1."
+ attribute: "Win Base Addr"
+    "Register Based Settings:Window Base Address"
+    uL readonly local 3FFF0098
+    // const: VI_ATTR_WIN_BASE_ADDR
+    "This property value is the base interface address to which this window is mapped."
+ attribute: "Win Size"
+    "Register Based Settings:Window Size"
+    uL readonly local 3FFF009A
+    // const: VI_ATTR_WIN_SIZE
+    "This property value is the size of the region mapped to this window."
+ attribute: "Win Access"
+    "Register Based Settings:Window Access"
+    uW enum {"Not Mapped"=1, "Use Peek/Poke Operations"=2, "Can Dereference Pointer"=3, "Pointer value is byte-swapped"=4} readonly local 3FFF00C3
+    // const: VI_ATTR_WIN_ACCESS
+    "This property value reflects whether the current session has a mapped window, and if so, whether accesses through this window can be achieved through direct pointer dereferences."
+ attribute: "1394 Dest Upper"
+    "FireWire Settings:Destination Upper Offset"
+     uW readwrite local 3FFF01F0
+    // const: VI_ATTR_FIREWIRE_DEST_UPPER_OFFSET
+    "This property specifies the upper 16 bits of the 48-bit destination address for a FireWire device."
+ attribute: "1394 Src Upper"
+    "FireWire Settings:Source Upper Offset"
+     uW readwrite local 3FFF01F1
+    // const: VI_ATTR_FIREWIRE_SRC_UPPER_OFFSET
+    "This property specifies the upper 16 bits of the 48-bit source address for a FireWire device."
+ attribute: "1394 Win Upper"
+    "FireWire Settings:Window Upper Offset"
+     uW readwrite local 3FFF01F2
+    // const: VI_ATTR_FIREWIRE_WIN_UPPER_OFFSET
+    "This property specifies the upper 16 bits of the 48-bit address for a FireWire device when a window is mapped."
+ attribute: "1394 Vendor"
+    "FireWire Settings:Vendor ID"
+     uL readonly global 3FFF01F3
+    // const: VI_ATTR_FIREWIRE_VENDOR_ID
+    "This property specifies the vendor ID for a FireWire device."
+ attribute: "1394 Lower Chip"
+    "FireWire Settings:Lower Chip ID"
+     uL readonly global 3FFF01F4
+    // const: VI_ATTR_FIREWIRE_LOWER_CHIP_ID
+    "This property specifies the lower chip ID for a FireWire device."
+ attribute: "1394 Upper Chip"
+    "FireWire Settings:Upper Chip ID"
+     uB readonly global 3FFF01F5
+    // const: VI_ATTR_FIREWIRE_UPPER_CHIP_ID
+    "This property specifies the upper chip ID for a FireWire device."
+
+ method: "VISA In 32" noInvoke
+ method: "VISA In 16" noInvoke
+ method: "VISA In 8" noInvoke
+ method: "VISA Out 32" noInvoke
+ method: "VISA Map Address" noInvoke
+ method: "VISA Unmap Address" noInvoke
+ method: "VISA Peek 32" noInvoke
+ method: "VISA Peek 16" noInvoke
+ method: "VISA Peek 8" noInvoke
+ method: "VISA Poke 32" noInvoke
+ method: "VISA Move In 32" noInvoke
+ method: "VISA Move In 16" noInvoke
+ method: "VISA Move In 8" noInvoke
+ method: "VISA Move Out 32" noInvoke
+
+ 
+ // Next are the Event classes
+
+class: "Event Class"
+super: "VISA object"
+flags: 2
+ attribute: "Impl Version"
+    "Version Information:Version of Implementation"
+    uL readonly  global 3FFF0003
+    // const: VI_ATTR_RSRC_IMPL_VERSION
+    "This property is the version that uniquely identifies each of the different revisions or implementations. This property is defined by the individual manufacturer and increments with each new revision."
+ attribute: "Spec Version"
+    "Version Information:Version of Specification"
+    uL readonly  global 3FFF0170
+    // const: VI_ATTR_RSRC_SPEC_VERSION
+    "This property is the version that uniquely identifies the version of the VISA specification to which the implementation is compliant."
+ attribute: "Rsrc Manf Id"
+    "Version Information:Resource Manufacturer Identification"
+    uW readonly global 3FFF0175
+    // const: VI_ATTR_RSRC_MANF_ID
+    "This property value corresponds to the VXI manufacturer ID of the manufacturer that created the VISA implementation."
+ attribute: "Rsrc Manf Name"
+    "Version Information:Resource Manufacturer Name"
+    string readonly global BFFF0174
+    // const: VI_ATTR_RSRC_MANF_NAME
+    "This property is the name of the manufacturer that created the implementation."
+
+class: "Generic Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+ attribute: "Recv Trig ID"
+    "Event Information:Received Trigger ID"
+    iW enum {Software=-1, TTL0=0, TTL1=1, TTL2=2, TTL3=3, TTL4=4, TTL5=5, TTL6=6, TTL7=7, ECL0=8, ECL1=9} readonly local 3FFF4012
+    // const: VI_ATTR_RECV_TRIG_ID
+    "This property identifies the triggering mechanism on which the specified trigger event was received. This is valid for the Trigger Event only."
+ attribute: "Sig Stat ID"
+    "Event Information:Signal Processor Status ID"
+    uW readonly local 3FFF4011
+    // const: VI_ATTR_SIGP_STATUS_ID
+    "This property is the 16-bit Status/ID value retrieved during the IACK cycle or from the Signal register. This is valid for the VXI Signal Event only."
+ attribute: "Intr Stat ID"
+    "Event Information:Interrupt Status ID"
+    uL readonly local 3FFF4023
+    // const: VI_ATTR_INTR_STATUS_ID
+    "This property value is the 32-bit status/ID retrieved during the IACK cycle. This is valid for the VXI/VME Interrupt Event only."
+ attribute: "Recv Intr Level"
+    "Event Information:Received Interrupt Level"
+    iW readonly local 3FFF4041
+    // const: VI_ATTR_RECV_INTR_LEVEL
+    "This property value is the VXI interrupt level on which the interrupt was received. This is valid for the VXI/VME Interrupt Event only."
+ attribute: "Recv CIC State"
+    "Event Information:Received CIC State"
+    bool readonly local 3FFF4193
+    // const: VI_ATTR_GPIB_RECV_CIC_STATE
+    "This property specifies whether the CIC status was gained or lost. This is valid for the GPIB CIC Event only."
+ attribute: "Status"
+    "Event Information:Status"
+    iL readonly local 3FFF4025
+    // const: VI_ATTR_STATUS
+    "This property value is the VISA status code of the specified event."
+ attribute: "USB Recv Intr Size"
+    "Event Information:USB Received Interrupt Size"
+    uW readonly local 3FFF41B0
+    // const: VI_ATTR_USB_RECV_INTR_SIZE
+    "This property value is the number of bytes of USB interrupt data that is stored."
+ attribute: "PCI Recv Intr Seq"
+    "Event Information:PXI/PCI Received Interrupt Sequence"
+    iW readonly local 3FFF4240
+    // const: VI_ATTR_PXI_RECV_INTR_SEQ
+    "This property value is the index of the interrupt sequence that detected the interrupt condition."
+ attribute: "PCI Recv Intr Data"
+    "Event Information:PXI/PCI Received Interrupt Data"
+    uL readonly local 3FFF4241
+    // const: VI_ATTR_PXI_RECV_INTR_DATA
+    "This property value is the first PXI/PCI register that was read in the successful interrupt detection sequence."
+
+
+class: "Service Request Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+
+class: "Trigger Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+ attribute: "Recv Trig ID"
+    "Event Information:Received Trigger ID"
+    iW enum {Software=-1, TTL0=0, TTL1=1, TTL2=2, TTL3=3, TTL4=4, TTL5=5, TTL6=6, TTL7=7, ECL0=8, ECL1=9} readonly local 3FFF4012
+    // const: VI_ATTR_RECV_TRIG_ID
+    "This property identifies the triggering mechanism on which the specified trigger event was received. This is valid for the Trigger Event only."
+
+class: "VXI Signal Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+ attribute: "Sig Stat ID"
+    "Event Information:Signal Processor Status ID"
+    uW readonly local 3FFF4011
+    // const: VI_ATTR_SIGP_STATUS_ID
+    "This property is the 16-bit Status/ID value retrieved during the IACK cycle or from the Signal register. This is valid for the VXI Signal Event only."
+
+class: "VXI/VME Interrupt Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+ attribute: "Intr Stat ID"
+    "Event Information:Interrupt Status ID"
+    uL readonly local 3FFF4023
+    // const: VI_ATTR_INTR_STATUS_ID
+    "This property value is the 32-bit status/ID retrieved during the IACK cycle. This is valid for the VXI/VME Interrupt Event only."
+ attribute: "Recv Intr Level"
+    "Event Information:Received Interrupt Level"
+    iW readonly local 3FFF4041
+    // const: VI_ATTR_RECV_INTR_LEVEL
+    "This property value is the VXI interrupt level on which the interrupt was received. This is valid for the VXI/VME Interrupt Event only."
+
+class: "PXI Interrupt Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+ attribute: "PCI Recv Intr Seq"
+    "Event Information:PXI/PCI Received Interrupt Sequence"
+    iW readonly local 3FFF4240
+    // const: VI_ATTR_PXI_RECV_INTR_SEQ
+    "This property value is the index of the interrupt sequence that detected the interrupt condition."
+ attribute: "PCI Recv Intr Data"
+    "Event Information:PXI/PCI Received Interrupt Data"
+    uL readonly local 3FFF4241
+    // const: VI_ATTR_PXI_RECV_INTR_DATA
+    "This property value is the first PXI/PCI register that was read in the successful interrupt detection sequence."
+
+class: "USB Interrupt Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+ attribute: "Status"
+    "Event Information:Status"
+    iL readonly local 3FFF4025
+    // const: VI_ATTR_STATUS
+    "This property value is the VISA status code of the specified event."
+ attribute: "USB Recv Intr Size"
+    "Event Information:USB Received Interrupt Size"
+    uW readonly local 3FFF41B0
+    // const: VI_ATTR_USB_RECV_INTR_SIZE
+    "This property value is the number of bytes of USB interrupt data that is stored."
+
+class: "Clear Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+
+class: "GPIB CIC Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+ attribute: "Recv CIC State"
+    "Event Information:Received CIC State"
+    bool readonly local 3FFF4193
+    // const: VI_ATTR_GPIB_RECV_CIC_STATE
+    "This property specifies whether the CIC status was gained or lost. This is valid for the GPIB CIC Event only."
+
+class: "GPIB Talk Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+
+class: "GPIB Listen Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+
+class: "VXI/VME Sysfail Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+
+class: "VXI/VME Sysreset Event"
+super: "Event Class"
+flags: 4
+ attribute: "Event Type"
+    "Event Information:Event Type"
+    uL enum {"Service Request"=1073684491, Trigger=3221168138, Clear=1073684493, "VXI Signal"=1073684512, "VXI/VME Interrupt"=3221168161, "VXI/VME Sysfail"=1073684509, "VXI/VME Sysreset"=1073684510, "GPIB CIC"=1073684498, "GPIB Talk"=1073684499, "GPIB Listen"=1073684500, "PXI Interrupt"=1073684514, "USB Interrupt"=1073684535, "All Enabled"=1073709055} readonly local 3FFF4010
+    // const: VI_ATTR_EVENT_TYPE
+    "This property is the unique logical identifier for the event type of the specified event."
+
+// Finally, there is the Resource Manager class
+
+class: "Resource Manager"
+super: "VISA object"
+flags: 3
+ attribute: "User Data"
+    "General Settings:User Data"
+    uL readwrite local 3FFF0007
+    // const: VI_ATTR_USER_DATA
+    "This property is a data value for the private use of an application, and is unique per session. This property is not used by VISA for any purpose."
+ attribute: "Impl Version"
+    "Version Information:Version of Implementation"
+    uL readonly  global 3FFF0003
+    // const: VI_ATTR_RSRC_IMPL_VERSION
+    "This property is the version that uniquely identifies each of the different revisions or implementations. This property is defined by the individual manufacturer and increments with each new revision."
+ attribute: "Spec Version"
+    "Version Information:Version of Specification"
+    uL readonly  global 3FFF0170
+    // const: VI_ATTR_RSRC_SPEC_VERSION
+    "This property is the version that uniquely identifies the version of the VISA specification to which the implementation is compliant."
+ attribute: "Rsrc Manf Id"
+    "Version Information:Resource Manufacturer Identification"
+    uW readonly global 3FFF0175
+    // const: VI_ATTR_RSRC_MANF_ID
+    "This property value corresponds to the VXI manufacturer ID of the manufacturer that created the VISA implementation."
+ attribute: "Rsrc Manf Name"
+    "Version Information:Resource Manufacturer Name"
+    string readonly global BFFF0174
+    // const: VI_ATTR_RSRC_MANF_NAME
+    "This property is the name of the manufacturer that created the implementation."

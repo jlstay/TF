@@ -1,0 +1,226 @@
+
+
+
+Using the VXI Instrument 
+Driver Support VIs 
+
+
+Introduction
+============
+
+In order for an instrument driver to communicate with a particular VXI 
+instrument, it must know the logical address of the instrument, and also 
+the type of controller that is serving as its master.  In the case of 
+MXI-VXI or embedded controllers, VXI word serial communications are required, 
+while in the case of GPIB-VXI controller, GPIB reads/writes are needed.  
+Generally, the type of I/O operation required does not affect the contents of 
+the actual message sent to the instrument; therefore, the same instrument 
+driver message building routines can be used with either word serial or GPIB 
+communications.  With that in mind, to make an instrument driver work with 
+either type of controller, at least three controls are required on the front 
+panel to specify the information needed to address the instrument: 
+1) a control that identifies the controller as one requiring either NI-VXI or 
+NI-488 calls; 2) a control for the unique logical address of that particular 
+instrument, and 3) a control for the GPIB primary address of the GPIB-VXI and 
+the secondary GPIB address it assigns to the instrument (in the case of 
+GPIB-VXI controlled instruments).  Not only would these controls take up a 
+significant amount of front panel space, but users would be required to 
+remember a great deal of information to communicate with their VXI 
+instruments.  
+
+To simplify the task of addressing VXI instruments, we have developed VIs 
+which store the necessary information at initialization and are able to refer 
+back to it during I/O calls.  Using the concept of instrument identifiers, 
+you must first run a VI to open the instrument and have an instrument ID 
+number assigned, but for subsequent operations with the instrument you only 
+need enter or wire that instrument ID number into the instrument driver or 
+communication VI.  In other words, one addressing control (instrument ID) 
+replaces the three controls previously needed for addressing.  Information 
+about each instrument is stored in a global storage VI, VXI Instrument 
+Global, which is called by the VXI Message Read and VXI Message Write VIs.  
+One additional step is required to take an instrument out of the VXI 
+Instrument Global when you are finished with it, but overall the advantages 
+of instrument identifiers outweigh the slight inconvenience of opening and 
+closing instruments prior to and after use. 
+
+
+About these VIs
+===============
+  
+The Virtual Instruments (VIs) contained in the _vxitls.llb archive are used 
+by the LabVIEW VXI instrument drivers.  VIs are included to open/close VXI 
+instruments, store information about those instruments, and communicate with 
+them.  Each VI included is fully described below.  You must have these VIs in 
+order to use the LabVIEW VXI instrument drivers.  In addition, you must 
+either have the NI-VXI library and the VXI VIs installed on your computer, or 
+you must substitute the actual VXI calls with the items contained in the 
+stubVXI.llb archive.  See the next section for complete instructions.
+
+
+VXI Instrument Global:
+
+This VI stores information about each VXI instrument in the system and 
+assigns instrument IDs.  The use of instrument IDs simplifies the task of 
+addressing the correct instrument in an instrument driver because information 
+such as controller platform (embedded, GPIB-VXI, or MXI-VXI), logical 
+address, and GPIB address is stored during instrument initialization and 
+replaced with a simple numeric identifier for subsequent I/O operations.
+
+There are several modes of operation for this VI.  Mode 0 (read) returns 
+information about an instrument with the specified instrument ID.  If no 
+instrument is currently using that ID, the output valid boolean will be 
+false.  Mode 1 (add) takes the information entered in the instrument in 
+cluster and stores it, returning the instrument ID assigned to that 
+instrument.  Mode 2 (change) replaces the stored information for the entered 
+instrument ID with the information currently in the instrument in cluster.  
+If no instrument is using that ID, the operation successful boolean will be 
+false.  Mode 3 (delete) removes the information stored at the entered 
+instrument ID and also places that ID on a list of available ID numbers.  
+Again, if no instrument is using that ID, the operation successful boolean 
+will be false.  Finally, mode 4 (clear all) removes all stored information an 
+makes all instrument IDs available for use.
+
+
+Open VXI Instrument:
+
+This VI loads information about an instrument into the VXI Instrument Global 
+VI and assigns an instrument ID to that instrument.  Before assigning the ID, 
+the VI searches the VXI Instrument Global to see if the instrument already 
+exists (one with the same LA, platform, and GPIB address).  If so, the 
+existing instrument ID is returned, otherwise a new instrument ID is 
+generated.  The instrument ID is used in subsequent instrument driver VIs or 
+I/O functions to communicate with the instrument.  You must run this VI 
+before using any of the VXI communication VIs included in the _vxitls.llb.
+
+If you select NI-488 as the controller platform, this VI queries the GPIB-VXI 
+at the entered GPIB primary address for the GPIB secondary address that it 
+assigns to the VXI instrument at the entered logical address.  This address 
+is stored in the VXI Instrument Global VI and is referred to as needed for 
+subsequent communication with the instrument.  If an error occurs while 
+opening the instrument, error code 1220 is returned.
+
+
+VXI Send Message:
+
+This VI send a string to a message based VXI instrument.  Use the instrument 
+ID generated by the Open VXI Instrument to address the specific instrument, 
+then set the write mode and enter the string to send.  If a write error 
+occurs, error code 1230 is returned.  If you fail to open the instrument, 
+error code 1232 is returned.
+
+
+VXI Receive Message:
+
+This VI reads a string from a message based VXI instrument.  Use the 
+instrument ID generated by the Open VXI Instrument to address the specific 
+instrument, then set the read mode and enter the byte count.  If a read error 
+occurs, error code 1231 is returned.  If you fail to open the instrument, 
+error code 1232 is returned.
+
+
+VXI Write Register
+
+This VI writes a single word to a particular VXI device's VXI registers 
+within the logical address space (the upper 16 kilobytes of VXI A16 address 
+space).  It is used primarily for writing to register based instruments.  Use 
+the instrument ID generated by the Open VXI Instrument to address the 
+specific instrument, then enter the offset of the register and the value you 
+wish to write to it.  If a write error occurs, error code 1230 is returned.  
+If you fail to open the instrument, error code 1232 is returned.
+
+
+VXI Read Register:
+
+This VI reads a single word from a particular VXI device's VXI registers 
+within the logical address space (the upper 16 kilobytes of VXI A16 address 
+space).  It is used primarily for reading from register based instruments.  
+Use the instrument ID generated by the Open VXI Instrument to address the 
+specific instrument, then enter the offset of the register you want to read.  
+For example, the instrument's ID register is offset 0; the Device Type 
+register is offset 2; etc..  If a read error occurs, error code 1231 is 
+returned.  If you fail to open the instrument, error code 1232 is returned.
+
+
+Close VXI Instrument:
+
+This VI searches the VXI Instrument Global VI for the entered instrument ID.  
+If the ID is valid, the instrument at that ID is removed from the VXI 
+Instrument Global VI and the instrument ID is made available for reuse.  
+If the entered ID is not found, error 1221 (unable to close instrument) is 
+generated.
+
+
+Instructions for GPIB-VXI users
+===============================
+
+The VXI Message Read, VXI Message Write, VXI Read Register, and VXI Write 
+Register VIs call a number of VIs located in the NI-VXI library.  If you do 
+not have the NI-VXI library installed in your computer (you do not need it to 
+operate your GPIB-VXI controller), you will need to substitute the WSrd, 
+WSwrt, WSsetTmo, VXIinReg, and VXIoutReg subVI found in the block diagrams of 
+the VXI communication VIs with the items found in the stubVXI.llb.  
+
+For example, when loading the VXI Message Read, you can either let LabVIEW 
+load the WSsetTmo and WSrd from the stubVXI.llb, or you can cancel the search 
+and replace the broken VIs in the VXI Receive Message block diagram by 
+command clicking on the grayed-out icons in the diagram and selecting Replace 
+from the pop-up menu.  Please note that you do not need the word serial or 
+high-level VXIbus access VIs when using the GPIB-VXI; the items in the 
+stubVXI.llb serve only as placeholders to complete the block diagram and 
+prevent a broken Go arrow.
+
+
+Error Reporting
+===============
+
+LabVIEW VXI instrument drivers report errors with an error cluster containing 
+a boolean error indicator, a numeric error code, and an error source string 
+indicator.  The boolean indicates if there is an error, the code specifies 
+the specific error condition, and the source is the name of the VI in which 
+the error occurred.  In addition to this error output cluster, each VI also 
+has on its connector pane an error input cluster containing the same 
+controls.  By wiring the error out cluster of one VI to the error in cluster 
+of another VI, you can pass error information throughout your instrument 
+driver that will propagate to the top level VI in your LabVIEW application.  
+An added benefit of error input/output is that data dependency is added to 
+VIs that are not otherwise data dependent, thus adding a means of specifying 
+execution order beyond traditional sequence structures.  The error clusters 
+are shown below.
+
+In the block diagram of the Open VXI Instrument, Close VXI Instrument, VXI 
+Message Read, VXI Message Write, VXI Read Register, and VXI Write Register VI 
+is a test of the error in boolean to determine if a previous VI generated an 
+error.  If an error is detected, a case statement containing the operational 
+elements of the VI switches, turning off the operation of the VI and passing 
+the error information to the error out cluster.  If no error is detected, the 
+VI executes normally and determines whether it generated an error.  If so, 
+error information is passed to the error out cluster, otherwise the error in 
+information is passed out.  By using this technique, the first error triggers 
+subsequent VIs to not execute (or some other action defined by the user) and 
+the error code and the source of the error propagates the the top level front 
+panel.  
+
+The following is a list of error codes reserved for instrument drivers.  All 
+instrument drivers reporting errors will use the following codes.
+
+	Code    Meaning
+	1210    Parameter out of Range
+	1220    Unable to open instrument
+	1221    Unable to close instrument
+	1223    Instrument identification query failed
+	1225    Error triggering instrument
+	1226    Error polling instrument
+	1228    Error writing to instrument from file
+	1229    Error reading from instrument to file
+	1230    Error writing to instrument
+	1231    Error reading from instrument
+	1232    Instrument not initialized
+	1234    Error placing instrument in local mode
+	1236    Error interpreting instrument response
+	1239    Error in configuring timeout
+	1240    Instrument timed out
+	1300    Instrument-specific errors
+
+
+
+

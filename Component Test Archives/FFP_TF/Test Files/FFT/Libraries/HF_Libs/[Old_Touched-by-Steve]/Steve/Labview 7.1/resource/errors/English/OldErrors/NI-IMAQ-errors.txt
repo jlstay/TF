@@ -1,0 +1,772 @@
+<?XML Version="1.0">
+<nidocument>
+<nicomment>
+<nifamily familyname="NI-IMAQ" displayname="NI-IMAQ">
+</nifamily>
+</nicomment>
+<nierror code="-1074397183">
+NI-IMAQ:  (Hex 0xBFF60001) NI-IMAQ cannot perform the requested operation.
+</nierror>
+<nierror code="-1074397182">
+NI-IMAQ:  (Hex 0xBFF60002) Too many interfaces open.
+</nierror>
+<nierror code="-1074397181">
+NI-IMAQ:  (Hex 0xBFF60003) Not enough memory to perform the operation.
+</nierror>
+<nierror code="-1074397180">
+NI-IMAQ:  (Hex 0xBFF60004) Operating system error occurred.
+</nierror>
+<nierror code="-1074397179">
+NI-IMAQ:  (Hex 0xBFF60005)  Function-specific; see function description.
+</nierror>
+<nierror code="-1074397178">
+NI-IMAQ:  (Hex 0xBFF60006)  Function-specific; see function description.
+</nierror>
+<nierror code="-1074397177">
+NI-IMAQ:  (Hex 0xBFF60007) Function-specific; see function description.
+</nierror>
+<nierror code="-1074397176">
+NI-IMAQ:  (Hex 0xBFF60008) Function-specific; see function description.
+</nierror>
+<nierror code="-1074397175">
+NI-IMAQ:  (Hex 0xBFF60009) Function-specific; see function description.
+</nierror>
+<nierror code="-1074397174">
+NI-IMAQ:  (Hex 0xBFF6000A) Function-specific; see function description.
+</nierror>
+<nierror code="-1074397173">
+NI-IMAQ:  (Hex 0xBFF6000B) Function-specific; see function description.
+</nierror>
+<nierror code="-1074397172">
+NI-IMAQ:  (Hex 0xBFF6000C) Too many buffers already allocated.
+</nierror>
+<nierror code="-1074397171">
+NI-IMAQ:  (Hex 0xBFF6000D) DLL internal error; bad logic state.
+</nierror>
+<nierror code="-1074397170">
+NI-IMAQ:  (Hex 0xBFF6000E) Buffer size used is too small for minimum acquisition frame.
+</nierror>
+<nierror code="-1074397169">
+NI-IMAQ:  (Hex 0xBFF6000F) Exhausted buffer IDs.
+</nierror>
+<nierror code="-1074397168">
+NI-IMAQ:  (Hex 0xBFF60010) Operating system unable to lock the requested amount of memory.
+</nierror>
+<nierror code="-1074397167">
+NI-IMAQ:  (Hex 0xBFF60011) Error releasing the image buffer.
+</nierror>
+<nierror code="-1074397166">
+NI-IMAQ:  (Hex 0xBFF60012) Bad buffer pointer in list.
+</nierror>
+<nierror code="-1074397165">
+NI-IMAQ:  (Hex 0xBFF60013) Buffer list is not locked for this acquisition.
+</nierror>
+<nierror code="-1074397164">
+NI-IMAQ:  (Hex 0xBFF60014) No camera defined for this channel.
+</nierror>
+<nierror code="-1074397163">
+NI-IMAQ:  (Hex 0xBFF60015) The passed in interface or session is invalid.
+</nierror>
+<nierror code="-1074397162">
+NI-IMAQ:  (Hex 0xBFF60016) The bytes per row value is less than region of interest.
+</nierror>
+<nierror code="-1074397161">
+NI-IMAQ:  (Hex 0xBFF60017) Region of interest is larger than the acquisition area.
+</nierror>
+<nierror code="-1074397160">
+NI-IMAQ:  (Hex 0xBFF60018) Camera file is missing or corrupted.
+</nierror>
+<nierror code="-1074397159">
+NI-IMAQ:  (Hex 0xBFF60019) The hardware is incapable of performing the requested action.
+</nierror>
+<nierror code="-1074397158">
+NI-IMAQ:  (Hex 0xBFF6001A) No buffers configured for session.
+</nierror>
+<nierror code="-1074397157">
+NI-IMAQ:  (Hex 0xBFF6001B) Buffer list does not contain a valid final command.
+</nierror>
+<nierror code="-1074397156">
+NI-IMAQ:  (Hex 0xBFF6001C) Buffer list contains an invalid command.
+</nierror>
+<nierror code="-1074397155">
+NI-IMAQ:  (Hex 0xBFF6001D) One of the buffers in the buffer list is NULL.
+</nierror>
+<nierror code="-1074397154">
+NI-IMAQ:  (Hex 0xBFF6001E) No acquisition in progress.
+</nierror>
+<nierror code="-1074397153">
+NI-IMAQ:  (Hex 0xBFF6001F) Cannot detect recognizeable video source.
+</nierror>
+<nierror code="-1074397152">
+NI-IMAQ:  (Hex 0xBFF60020) Bad DMA transfer.
+</nierror>
+<nierror code="-1074397151">
+NI-IMAQ:  (Hex 0xBFF60021) Cannot perform request; acquisition currently in progress.
+</nierror>
+<nierror code="-1074397150">
+NI-IMAQ:  (Hex 0xBFF60022) Did not receive all expected video data within the timeout period.
+</nierror>
+<nierror code="-1074397149">
+NI-IMAQ:  (Hex 0xBFF60023) No buffers available; too early in acquisition.
+</nierror>
+<nierror code="-1074397148">
+NI-IMAQ:  (Hex 0xBFF60024) The buffer has a size of zero.
+</nierror>
+<nierror code="-1074397147">
+NI-IMAQ:  (Hex 0xBFF60025) Parameter value set lower than valid range.
+</nierror>
+<nierror code="-1074397146">
+NI-IMAQ:  (Hex 0xBFF60026) Trigger loopback problem; cannot drive with action enabled.
+</nierror>
+<nierror code="-1074397145">
+NI-IMAQ:  (Hex 0xBFF60027) No interface found.
+</nierror>
+<nierror code="-1074397144">
+NI-IMAQ:  (Hex 0xBFF60028) Unable to load DLL.
+</nierror>
+<nierror code="-1074397143">
+NI-IMAQ:  (Hex 0xBFF60029) Unable to find API function in DLL.
+</nierror>
+<nierror code="-1074397142">
+NI-IMAQ:  (Hex 0xBFF6002A) Unable to allocate system resources.
+</nierror>
+<nierror code="-1074397141">
+NI-IMAQ:  (Hex 0xBFF6002B) No trigger action; acquisition will time out.
+</nierror>
+<nierror code="-1074397140">
+NI-IMAQ:  (Hex 0xBFF6002C) FIFO overflow caused acquisition to halt.
+</nierror>
+<nierror code="-1074397139">
+NI-IMAQ:  (Hex 0xBFF6002D) Operating system denied request to lock down memory.
+</nierror>
+<nierror code="-1074397138">
+NI-IMAQ:  (Hex 0xBFF6002E) Interface locked.
+</nierror>
+<nierror code="-1074397137">
+NI-IMAQ:  (Hex 0xBFF6002F) No pixel clock detected from camera. 
+</nierror>
+<nierror code="-1074397136">
+NI-IMAQ:  (Hex 0xBFF60030) Field scaling mode not supported.
+</nierror>
+<nierror code="-1074397135">
+NI-IMAQ:  (Hex 0xBFF60031) Channel not set to 1 when using StillColor RGB acquisition.
+</nierror>
+<nierror code="-1074397134">
+NI-IMAQ:  (Hex 0xBFF60032) Error during small buffer allocation.
+</nierror>
+<nierror code="-1074397133">
+NI-IMAQ:  (Hex 0xBFF60033) Error during large buffer allocation.
+</nierror>
+<nierror code="-1074397132">
+NI-IMAQ:  (Hex 0xBFF60034) This camera type is not supported by this hardware.
+</nierror>
+<nierror code="-1074397131">
+NI-IMAQ:  (Hex 0xBFF60035) Camera not supported; must be an 8-bit camera.
+</nierror>
+<nierror code="-1074397130">
+NI-IMAQ:  (Hex 0xBFF60036) Bad camera parameter in configuration file.
+</nierror>
+<nierror code="-1074397129">
+NI-IMAQ:  (Hex 0xBFF60037) Unable to recognize color component in PAL signal.
+</nierror>
+<nierror code="-1074397128">
+NI-IMAQ:  (Hex 0xBFF60038) Bad clock frequency.
+</nierror>
+<nierror code="-1074397127">
+NI-IMAQ:  (Hex 0xBFF60039) Bad interface type.
+</nierror>
+<nierror code="-1074397126">
+NI-IMAQ:  (Hex 0xBFF6003A) Hardware not capable of supporting this operation.
+</nierror>
+<nierror code="-1074397125">
+NI-IMAQ:  (Hex 0xBFF6003B) Serial port error.
+</nierror>
+<nierror code="-1074397123">
+NI-IMAQ:  (Hex 0xBFF6003D) Bad pulse ID.
+</nierror>
+<nierror code="-1074397122">
+NI-IMAQ:  (Hex 0xBFF6003E) DLL internal error; bad logic state.
+</nierror>
+<nierror code="-1074397121">
+NI-IMAQ:  (Hex 0xBFF6003F) Unable to perform the requested serial operation within the timeout period.
+</nierror>
+<nierror code="-1074397120">
+NI-IMAQ:  (Hex 0xBFF60040) Too many pattern generation transitions defined.
+</nierror>
+<nierror code="-1074397119">
+NI-IMAQ:  (Hex 0xBFF60041) Bad pattern generation transition time.
+</nierror>
+<nierror code="-1074397118">
+NI-IMAQ:  (Hex 0xBFF60042) Pulse not started.
+</nierror>
+<nierror code="-1074397117">
+NI-IMAQ:  (Hex 0xBFF60043) Bad pulse mode.
+</nierror>
+<nierror code="-1074397116">
+NI-IMAQ:  (Hex 0xBFF60044) This attribute cannot be set.
+</nierror>
+<nierror code="-1074397115">
+NI-IMAQ:  (Hex 0xBFF60045) Cannot mix system and onboard memory buffers.
+</nierror>
+<nierror code="-1074397114">
+NI-IMAQ:  (Hex 0xBFF60046) Pixel depth not supported with this file format.
+</nierror>
+<nierror code="-1074397113">
+NI-IMAQ:  (Hex 0xBFF60047) File extension is not supported.
+</nierror>
+<nierror code="-1074397112">
+NI-IMAQ:  (Hex 0xBFF60048) Too many RTSI triggers mapped; you can use only four RTSI lines at once.
+</nierror>
+<nierror code="-1074397111">
+NI-IMAQ:  (Hex 0xBFF60049) Exhausted trigger resources.
+</nierror>
+<nierror code="-1074397110">
+NI-IMAQ:  (Hex 0xBFF6004A) Exhausted resources.
+</nierror>
+<nierror code="-1074397109">
+NI-IMAQ:  (Hex 0xBFF6004B) Parameter out of range.
+</nierror>
+<nierror code="-1074397108">
+NI-IMAQ:  (Hex 0xBFF6004C) FPGA not programmed.
+</nierror>
+<nierror code="-1074397107">
+NI-IMAQ:  (Hex 0xBFF6004D) Not enough onboard memory to perform the operation.
+</nierror>
+<nierror code="-1074397106">
+NI-IMAQ:  (Hex 0xBFF6004E) Bad display type; buffer cannot be displayed with imgPlot.
+</nierror>
+<nierror code="-1074397105">
+NI-IMAQ:  (Hex 0xBFF6004F) Thread denied access to function.
+</nierror>
+<nierror code="-1074397104">
+NI-IMAQ:  (Hex 0xBFF60050) Could not write the file.
+</nierror>
+<nierror code="-1074397103">
+NI-IMAQ:  (Hex 0xBFF60051) This buffer is currently protected. Release it to allow new data to be written.
+</nierror>
+<nierror code="-1074397102">
+NI-IMAQ:  (Hex 0xBFF60052) Invalid LUT type.
+</nierror>
+<nierror code="-1074397101">
+NI-IMAQ:  (Hex 0xBFF60053) Selected attribute is not readable.
+</nierror>
+<nierror code="-1074397100">
+NI-IMAQ:  (Hex 0xBFF60054) This version of the driver does not support this board.
+</nierror>
+<nierror code="-1074397099">
+NI-IMAQ:  (Hex 0xBFF60055) The value for frame/field is invalid.
+</nierror>
+<nierror code="-1074397098">
+NI-IMAQ:  (Hex 0xBFF60056) The requested attribute is invalid.
+</nierror>
+<nierror code="-1074397097">
+NI-IMAQ:  (Hex 0xBFF60057) Invalid mapping of physical data lines to bit values.
+</nierror>
+<nierror code="-1074397095">
+NI-IMAQ:  (Hex 0xBFF60059) The requested channel is invalid for this board.
+</nierror>
+<nierror code="-1074397094">
+NI-IMAQ:  (Hex 0xBFF6005A) The reqested setting for the anti-chrominance filter is invalid.
+</nierror>
+<nierror code="-1074397093">
+NI-IMAQ:  (Hex 0xBFF6005B) The value for scaling is invalid.
+</nierror>
+<nierror code="-1074397091">
+NI-IMAQ:  (Hex 0xBFF6005D) The requested value for trigger mode is invalid.
+</nierror>
+<nierror code="-1074397090">
+NI-IMAQ:  (Hex 0xBFF6005E) The value for clamp start is invalid.
+</nierror>
+<nierror code="-1074397089">
+NI-IMAQ:  (Hex 0xBFF6005F) The requested value for clamp stop is invalid.
+</nierror>
+<nierror code="-1074397088">
+NI-IMAQ:  (Hex 0xBFF60060) The requested brightness level is out of range.
+</nierror>
+<nierror code="-1074397087">
+NI-IMAQ:  (Hex 0xBFF60061) The requested contrast level is out of range.
+</nierror>
+<nierror code="-1074397086">
+NI-IMAQ:  (Hex 0xBFF60062) The requested saturation level is out of range.
+</nierror>
+<nierror code="-1074397085">
+NI-IMAQ:  (Hex 0xBFF60063) The requested tint level is out of range.
+</nierror>
+<nierror code="-1074397084">
+NI-IMAQ:  (Hex 0xBFF60064) The requested hue offset angle is out of range.
+</nierror>
+<nierror code="-1074397083">
+NI-IMAQ:  (Hex 0xBFF60065) The requested field to acquire is invalid.
+</nierror>
+<nierror code="-1074397082">
+NI-IMAQ:  (Hex 0xBFF60066) The requested value for luma bandwidth is invalid.
+</nierror>
+<nierror code="-1074397081">
+NI-IMAQ:  (Hex 0xBFF60067) The requested setting for the luma comb is invalid.
+</nierror>
+<nierror code="-1074397080">
+NI-IMAQ:  (Hex 0xBFF60068) The requested value for chroma processing is invalid.
+</nierror>
+<nierror code="-1074397079">
+NI-IMAQ:  (Hex 0xBFF60069) The requested value for the chroma bandwidth is invalid.
+</nierror>
+<nierror code="-1074397078">
+NI-IMAQ:  (Hex 0xBFF6006A) The requested value for the chroma comb setting is invalid.
+</nierror>
+<nierror code="-1074397077">
+NI-IMAQ:  (Hex 0xBFF6006B) The requested value for RGB coring is invalid.
+</nierror>
+<nierror code="-1074397076">
+NI-IMAQ:  (Hex 0xBFF6006C) The requested value for HSL hue replacement is out of range.
+</nierror>
+<nierror code="-1074397075">
+NI-IMAQ:  (Hex 0xBFF6006D) The requested value for red gain is out of range.
+</nierror>
+<nierror code="-1074397074">
+NI-IMAQ:  (Hex 0xBFF6006E) The requested value for green gain is out of range.
+</nierror>
+<nierror code="-1074397073">
+NI-IMAQ:  (Hex 0xBFF6006F) The requested value for blue gain is out of range.
+</nierror>
+<nierror code="-1074397072">
+NI-IMAQ:  (Hex 0xBFF60070) Requested value for start field is invalid.
+</nierror>
+<nierror code="-1074397071">
+NI-IMAQ:  (Hex 0xBFF60071) Invalid tap scan direction.
+</nierror>
+<nierror code="-1074397070">
+NI-IMAQ:  (Hex 0xBFF60072) Invalid maximum image rectangle.
+</nierror>
+<nierror code="-1074397069">
+NI-IMAQ:  (Hex 0xBFF60073) Invalid tap configuration.
+</nierror>
+<nierror code="-1074397068">
+NI-IMAQ:  (Hex 0xBFF60074) The synchronization rectangle is invalid.
+</nierror>
+<nierror code="-1074397067">
+NI-IMAQ:  (Hex 0xBFF60075) The requested acquisition window is invalid.
+</nierror>
+<nierror code="-1074397067">
+NI-IMAQ:  (Hex 0xBFF60075) The requested value for HSL coring is out of range.
+</nierror>
+<nierror code="-1074397065">
+NI-IMAQ:  (Hex 0xBFF60077) Invalid rectangle defined for Tap 0.
+</nierror>
+<nierror code="-1074397064">
+NI-IMAQ:  (Hex 0xBFF60078) Invalid rectangle defined for Tap 1.
+</nierror>
+<nierror code="-1074397063">
+NI-IMAQ:  (Hex 0xBFF60079) Invalid rectangle defined for Tap 2.
+</nierror>
+<nierror code="-1074397062">
+NI-IMAQ:  (Hex 0xBFF6007A) Invalid rectangle defined for Tap 3.
+</nierror>
+<nierror code="-1074397061">
+NI-IMAQ:  (Hex 0xBFF6007B) Invalid tap rectangle.
+</nierror>
+<nierror code="-1074397060">
+NI-IMAQ:  (Hex 0xBFF6007C) Invalid value for number of taps.
+</nierror>
+<nierror code="-1074397059">
+NI-IMAQ:  (Hex 0xBFF6007D) Invalid tap number.
+</nierror>
+<nierror code="-1074397058">
+NI-IMAQ:  (Hex 0xBFF6007E) Invalid scarab quadrant number.
+</nierror>
+<nierror code="-1074397057">
+NI-IMAQ:  (Hex 0xBFF6007F) The number of requested data lines is invalid for this board.
+</nierror>
+<nierror code="-1074397056">
+NI-IMAQ:  (Hex 0xBFF60080) The value for bits per component is invalid.
+</nierror>
+<nierror code="-1074397055">
+NI-IMAQ:  (Hex 0xBFF60081) The value for number of components is invalid.
+</nierror>
+<nierror code="-1074397054">
+NI-IMAQ:  (Hex 0xBFF60082) The requested lower binary threshold value is out of range.
+</nierror>
+<nierror code="-1074397053">
+NI-IMAQ:  (Hex 0xBFF60083) The requested upper binary threshold value is out of range.
+</nierror>
+<nierror code="-1074397052">
+NI-IMAQ:  (Hex 0xBFF60084) The requested value for the black reference voltage is out of range.
+</nierror>
+<nierror code="-1074397051">
+NI-IMAQ:  (Hex 0xBFF60085) The requested value for the white reference voltage is out of range.
+</nierror>
+<nierror code="-1074397050">
+NI-IMAQ:  (Hex 0xBFF60086) Invalid video standard frequency selected for 6431 chip.
+</nierror>
+<nierror code="-1074397049">
+NI-IMAQ:  (Hex 0xBFF60087) The value for HDELAY is out of range.
+</nierror>
+<nierror code="-1074397048">
+NI-IMAQ:  (Hex 0xBFF60088) Invalid setting for lock speed.
+</nierror>
+<nierror code="-1074397047">
+NI-IMAQ:  (Hex 0xBFF60089) Invalid buffer list.
+</nierror>
+<nierror code="-1074397046">
+NI-IMAQ:  (Hex 0xBFF6008A) Board not yet initialized. 
+</nierror>
+<nierror code="-1074397045">
+NI-IMAQ:  (Hex 0xBFF6008B) The requested pixel clock source is invalid for this board.
+</nierror>
+<nierror code="-1074397044">
+NI-IMAQ:  (Hex 0xBFF6008C) Selected source for video timing signal is invalid for this board.
+</nierror>
+<nierror code="-1074397043">
+NI-IMAQ:  (Hex 0xBFF6008D) Invalid lock mode selected.
+</nierror>
+<nierror code="-1074397042">
+NI-IMAQ:  (Hex 0xBFF6008E) Invalid baud rate selected for this board.
+</nierror>
+<nierror code="-1074397041">
+NI-IMAQ:  (Hex 0xBFF6008F) Requested setting for serial stop bits is invalid for this board.
+</nierror>
+<nierror code="-1074397040">
+NI-IMAQ:  (Hex 0xBFF60090) The requested setting for serial data bits is invalid for this board.
+</nierror>
+<nierror code="-1074397039">
+NI-IMAQ:  (Hex 0xBFF60091) The requested serial parity setting is invalid for this board.
+</nierror>
+<nierror code="-1074397038">
+NI-IMAQ:  (Hex 0xBFF60092) Serial termination string not found in the returned buffer.
+</nierror>
+<nierror code="-1074397037">
+NI-IMAQ:  (Hex 0xBFF60093) Serial termination condition not met within specified timeout period.
+</nierror>
+<nierror code="-1074397036">
+NI-IMAQ:  (Hex 0xBFF60094) Serial write operation could not execute within the specified timeout period.
+</nierror>
+<nierror code="-1074397035">
+NI-IMAQ:  (Hex 0xBFF60095) Invalid setting for whether or not the acquisition is synchronous.
+</nierror>
+<nierror code="-1074397034">
+NI-IMAQ:  (Hex 0xBFF60096) This tap configuration cannot be interlaced.
+</nierror>
+<nierror code="-1074397033">
+NI-IMAQ:  (Hex 0xBFF60097) Invalid number of interleaved regions in the image.
+</nierror>
+<nierror code="-1074397032">
+NI-IMAQ:  (Hex 0xBFF60098) Invalid chip code. Could not find a matching chip.
+</nierror>
+<nierror code="-1074397031">
+NI-IMAQ:  (Hex 0xBFF60099) The LUT chip does not exist on this board.
+</nierror>
+<nierror code="-1074397030">
+NI-IMAQ:  (Hex 0xBFF6009A) the DSP filter does not exist on this board.
+</nierror>
+<nierror code="-1074397029">
+NI-IMAQ:  (Hex 0xBFF6009B) The IMAQ Device was not found.
+</nierror>
+<nierror code="-1074397028">
+NI-IMAQ:  (Hex 0xBFF6009C) Error configuring onboard memory.
+</nierror>
+<nierror code="-1074397027">
+NI-IMAQ:  (Hex 0xBFF6009D) The pointer provided is either NULL when it shouldn't be, or is non-NULL when it should be NULL>
+</nierror>
+<nierror code="-1074397026">
+NI-IMAQ:  (Hex 0xBFF6009E) The given buffer list index is not valid.
+</nierror>
+<nierror code="-1074397025">
+NI-IMAQ:  (Hex 0xBFF6009F) The given buffer attribute is invalid.
+</nierror>
+<nierror code="-1074397024">
+NI-IMAQ:  (Hex 0xBFF600A0) The given buffer wasn't created by the NI-IMAQ driver.
+</nierror>
+<nierror code="-1074397023">
+NI-IMAQ:  (Hex 0xBFF600A1) A buffer list is already locked down in memory for this board.
+</nierror>
+<nierror code="-1074397022">
+NI-IMAQ:  (Hex 0xBFF600A2) The type of IMAQ device is invalid.
+</nierror>
+<nierror code="-1074397021">
+NI-IMAQ:  (Hex 0xBFF600A3) The size of one or more Base Address Register windows is incorrect.
+</nierror>
+<nierror code="-1074397019">
+NI-IMAQ:  (Hex 0xBFF600A5) The selected region of interest is not valid for this cameras tap configuration. 
+</nierror>
+<nierror code="-1074397018">
+NI-IMAQ:  (Hex 0xBFF600A6) The wait terminated because the acquisition stopped.
+</nierror>
+<nierror code="-1074397017">
+NI-IMAQ:  (Hex 0xBFF600A7) The requested trigger action is invalid.
+</nierror>
+<nierror code="-1074397016">
+NI-IMAQ:  (Hex 0xBFF600A8) The trigger polarity is invalid.
+</nierror>
+<nierror code="-1074397015">
+NI-IMAQ:  (Hex 0xBFF600A9) The requested trigger line is invalid.
+</nierror>
+<nierror code="-1074397014">
+NI-IMAQ:  (Hex 0xBFF600AA) The requested buffer has been overwritten and is no longer available.
+</nierror>
+<nierror code="-1074397013">
+NI-IMAQ:  (Hex 0xBFF600AB) The request exposure time is our of range.
+</nierror>
+<nierror code="-1074397012">
+NI-IMAQ:  (Hex 0xBFF600AC) The given pulse ID is invalid.
+</nierror>
+<nierror code="-1074397011">
+NI-IMAQ:  (Hex 0xBFF600AD) The requested timebase for the pulse is invalid.
+</nierror>
+<nierror code="-1074397010">
+NI-IMAQ:  (Hex 0xBFF600AE) The given gate signal for the pulse is invalid.
+</nierror>
+<nierror code="-1074397009">
+NI-IMAQ:  (Hex 0xBFF600AF) The polarity of the pulse gate signal is invalid.
+</nierror>
+<nierror code="-1074397008">
+NI-IMAQ:  (Hex 0xBFF600B0) The given output signal for the pulse is invalid.
+</nierror>
+<nierror code="-1074397007">
+NI-IMAQ:  (Hex 0xBFF600B1) The requested polarity of the pulse output signal is invalid.
+</nierror>
+<nierror code="-1074397006">
+NI-IMAQ:  (Hex 0xBFF600B2) The requested pulse mode is invalid.
+</nierror>
+<nierror code="-1074397005">
+NI-IMAQ:  (Hex 0xBFF600B3) There are not enough resources to complete the requested option.
+</nierror>
+<nierror code="-1074397004">
+NI-IMAQ:  (Hex 0xBFF600B4) The requested resource is invalid.
+</nierror>
+<nierror code="-1074397003">
+NI-IMAQ:  (Hex 0xBFF600B5) Invalid enable mode for FVAL.
+</nierror>
+<nierror code="-1074397002">
+NI-IMAQ:  (Hex 0xBFF600B6) The specified combination of enable lines is invalid.
+</nierror>
+<nierror code="-1074397001">
+NI-IMAQ:  (Hex 0xBFF600B7) Internal Error: The installed components of the driver are incompatible.  Reinstall the driver.
+</nierror>
+<nierror code="-1074397000">
+NI-IMAQ:  (Hex 0xBFF600B8) Internal Error: Downloading the program to an FPGA didn't work.
+</nierror>
+<nierror code="-1074396999">
+NI-IMAQ:  (Hex 0xBFF600B9) Internal Error: The Control FPGA didn't initialize properly.
+</nierror>
+<nierror code="-1074396998">
+NI-IMAQ:  (Hex 0xBFF600BA) Internal Error: Attempt to read a write-only chip.
+</nierror>
+<nierror code="-1074396997">
+NI-IMAQ:  (Hex 0xBFF600BB) Internal Error: Attempt to write a read-only chip.
+</nierror>
+<nierror code="-1074396996">
+NI-IMAQ:  (Hex 0xBFF600BC) Internal Error: The I2C bus didn't respond correctly.
+</nierror>
+<nierror code="-1074396995">
+NI-IMAQ:  (Hex 0xBFF600BD) The requested IMAQ device is already open.
+</nierror>
+<nierror code="-1074396994">
+NI-IMAQ:  (Hex 0xBFF600BE) The requested data lanes on a particular tap are invalid.
+</nierror>
+<nierror code="-1074396993">
+NI-IMAQ:  (Hex 0xBFF600BF) Requested video gain value out of range.
+</nierror>
+<nierror code="-1074396992">
+NI-IMAQ:  (Hex 0xBFF600C0) VHA mode not allowed with current configuration.
+</nierror>
+<nierror code="-1074396991">
+NI-IMAQ:  (Hex 0xBFF600C1) Invalid color video tracking speed.
+</nierror>
+<nierror code="-1074396990">
+NI-IMAQ:  (Hex 0xBFF600C2) The selected input connector is not valid
+</nierror>
+<nierror code="-1074396989">
+NI-IMAQ:  (Hex 0xBFF600C3) The offset value for the Horizontal Active Video color decoder setting is invalid.
+</nierror>
+<nierror code="-1074396988">
+NI-IMAQ:  (Hex 0xBFF600C4) The Horizontal Sync 1offset value for the color decoder is invalid.
+</nierror>
+<nierror code="-1074396987">
+NI-IMAQ:  (Hex 0xBFF600C5) The Horizontal Sync 2 offset value for the color decoder is invalid.
+</nierror>
+<nierror code="-1074396986">
+NI-IMAQ:  (Hex 0xBFF600C6) The chroma IF compensation setting is invalid.
+</nierror>
+<nierror code="-1074396985">
+NI-IMAQ:  (Hex 0xBFF600C7) The color output format is invalid.
+</nierror>
+<nierror code="-1074396984">
+NI-IMAQ:  (Hex 0xBFF600C8) The phase constant specified for the color decoder is invalid.
+</nierror>
+<nierror code="-1074396983">
+NI-IMAQ:  (Hex 0xBFF600C9) The chroma path group delay setting is invalid.
+</nierror>
+<nierror code="-1074396982">
+NI-IMAQ:  (Hex 0xBFF600CA) The SECAM detection method is invalid.
+</nierror>
+<nierror code="-1074396981">
+NI-IMAQ:  (Hex 0xBFF600CB) The FSC detection method is invalid.
+</nierror>
+<nierror code="-1074396980">
+NI-IMAQ:  (Hex 0xBFF600CC) The chroma frequency tracking time constant is invalid.
+</nierror>
+<nierror code="-1074396979">
+NI-IMAQ:  (Hex 0xBFF600CD) The chroma gain tracking time constant setting is invalid.
+</nierror>
+<nierror code="-1074396978">
+NI-IMAQ:  (Hex 0xBFF600CE) The pixel sampling rate is invalid.
+</nierror>
+<nierror code="-1074396977">
+NI-IMAQ:  (Hex 0xBFF600CF) The requested VSYNC edge to synchronize with is invalid.
+</nierror>
+<nierror code="-1074396976">
+NI-IMAQ:  (Hex 0xBFF600D0) The method used to control the gain setting for luminance is invalid.
+</nierror>
+<nierror code="-1074396975">
+NI-IMAQ:  (Hex 0xBFF600D1) The chrominance comb coefficients setting is invalid.
+</nierror>
+<nierror code="-1074396974">
+NI-IMAQ:  (Hex 0xBFF600D2) The method used to track chrominance is invalid.
+</nierror>
+<nierror code="-1074396973">
+NI-IMAQ:  (Hex 0xBFF600D3) The algorithm for dropping video lines is invalid.
+</nierror>
+<nierror code="-1074396972">
+NI-IMAQ:  (Hex 0xBFF600D4) VHA optimization is not applicable for the current configuration.
+</nierror>
+<nierror code="-1074396971">
+NI-IMAQ:  (Hex 0xBFF600D5) A pattern generation is invalid.
+</nierror>
+<nierror code="-1074396970">
+NI-IMAQ:  (Hex 0xBFF600D6) The number of pattern generation transitions exceeds the maximum allowed for the selected IMAQ device.
+</nierror>
+<nierror code="-1074396969">
+NI-IMAQ:  (Hex 0xBFF600D7) The channel link chips data configuration is invalid.
+</nierror>
+<nierror code="-1074396968">
+NI-IMAQ:  (Hex 0xBFF600D8) The requested occurrence is invalid.
+</nierror>
+<nierror code="-1074396967">
+NI-IMAQ:  (Hex 0xBFF600D9) The pattern generation mode is invalid.
+</nierror>
+<nierror code="-1074396966">
+NI-IMAQ:  (Hex 0xBFF600DA) The pattern generation source signal is invalid.
+</nierror>
+<nierror code="-1074396965">
+NI-IMAQ:  (Hex 0xBFF600DB) The pattern generation gate signal is invalid.
+</nierror>
+<nierror code="-1074396964">
+NI-IMAQ:  (Hex 0xBFF600DC) The pattern generation gate polarity is invalid.
+</nierror>
+<nierror code="-1074396963">
+NI-IMAQ:  (Hex 0xBFF600DD) The initial state for the pattern generation waveform is invalid.
+</nierror>
+<nierror code="-1074396962">
+NI-IMAQ:  (Hex 0xBFF600DE) The requested camera attribute is invalid. 
+</nierror>
+<nierror code="-1074396961">
+NI-IMAQ:  (Hex 0xBFF600DF) The request failed because the board is closed.
+</nierror>
+<nierror code="-1074396960">
+NI-IMAQ:  (Hex 0xBFF600E0) The requested file could not be found.
+</nierror>
+<nierror code="-1074396959">
+NI-IMAQ:  (Hex 0xBFF600E1) The dspfilter1409.bin file is corrupt or missing.
+</nierror>
+<nierror code="-1074396958">
+NI-IMAQ:  (Hex 0xBFF600E2) The scarabXCV200.bin file is corrupt or missing.
+</nierror>
+<nierror code="-1074396957">
+NI-IMAQ:  (Hex 0xBFF600E3) The scarab16bit.bin file is corrupt or missing.
+</nierror>
+<nierror code="-1074396956">
+NI-IMAQ:  (Hex 0xBFF600E4) The data1428.bin file is corrupt or missing.
+</nierror>
+<nierror code="-1074396955">
+NI-IMAQ:  (Hex 0xBFF600E5) The colorspace.bin file is corrupt or missing.
+</nierror>
+<nierror code="-1074396954">
+NI-IMAQ:  (Hex 0xBFF600E6) The error code passed into imgShowError is unknown.
+</nierror>
+<nierror code="-1074396953">
+NI-IMAQ:  (Hex 0xBFF600E7) The IMAQ device requires a newer version of the NI-IMAQ driver software.
+</nierror>
+<nierror code="-1074396952">
+NI-IMAQ:  (Hex 0xBFF600E8) The NI-IMAQ driver software installation is corrupt. 
+</nierror>
+<nierror code="-1074396951">
+NI-IMAQ:  (Hex 0xBFF600E9) NI-IMAQ cannot perform an onboard acquisition because there is no onboard memory.
+</nierror>
+<nierror code="-1074396950">
+NI-IMAQ:  (Hex 0xBFF600EA) The Bayer pattern specified is invalid.
+</nierror>
+<nierror code="-1074396949">
+NI-IMAQ:  (Hex 0xBFF600EB) The IMAQ device is not operating correctly and cannot be initialized.
+</nierror>
+<nierror code="-1074396948">
+NI-IMAQ:  (Hex 0xBFF600EC) The stored calibration data has been corrupted.
+</nierror>
+<nierror code="-1074396947">
+NI-IMAQ:  (Hex 0xBFF600ED) NI-IMAQ attempted to perform an illegal operation.
+</nierror>
+<nierror code="-1074396946">
+NI-IMAQ:  (Hex 0xBFF600EE) NI-IMAQ attempted to access a chip beyond the applicable addressable range.
+</nierror>
+<nierror code="-1074396945">
+NI-IMAQ:  (Hex 0xBFF600EF) The requested operation is valid only for onboard acquisitions.
+</nierror>
+<nierror code="-1074396944">
+NI-IMAQ:  (Hex 0xBFF600F0) The requested operation is not valid for onboard acquisitions.
+</nierror>
+<nierror code="-1074396943">
+NI-IMAQ:  (Hex 0xBFF600F1) NI-IMAQ attempted to call an initialization function on an IMAQ device that was already initialized.
+</nierror>
+<nierror code="-1074396942">
+NI-IMAQ:  (Hex 0xBFF600F2) The IMAQ device does not have a serial port. Serial functions are invalid.
+</nierror>
+<nierror code="-1074396941">
+NI-IMAQ:  (Hex 0xBFF600F3) The VENABLE gating mode selection is invalid.
+</nierror>
+<nierror code="-1074396940">
+NI-IMAQ:  (Hex 0xBFF600F4) The lutfpga1407.bin file is corrupt or missing.
+</nierror>
+<nierror code="-1074396939">
+NI-IMAQ:  (Hex 0xBFF600F5) The synchronization signal detection level is out of range.
+</nierror>
+<nierror code="-1074396938">
+NI-IMAQ:  (Hex 0xBFF600F6) The gain1405.bin file is corrupt or missing.
+</nierror>
+<nierror code="-1074396937">
+NI-IMAQ:  (Hex 0xBFF600F7) The IMAQ device does not have a clamp DAC.
+</nierror>
+<nierror code="-1074396936">
+NI-IMAQ:  (Hex 0xBFF600F8) The IMAQ device does not have a gain DAC.
+</nierror>
+<nierror code="-1074396935">
+NI-IMAQ:  (Hex 0xBFF600F9) The IMAQ device does not have a reference DAC.
+</nierror>
+<nierror code="-1074396934">
+NI-IMAQ:  (Hex 0xBFF600FA) The scarab16bit.bin file is corrupt or missing.
+</nierror>
+<nierror code="-1074396933">
+NI-IMAQ:  (Hex 0xBFF600FB) The specified LUT gain is invalid.
+</nierror>
+<nierror code="-1074396932">
+NI-IMAQ:  (Hex 0xBFF600FC) The requested number of buffer lists for an onboard acquisition is invalid.
+</nierror>
+<nierror code="1073086465">
+NI-IMAQ:  (Hex 0x3FF60001) Warning; corrupt camera file detected.
+</nierror>
+<nierror code="1073086466">
+NI-IMAQ:  (Hex 0x3FF60002)  Warning; change requires reconfigure to take effect.
+</nierror>
+<nierror code="1073086467">
+NI-IMAQ:  (Hex 0x3FF60003) Warning; interface still locked.
+</nierror>
+<nierror code="1073086468">
+NI-IMAQ:  (Hex 0x3FF60004) Warning; unstable blanking reference (Still Color mode).
+</nierror>
+<nierror code="1073086469">
+NI-IMAQ:  (Hex 0x3FF60005) Warning; bad quality colorburst (Still Color mode).
+</nierror>
+<nierror code="1073086470">
+NI-IMAQ:  (Hex 0x3FF60006) Warning; old attribute used.
+</nierror>
+<nierror code="1073086471">
+NI-IMAQ:  (Hex 0x3FF60007) Warning; white level out of range.
+</nierror>
+</nidocument>

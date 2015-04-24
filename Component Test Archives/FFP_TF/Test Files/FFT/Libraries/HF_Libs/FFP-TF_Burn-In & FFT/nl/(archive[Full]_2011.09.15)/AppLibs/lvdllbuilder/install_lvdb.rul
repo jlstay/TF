@@ -1,0 +1,74 @@
+#define APP_FILENAME			"lvdb.exe"
+#define AUTOSRV_APP_PROGID		"LVDB.Application" 
+#define AUTOSRV_APP_DESCRIPTION		"LVDB Application"
+#define AUTOSRV_APP_CLSID		"{4560C293-C482-11D3-A4E7-005004146786}"
+
+#define CLSID_REGKEY_STR		"CLSID"
+#define LOCAL_SERVER32_REGKEY_STR	"LocalServer32"
+#define PROGID_REGKEY_STR		"ProgID"
+
+/*---------------------------------------------------------------------------*\
+ *
+ * Function:  RegisterLVDBActiveXServer
+ *
+ *  Purpose:  This function registers the COM Automation objects that LVDB 
+ *			  serves.
+ *
+\*---------------------------------------------------------------------------*/
+
+function RegisterLVDBActiveXServer( )
+	string szAppLocalSrvrPath;
+begin
+	// Register the Application object
+	szAppLocalSrvrPath = svTarget ^ APP_FILENAME;
+	CreateCoClassRegEntries( AUTOSRV_APP_PROGID, AUTOSRV_APP_CLSID,
+		AUTOSRV_APP_DESCRIPTION, TRUE, szAppLocalSrvrPath );
+end;
+
+
+/*---------------------------------------------------------------------------*\
+ *
+ * Function:  CreateCoClassRegEntries
+ *
+ *  Purpose:  This function registers a COM Automation object.
+ *
+\*---------------------------------------------------------------------------*/
+function CreateCoClassRegEntries (szCoClassProgId, szCoClassCLSID,
+	szCoClassDescription, bIsAppObj, szLocalSrvrPath )
+	string szKey, szSubKey, szLocalSrvrReg;
+begin
+	
+	RegDBSetDefaultRoot( HKEY_CLASSES_ROOT );
+
+	// Register the ProgId
+	if (szCoClassProgId != "") then
+		szKey = szCoClassProgId;
+		RegDBCreateKeyEx (szKey, "");
+		szKey = szKey + "\\" + CLSID_REGKEY_STR;
+		RegDBCreateKeyEx (szKey, "");
+		RegDBSetKeyValueEx (szKey, "", REGDB_STRING, szCoClassCLSID, -1);
+	endif;
+
+	// Register the server under the CLSID
+	szKey = CLSID_REGKEY_STR + "\\" + szCoClassCLSID;
+	RegDBCreateKeyEx (szKey, "");
+	if (szCoClassDescription != "") then
+		RegDBSetKeyValueEx (szKey, "", REGDB_STRING, szCoClassDescription, -1);
+	endif;
+
+	szSubKey = szKey + "\\" + LOCAL_SERVER32_REGKEY_STR;
+	RegDBCreateKeyEx (szSubKey, "");
+
+	szLocalSrvrReg = szLocalSrvrPath;
+	if (bIsAppObj) then
+		szLocalSrvrReg = szLocalSrvrReg + " /Automation";
+	endif;
+	RegDBSetKeyValueEx (szSubKey, "", REGDB_STRING, szLocalSrvrReg, -1);
+
+	// Register the ProgId under the CLSID
+	if (szCoClassProgId != "") then 
+		szSubKey = szKey + "\\" + PROGID_REGKEY_STR;
+		RegDBCreateKeyEx (szSubKey, "");
+		RegDBSetKeyValueEx (szSubKey, "", REGDB_STRING, szCoClassProgId, -1);
+	endif;
+end;

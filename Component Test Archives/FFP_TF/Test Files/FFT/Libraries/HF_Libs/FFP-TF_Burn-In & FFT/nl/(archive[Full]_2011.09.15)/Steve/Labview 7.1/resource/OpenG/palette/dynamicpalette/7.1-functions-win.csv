@@ -1,0 +1,13 @@
+Menu File Name,Menu Name,Submenus,,,,,,,
+3dprops,3D Graph Properties,,,,,,,,
+comm,Communication,dot-net,ole,dsocket,SMTPEmail,tcp,udp,irda,bt
+ole,ActiveX,,,,,,,,
+dot-net,.NET,,,,,,,,
+graphics,Graphics & Sound,3dprops,pictplots,picture,graphicsfmt,sound,,,
+adv,Advanced,inputDevice,advdata,synch,advmem,registry,,,
+advmem,Port I/O,,,,,,,,
+registry,Windows Registry Access VIs,,,,,,,,
+mathform,Formula,mathpars,,,,,,,
+storage0,Storage,storage1,,,,,,,
+storage1,Advanced Storage,,,,,,,,
+structs,Structures,,,,,,,,

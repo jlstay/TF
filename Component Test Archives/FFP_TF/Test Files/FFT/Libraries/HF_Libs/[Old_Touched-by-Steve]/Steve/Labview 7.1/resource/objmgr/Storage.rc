@@ -1,0 +1,240 @@
+RCversion: 3
+include: "Storage.rch"
+
+sessionLibraryPath: "..\..\resource\objmgr"
+libraryPath: "..\..\resource\objmgr"
+
+///// Data Storage Forward Declaration /////
+class: "Data Storage"
+genericType: Storage
+control: DataStorage.ctl
+refnum: Generic
+menuSelect: no
+cleanup: idle
+passAttributeError: none
+setFunction: SetStorageProps
+getFunction: GetStorageProps
+library: lvStorage.dll
+openFunction: OpenStorage
+closeFunction: CloseStorage
+className: "Data Storage"
+flags: 0
+
+///// Data Object Class Definition /////
+class: "Data Object"
+genericType: Storage
+control: DataObject.ctl
+matchExact: withInheritance
+menuSelect: no
+passAttributeError: none
+className: "Data Object"
+flags: 0
+
+method: DataObjGetProperty	PropertyGet	5	20	0	4	
+	"Read Property"	void
+	PropertyName	string	StrHandle	in
+	Datatype	numeric	int32	reference
+	FlattenedData	array	1	string	handlepointer	out
+	""
+
+method: DataObjSetProperty	PropertySet	5	21	2	5	
+	"Write Property"	void
+	PropertyName	string	StrHandle	in
+	FlattenedData	string	StrHandle	in
+	DataType	numeric	int32	value
+	instPropFlag	numeric	int32	value
+	""
+
+method: DataObjGetRef	ReferenceGet	5	22	0	3	
+	"Read Reference"	void
+	PropertyName	string	StrHandle	in
+	Objects	array	1	genclass	"Data Object"	handlepointer	out
+	""
+
+method: DataObjSetRef	ReferenceSet	5	24	1	4	
+	"Write Reference"	void
+	PropertyName	string	StrHandle	in
+	Object	array	1	genclass	"Data Object"	handlepointer	inout
+	Index	numeric	uInt32	refInOut
+	""
+
+method: DataObjCreateChild	CreateChildObject	5	27	1	4	
+	"Create Child Object"	void
+	propertyName	string	StrHandle	in
+	Object	genclass	"Data Object"	reference
+	ObjectType	string	StrHandle	in
+	""
+
+method: DataObjDel	DeleteObject	5	28	0	1	
+	"Delete Object"	void
+	""
+
+method: DataObjDelChild	DeleteChildObject	5	29	0	3	
+	"Delete Child Object"	void
+	"Data object"	genclass	"Data Object"	value
+	PropertyName	string	StrHandle	in
+	""
+
+method: DataObjSetArray	ArraySet	5	2A	3	7	
+	"Write Array"	void
+	PropertyName	string	StrHandle	in
+	Datatype	numeric	int32	value
+	FlattenedData	array	1	string	handle	in
+	Index	numeric	uInt32	refInOut
+	Options	numeric	int32		enum	{Append=0, Insert=1, Replace=2, "Replace All"=3}	value
+	length	numeric	uInt32	reference
+	""
+
+method: DataObjGetArray	ArrayGet	5	2B	2	6	
+	"Read Array"	void
+	PropertyName	string	StrHandle	in
+	Datatype	numeric	int32	refInOut
+	FlattenedData	array	1	string	handlepointer	out
+	Index	numeric	uInt32	refInOut
+	Count	numeric	uInt32	refInOut
+	""
+
+attribute: Type
+	"Data object type"
+	string	readonly	12	10
+	""
+
+attribute: ID
+	"Persistent object ID"
+	string	readonly	12	11
+	""
+
+attribute: Storage
+	"Data storage refnum"
+	genclass	"Data Storage"	readonly	12	12
+	""
+
+attribute: "Base type"
+	"Data object base type"
+	string	readonly	12	13
+	""
+
+attribute: "Storage format"
+	"Data storage format"
+	string	readonly	12	14
+	""
+
+attribute: "Storage location"
+	"Data storage location"
+	string	readonly	12	15
+	""
+
+///// Data Storage Class Definition /////
+class: "Data Storage"
+genericType: Storage
+control: DataStorage.ctl
+refnum: Generic
+menuSelect: no
+cleanup: idle
+passAttributeError: none
+setFunction: SetStorageProps
+getFunction: GetStorageProps
+library: lvStorage.dll
+openFunction: OpenStorage
+closeFunction: CloseStorage
+className: "Data Storage"
+flags: 0
+
+method: StorageConnect	Connect	5	1	3	5	
+	"Open Storage"	void
+	Path	string	StrHandle	in
+	Type	string	StrHandle	in
+	"read only"	numeric	int32	value
+	"import mode"	numeric	int32		enum	{"load data"=0, "load object definition"=1}	value
+	""
+
+method: StorageDisconnect	Disconnect	5	2	0	1	
+	"Close Storage"	void
+	""
+
+method: StorageGetObjectTypes	GetObjectDefinitions	5	4	0	2	
+	"Get Object Types"	void
+	ObjectDefs	array	1	cluster {3, "name" = string, "baseName" = string, "abstract" = bool}	handlepointer	out
+	""
+
+method: StorageGetPropertyTypes	GetPropertyDefinition	5	A	0	3	
+	"Get Property Types"	void
+	objectType	string	StrHandle	in
+	propDefs	array	1	cluster {6, "name" = string, "baseName" = string, "refDataType" = string, "dimensions" = iL, "type" = iL, "enumStrings" = string1D}	handlepointer	out
+	""
+
+method: StorageQuery	Query	5	8	0	3	
+	"Query Objects"	void
+	Query	string	StrHandle	in
+	Objects	array	1	genclass	"Data Object"	handlepointer	out
+	""
+
+method: StorageCreateObject	CreateObject	5	9	0	3	
+	"Create Object"	void
+	ObjectType	string	StrHandle	in
+	Object	genclass	"Data Object"	reference
+	""
+
+method: StorageGetObjectFromKey	"Object From ID"	5	B	0	3	
+	"Get Object From ID"	void
+	"Object ID"	string	StrHandle	in
+	Object	genclass	"Data Object"	reference
+	""
+
+method: StorageCommitTransaction	CommitTransaction	5	7	0	1	
+	"Commit Transaction"	void
+	""
+
+attribute: Format
+	"Data storage format"
+	string	readwrite	12	1
+	""
+
+attribute: Location
+	"Data storage location"
+	string	readwrite	12	2
+	""
+
+attribute: Read-only
+	Read-only
+	iL	readonly	12	3
+	""
+
+attribute: DBG_ObjCount
+	refNumArrayHdl
+	iL	readonly	4	4
+	""
+
+///// Root Class Definition /////
+class: Root
+genericType: Storage
+control: DataObject.ctl
+matchExact: withInheritance
+menuSelect: no
+passAttributeError: none
+className: File
+super: "Data Object"
+flags: 0
+
+///// ChannelGroup Class Definition /////
+class: ChannelGroup
+genericType: Storage
+control: DataObject.ctl
+matchExact: withInheritance
+menuSelect: no
+passAttributeError: none
+className: ChannelGroup
+super: "Data Object"
+flags: 0
+
+///// Channel Class Definition /////
+class: Channel
+genericType: Storage
+control: DataObject.ctl
+matchExact: withInheritance
+menuSelect: no
+passAttributeError: none
+className: Channel
+super: "Data Object"
+flags: 0
+

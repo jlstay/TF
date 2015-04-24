@@ -1,0 +1,12 @@
+01.26.2010 rsj
+
+FixedLaser FFP-TF_Burn-In & FFT.vi
+1. Datasheet Delta LV appears to show a max LV instead of delta LV.
+	An errant zero in the data file causes this.  Mr. Marihew would just go in and change it.  Need
+	to look into the code and figure out why it gets a zero.
+
+VI Location: 
+\\Nas01\Test\Component Test Archives\FFP_TF\Test Files\FFT\Libraries\HF_Libs\Fixed Laser FFP-TF_Burn-In & FFT\FixedLaser FFP-TF_Burn-In & FFT.vi
+\\Nas01\Test\Component Test Archives\FFP_TF\Test Files\FFT\Libraries\HF_Libs\Fixed Laser FFP-TF_Burn-In & FFT\FixedLaser FFP-TF FFT Datasheet.vi
+
+Data Location: \\Nas01\Test\TF\Data\FFT full

@@ -1,0 +1,3299 @@
+RCversion: 3
+include: "daqmx.rch"
+typeFlags: 1
+
+///// DAQmx Calibration Info Class Definition /////
+class: "DAQmx Calibration Info"
+genericType: NIDAQ
+termName: reference
+hasActiveProp: yes
+className: "DAQmx Calibration Info"
+super: "DAQ Object"
+flags: 10
+
+attribute: "ActiveDev"
+	"Active Device"
+	DAQDevice	writeonly		27	185F
+	"Specifies the device from which to retrieve calibration properties."	"attr185F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get185F	set185F	@NoReset
+
+attribute: "SelfCal.Supported"
+	"Self Calibration:Is Supported"
+	bool	readonly		25	1860
+	"Indicates whether the device supports self calibration."	"attr1860.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1860	set1860	@NoReset
+
+attribute: "SelfCal.LastDate/Time"
+	"Self Calibration:Last Self Calibration Date/Time"
+	timestamp	readonly		25	1862
+	"Indicates the last date and time that the device underwent a self calibration."	"attr1862.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1862	set1862	@NoReset
+
+attribute: "SelfCal.LastTemp"
+	"Self Calibration:Last Self Calibration Temperature"
+	fD	readonly		25	1864
+	"Indicates in degrees Celsius the temperature of the device at the time of the last self calibration. Compare this temperature to the current onboard temperature to determine if you should perform another calibration."	"attr1864.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1864	set1864	@NoReset
+
+attribute: "ExtCal.RecommendedInterval"
+	"External Calibration:Recommended Interval"
+	uL	readonly		25	1868
+	"Indicates in months the National Instruments recommended interval between each external calibration of the device."	"attr1868.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1868	set1868	@NoReset
+
+attribute: "ExtCal.LastDate/Time"
+	"External Calibration:Last External Calibration Date/Time"
+	timestamp	readonly		25	1865
+	"Indicates the last date and time that the device underwent an external calibration."	"attr1865.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1865	set1865	@NoReset
+
+attribute: "ExtCal.LastTemp"
+	"External Calibration:Last External Calibration Temperature"
+	fD	readonly		25	1867
+	"Indicates in degrees Celsius the temperature of the device at the time of the last external calibration. Compare this temperature to the current onboard temperature to determine if you should perform another calibration."	"attr1867.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1867	set1867	@NoReset
+
+attribute: "Cal.UserDefinedInfo"
+	"User Defined Information:Information"
+	string	readwrite		25	1861
+	"Specifies a string that contains arbitrary, user-defined information. This number of characters in this string can be no more than User Defined Information:Max Size."	"attr1861.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1861	set1861	@NoReset
+
+attribute: "Cal.UserDefinedInfo.MaxSize"
+	"User Defined Information:Max Size"
+	uL	readonly		25	191C
+	"Indicates the maximum length in characters of User Defined Information:Information."	"attr191C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get191C	set191C	@NoReset
+
+attribute: "DevTemp"
+	"More:Device Temperature"
+	fD	readonly		25	223B
+	"Indicates in degrees Celsius the current temperature of the device."	"attr223B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get223B	set223B	@NoReset
+
+
+///// DAQmx Channel Class Definition /////
+class: "DAQmx Channel"
+genericType: NIDAQ
+termName: task
+hasActiveProp: yes
+className: "DAQmx Channel"
+super: "DAQ Object"
+flags: 2
+
+attribute: "ActiveChans"
+	"Active Channels"
+	DAQChannel	writeonly		27	11
+	"Specifies a virtual channel or list of virtual channels to modify. The virtual channels are within the context of a specific task."	"attr11.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get11	set11	@NoReset
+
+attribute: "ChanType"
+	"Channel Type"
+	iL enum { "Analog Input"=10100, "Analog Output"=10102, "Digital Input"=10151, "Digital Output"=10153, "Counter Input"=10131, "Counter Output"=10132 }	readonly		25	187F
+	"Indicates the type of the virtual channel."	"attr187F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	@NoReset
+
+attribute: "PhysicalChanName"
+	"Physical Channel Name"
+	DAQPhysChan	readonly		25	18F5
+	"Indicates the name of the physical channel upon which this virtual channel is based."	"attr18F5.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18F5	set18F5	@NoReset
+
+attribute: "Descr"
+	"Description"
+	string	readwrite		25	1926
+	"Specifies a user-defined description for the channel."	"attr1926.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelWstringAP	setChannelWstringAP	resetChannelWstringAP
+
+attribute: "AI.Max"
+	"Analog Input:Maximum Value"
+	fD	readwrite		25	17DD
+	"Specifies the maximum value you expect to measure. This value is in the units you specify with a units property. When you query this property, it returns the coerced maximum value that the device can measure with the current settings."	"attr17DD.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Min"
+	"Analog Input:Minimum Value"
+	fD	readwrite		25	17DE
+	"Specifies the minimum value you expect to measure. This value is in the units you specify with a units property.  When you query this property, it returns the coerced minimum value that the device can measure with the current settings."	"attr17DE.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.CustomScaleName"
+	"Analog Input:Custom Scale Name"
+	DAQScale	readwrite		25	17E0
+	"Specifies the name of a custom scale for the channel."	"attr17E0.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelWstringScaleAP	setChannelWstringScaleAP	resetChannelWstringScaleAP
+
+attribute: "AI.MeasType"
+	"Analog Input:Measurement Type"
+	iL enum { "Voltage"=10322, "Current"=10134, "More:Voltage:Custom with Excitation"=10323, "Frequency"=10181, "Resistance"=10278, "Temperature:Thermocouple"=10303, "Temperature:Thermistor"=10302, "Temperature:RTD"=10301, "Temperature:Built-in Sensor"=10311, "Strain Gage"=10300, "Position:LVDT"=10352, "Position:RVDT"=10353, "Accelerometer"=10356, "Sound Pressure:Microphone"=10354, "TEDS Sensor"=12531 }	readonly		25	695
+	"Indicates the measurement to take with the analog input channel and in some cases, such as for temperature measurements, the sensor to use."	"attr695.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	@NoReset
+
+attribute: "AI.Voltage.Units"
+	"Analog Input:Voltage:Units"
+	iL enum { "Volts"=10348, "From Custom Scale"=10065, "From TEDS"=12516 }	readwrite		25	1094
+	"Specifies the units to use to return voltage measurements from the channel."	"attr1094.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Temp.Units"
+	"Analog Input:Temperature:Units"
+	iL enum { "Deg C"=10143, "Deg F"=10144, "Kelvins"=10325, "Deg R"=10145, "From Custom Scale"=10065 }	readwrite		25	1033
+	"Specifies the units to use to return temperature measurements from the channel."	"attr1033.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Thrmcpl.Type"
+	"Analog Input:Temperature:Thermocouple:Type"
+	iL enum { "J"=10072, "K"=10073, "N"=10077, "R"=10082, "S"=10085, "T"=10086, "B"=10047, "E"=10055 }	readwrite		25	1050
+	"Specifies the type of thermocouple connected to the channel. Thermocouple types differ in composition and measurement range."	"attr1050.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Thrmcpl.CJCSrc"
+	"Analog Input:Temperature:Thermocouple:CJC Source"
+	iL enum { "Built-In"=10200, "Constant Value"=10116, "Channel"=10113 }	readonly		25	1035
+	"Indicates the source of cold-junction compensation."	"attr1035.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumObservableAP	setChannelI32EnumObservableAP	@NoReset
+
+attribute: "AI.Thrmcpl.CJCVal"
+	"Analog Input:Temperature:Thermocouple:CJC Value"
+	fD	readwrite		25	1036
+	"Specifies the temperature of the cold junction if Analog Input:Temperature:Thermocouple:CJC Source is Constant Value. Specify this value in the units of the measurement."	"attr1036.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Thrmcpl.CJCChan"
+	"Analog Input:Temperature:Thermocouple:CJC Channel"
+	DAQChannel	readonly		25	1034
+	"Indicates the channel that acquires the temperature of the cold junction if Analog Input:Temperature:Thermocouple:CJC Source is Channel. If the channel is a temperature channel, NI-DAQmx acquires the temperature in the correct units. Other channel types, such as a resistance channel with a custom sensor, must use a custom scale to scale values to degrees Celsius."	"attr1034.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelWstringObservableChanAP	setChannelWstringObservableChanAP	@NoReset
+
+attribute: "AI.RTD.Type"
+	"Analog Input:Temperature:RTD:Type"
+	iL enum { "Pt3750"=12481, "Pt3851"=10071, "Pt3911"=12482, "Pt3916"=10069, "Pt3920"=10053, "Pt3928"=12483, "Custom"=10137 }	readwrite		25	1032
+	"Specifies the type of RTD connected to the channel."	"attr1032.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.RTD.R0"
+	"Analog Input:Temperature:RTD:R0"
+	fD	readwrite		25	1030
+	"Specifies in ohms the sensor resistance at 0 deg C. The Callendar-Van Dusen equation requires this value. Refer to the sensor documentation to determine this value."	"attr1030.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.RTD.A"
+	"Analog Input:Temperature:RTD:Custom:A"
+	fD	readwrite		25	1010
+	"Specifies the 'A' constant of the Callendar-Van Dusen equation. NI-DAQmx requires this value when you use a custom RTD."	"attr1010.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.RTD.B"
+	"Analog Input:Temperature:RTD:Custom:B"
+	fD	readwrite		25	1011
+	"Specifies the 'B' constant of the Callendar-Van Dusen equation. NI-DAQmx requires this value when you use a custom RTD."	"attr1011.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.RTD.C"
+	"Analog Input:Temperature:RTD:Custom:C"
+	fD	readwrite		25	1013
+	"Specifies the 'C' constant of the Callendar-Van Dusen equation. NI-DAQmx requires this value when you use a custom RTD."	"attr1013.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Thrmstr.A"
+	"Analog Input:Temperature:Thermistor:A"
+	fD	readwrite		25	18C9
+	"Specifies the 'A' constant of the Steinhart-Hart thermistor equation."	"attr18C9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Thrmstr.B"
+	"Analog Input:Temperature:Thermistor:B"
+	fD	readwrite		25	18CB
+	"Specifies the 'B' constant of the Steinhart-Hart thermistor equation."	"attr18CB.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Thrmstr.C"
+	"Analog Input:Temperature:Thermistor:C"
+	fD	readwrite		25	18CA
+	"Specifies the 'C' constant of the Steinhart-Hart thermistor equation."	"attr18CA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Thrmstr.R1"
+	"Analog Input:Temperature:Thermistor:R1"
+	fD	readwrite		25	1061
+	"Specifies in ohms the value of the reference resistor if you use voltage excitation. NI-DAQmx ignores this value for current excitation."	"attr1061.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.ForceReadFromChan"
+	"Analog Input:Temperature:Advanced:Force Read from Channel"
+	bool	readwrite		25	18F8
+	"Specifies whether to read from the channel if it is a cold-junction compensation channel. By default, DAQmx Read does not return data from cold-junction compensation channels.  Setting this property to TRUE forces read operations to return the cold-junction compensation channel data with the other channels in the task."	"attr18F8.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.Current.Units"
+	"Analog Input:Current:Units"
+	iL enum { "Amps"=10342, "From Custom Scale"=10065, "From TEDS"=12516 }	readwrite		25	701
+	"Specifies the units to use to return current measurements from the channel."	"attr701.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Strain.Units"
+	"Analog Input:Strain:Units"
+	iL enum { "Strain"=10299, "From Custom Scale"=10065 }	readwrite		25	981
+	"Specifies the units to use to return strain measurements from the channel."	"attr981.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.StrainGage.GageFactor"
+	"Analog Input:Strain:Strain Gage:Gage Factor"
+	fD	readwrite		25	994
+	"Specifies the sensitivity of the strain gage.  Gage factor relates the change in electrical resistance to the change in strain. Refer to the sensor documentation for this value."	"attr994.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.StrainGage.PoissonRatio"
+	"Analog Input:Strain:Strain Gage:Poisson Ratio"
+	fD	readwrite		25	998
+	"Specifies the ratio of lateral strain to axial strain in the material you are measuring."	"attr998.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.StrainGage.Cfg"
+	"Analog Input:Strain:Strain Gage:Configuration"
+	iL enum { "Full Bridge I"=10183, "Full Bridge II"=10184, "Full Bridge III"=10185, "Half Bridge I"=10188, "Half Bridge II"=10189, "Quarter Bridge I"=10271, "Quarter Bridge II"=10272 }	readwrite		25	982
+	"Specifies the bridge configuration of the strain gages."	"attr982.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Resistance.Units"
+	"Analog Input:Resistance:Units"
+	iL enum { "Ohms"=10384, "From Custom Scale"=10065, "From TEDS"=12516 }	readwrite		25	955
+	"Specifies the units to use to return resistance measurements."	"attr955.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Freq.Units"
+	"Analog Input:Frequency:Units"
+	iL enum { "Hz"=10373, "From Custom Scale"=10065 }	readwrite		25	806
+	"Specifies the units to use to return frequency measurements from the channel."	"attr806.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Freq.ThreshVoltage"
+	"Analog Input:Frequency:Voltage:Threshold Level"
+	fD	readwrite		25	815
+	"Specifies the voltage level at which to recognize waveform repetitions. You should select a voltage level that occurs only once within the entire period of a waveform. You also can select a voltage that occurs only once while the voltage rises or falls."	"attr815.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Freq.Hyst"
+	"Analog Input:Frequency:Voltage:Hysteresis"
+	fD	readwrite		25	814
+	"Specifies in volts a window below Analog Input:Frequency:Voltage:Threshold Level. The input voltage must pass below Analog Input:Frequency:Voltage:Threshold Level minus this value before NI-DAQmx recognizes a waveform repetition at Analog Input:Frequency:Voltage:Threshold Level. Hysteresis can improve the measurement accuracy when the signal contains noise or jitter."	"attr814.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.LVDT.Units"
+	"Analog Input:Position:LVDT:Units"
+	iL enum { "Meters"=10219, "Inches"=10379, "From Custom Scale"=10065 }	readwrite		25	910
+	"Specifies the units to use to return linear position measurements from the channel."	"attr910.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.LVDT.Sensitivity"
+	"Analog Input:Position:LVDT:Sensitivity"
+	fD	readwrite		25	939
+	"Specifies the sensitivity of the LVDT. This value is in the units you specify with Analog Input:Position:LVDT:Sensitivity Units. Refer to the sensor documentation to determine this value."	"attr939.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.LVDT.SensitivityUnits"
+	"Analog Input:Position:LVDT:Sensitivity Units"
+	iL enum { "mVolts/Volt/mMeter"=12506, "mVolts/Volt/0.001 Inch"=12505 }	readwrite		25	219A
+	"Specifies the units of Analog Input:Position:LVDT:Sensitivity."	"attr219A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.RVDT.Units"
+	"Analog Input:Position:RVDT:Units"
+	iL enum { "Degrees"=10146, "Radians"=10273, "From Custom Scale"=10065 }	readwrite		25	877
+	"Specifies the units to use to return angular position measurements from the channel."	"attr877.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.RVDT.Sensitivity"
+	"Analog Input:Position:RVDT:Sensitivity"
+	fD	readwrite		25	903
+	"Specifies the sensitivity of the RVDT. This value is in the units you specify with Analog Input:Position:RVDT:Sensitivity Units. Refer to the sensor documentation to determine this value."	"attr903.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.RVDT.SensitivityUnits"
+	"Analog Input:Position:RVDT:Sensitivity Units"
+	iL enum { "mVolts/Volt/Degree"=12507, "mVolts/Volt/Radian"=12508 }	readwrite		25	219B
+	"Specifies the units of Analog Input:Position:RVDT:Sensitivity."	"attr219B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.SoundPressure.MaxSoundPressureLvl"
+	"Analog Input:Sound Pressure:Maximum Sound Pressure Level"
+	fD	readwrite		25	223A
+	"Specifies the maximum instantaneous sound pressure level you expect to measure. This value is in decibels, referenced to 20 micropascals. NI-DAQmx uses the maximum sound pressure level to calculate values in pascals for Analog Input:Maximum Value and Analog Input:Minimum Value for the channel."	"attr223A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.SoundPressure.Units"
+	"Analog Input:Sound Pressure:Units"
+	iL enum { "Pascals"=10081, "From Custom Scale"=10065 }	readwrite		25	1528
+	"Specifies the units to use to return sound pressure measurements from the channel."	"attr1528.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Microphone.Sensitivity"
+	"Analog Input:Sound Pressure:Microphone:Sensitivity"
+	fD	readwrite		25	1536
+	"Specifies the sensitivity of the microphone. This value is in mV/Pa. Refer to the sensor documentation to determine this value."	"attr1536.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Accel.Units"
+	"Analog Input:Acceleration:Units"
+	iL enum { "g"=10186, "From Custom Scale"=10065 }	readwrite		25	673
+	"Specifies the units to use to return acceleration measurements from the channel."	"attr673.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Accel.Sensitivity"
+	"Analog Input:Acceleration:Accelerometer:Sensitivity"
+	fD	readwrite		25	692
+	"Specifies the sensitivity of the accelerometer. This value is in the units you specify with Analog Input:Acceleration:Accelerometer:Sensitivity Units. Refer to the sensor documentation to determine this value."	"attr692.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Accel.SensitivityUnits"
+	"Analog Input:Acceleration:Accelerometer:Sensitivity Units"
+	iL enum { "mVolts/g"=12509, "Volts/g"=12510 }	readwrite		25	219C
+	"Specifies the units of Analog Input:Acceleration:Accelerometer:Sensitivity."	"attr219C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.TEDS.Units"
+	"Analog Input:TEDS:Units"
+	string	readonly		25	21E0
+	"Indicates the units defined by TEDS information associated with the channel."	"attr21E0.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21E0	set21E0	@NoReset
+
+attribute: "AI.Coupling"
+	"Analog Input:General Properties:Input Configuration:Coupling"
+	iL enum { "AC"=10045, "DC"=10050, "GND"=10066 }	readwrite		25	64
+	"Specifies the coupling for the channel."	"attr64.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Impedance"
+	"Analog Input:General Properties:Input Configuration:Impedance"
+	fD enum { "50 Ohms"=50, "75 Ohms"=75, "1 M Ohm"=1000000, "10 G Ohms"=10000000000 }	readwrite		25	62
+	"Specifies the input impedance of the channel."	"attr62.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.TermCfg"
+	"Analog Input:General Properties:Input Configuration:Terminal Configuration"
+	iL enum { "RSE"=10083, "NRSE"=10078, "Differential"=10106, "Pseudodifferential"=12529 }	readwrite		25	1097
+	"Specifies the terminal configuration for the channel."	"attr1097.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.InputSrc"
+	"Analog Input:General Properties:Input Configuration:Input Source"
+	string	readwrite		25	2198
+	"Specifies the source of the channel. You can use the signal from the I/O connector or one of several calibration signals. Certain devices have a single calibration signal bus. For these devices, you must specify the same calibration signal for all channels you connect to a calibration signal."	"attr2198.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelWstringAP	setChannelWstringAP	resetChannelWstringAP
+
+attribute: "AI.ResistanceCfg"
+	"Analog Input:General Properties:Signal Conditioning:Resistance Configuration"
+	iL enum { "2-Wire"=2, "3-Wire"=3, "4-Wire"=4 }	readwrite		25	1881
+	"Specifies the resistance configuration for the channel. NI-DAQmx uses this value for any resistance-based measurements, including temperature measurement using a thermistor or RTD."	"attr1881.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.LeadWireResistance"
+	"Analog Input:General Properties:Signal Conditioning:Lead Wire Resistance"
+	fD	readwrite		25	17EE
+	"Specifies in ohms the resistance of the wires that lead to the sensor."	"attr17EE.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Bridge.Cfg"
+	"Analog Input:General Properties:Signal Conditioning:Bridge:Configuration"
+	iL enum { "Full Bridge"=10182, "Half Bridge"=10187, "Quarter Bridge"=10270, "No Bridge"=10228 }	readwrite		25	87
+	"Specifies the type of Wheatstone bridge that the sensor is."	"attr87.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Bridge.NomResistance"
+	"Analog Input:General Properties:Signal Conditioning:Bridge:Nominal Resistance"
+	fD	readwrite		25	17EC
+	"Specifies in ohms the resistance across each arm of the bridge in an unloaded position."	"attr17EC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Bridge.InitialVoltage"
+	"Analog Input:General Properties:Signal Conditioning:Bridge:Initial Bridge Voltage"
+	fD	readwrite		25	17ED
+	"Specifies in volts the output voltage of the bridge in the unloaded condition. NI-DAQmx subtracts this value from any measurements before applying scaling equations."	"attr17ED.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Bridge.ShuntCal.Enable"
+	"Analog Input:General Properties:Signal Conditioning:Bridge:Shunt Cal:Shunt Cal Enable"
+	bool	readwrite		25	94
+	"Specifies whether to enable a shunt calibration switch. Use Analog Input:General Properties:Signal Conditioning:Bridge:Shunt Cal:Shunt Cal Select to select the switch(es) to enable."	"attr94.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.Bridge.ShuntCal.Select"
+	"Analog Input:General Properties:Signal Conditioning:Bridge:Shunt Cal:Shunt Cal Select"
+	iL enum { "A"=12513, "B"=12514, "A and B"=12515 }	readwrite		25	21D5
+	"Specifies which shunt calibration switch(es) to enable.  Use Analog Input:General Properties:Signal Conditioning:Bridge:Shunt Cal:Shunt Cal Enable to enable the switch(es) you specify with this property."	"attr21D5.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Bridge.ShuntCal.GainAdjust"
+	"Analog Input:General Properties:Signal Conditioning:Bridge:Shunt Cal:Gain Adjustment"
+	fD	readwrite		25	193F
+	"Specifies the result of a shunt calibration. NI-DAQmx multiplies data read from the channel by the value of this property. This value should be close to 1.0."	"attr193F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Bridge.Balance.CoarsePot"
+	"Analog Input:General Properties:Signal Conditioning:Bridge:Balance:Coarse Potentiometer"
+	iL	readwrite		25	17F1
+	"Specifies by how much to compensate for offset in the signal. This value can be between 0 and 127."	"attr17F1.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32AP	setChannelI32AP	resetChannelI32AP
+
+attribute: "AI.Bridge.Balance.FinePot"
+	"Analog Input:General Properties:Signal Conditioning:Bridge:Balance:Fine Potentiometer"
+	iL	readwrite		25	18F4
+	"Specifies by how much to compensate for offset in the signal. This value can be between 0 and 4095."	"attr18F4.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32AP	setChannelI32AP	resetChannelI32AP
+
+attribute: "AI.CurrentShunt.Loc"
+	"Analog Input:General Properties:Signal Conditioning:Current Shunt Resistor:Location"
+	iL enum { "Internal"=10200, "External"=10167 }	readwrite		25	17F2
+	"Specifies the shunt resistor location for current measurements."	"attr17F2.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.CurrentShunt.Resistance"
+	"Analog Input:General Properties:Signal Conditioning:Current Shunt Resistor:Value"
+	fD	readwrite		25	17F3
+	"Specifies in ohms the external shunt resistance for current measurements."	"attr17F3.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Excit.Src"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:Source"
+	iL enum { "Internal"=10200, "External"=10167, "None"=10230 }	readwrite		25	17F4
+	"Specifies the source of excitation."	"attr17F4.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Excit.Val"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:Value"
+	fD	readwrite		25	17F5
+	"Specifies the amount of excitation that the sensor requires. If Analog Input:General Properties:Signal Conditioning:Excitation:Advanced:Voltage or Current is  Voltage, this value is in volts. If Analog Input:General Properties:Signal Conditioning:Excitation:Advanced:Voltage or Current is  Current, this value is in amperes."	"attr17F5.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Excit.UseForScaling"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:Advanced:Use Excitation For Scaling"
+	bool	readwrite		25	17FC
+	"Specifies if NI-DAQmx divides the measurement by the excitation. You should typically set this property to TRUE for ratiometric transducers. If you set this property to TRUE, set Analog Input:Maximum Value and Analog Input:Minimum Value to reflect the scaling."	"attr17FC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.Excit.UseMultiplexed"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:Advanced:Use Multiplexed Excitation"
+	bool	readwrite		25	2180
+	"Specifies if the SCXI-1122 multiplexes the excitation to the upper half of the channels as it advances through the scan list."	"attr2180.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.Excit.ActualVal"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:Advanced:Actual Excitation Value"
+	fD	readwrite		25	1883
+	"Specifies the actual amount of excitation supplied by an internal excitation source.  If you read an internal excitation source more precisely with an external device, set this property to the value you read.  NI-DAQmx ignores this value for external excitation."	"attr1883.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Excit.DCorAC"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:Advanced:DC or AC"
+	iL enum { "DC"=10050, "AC"=10045 }	readwrite		25	17FB
+	"Specifies if the excitation supply is DC or AC."	"attr17FB.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Excit.VoltageOrCurrent"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:Advanced:Voltage or Current"
+	iL enum { "Voltage"=10322, "Current"=10134 }	readwrite		25	17F6
+	"Specifies if the channel uses current or voltage excitation."	"attr17F6.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.ACExcit.Freq"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:AC Excitation:Frequency"
+	fD	readwrite		25	101
+	"Specifies the AC excitation frequency in Hertz."	"attr101.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.ACExcit.SyncEnable"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:AC Excitation:Synchronization Enable"
+	bool	readwrite		25	102
+	"Specifies whether to synchronize the AC excitation source of the channel to that of another channel. Synchronize the excitation sources of multiple channels to use multichannel sensors. Set this property to FALSE for the master channel and to TRUE for the slave channels."	"attr102.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.ACExcit.WireMode"
+	"Analog Input:General Properties:Signal Conditioning:Excitation:AC Excitation:Wire Mode"
+	iL enum { "4-Wire"=4, "5-Wire"=5 }	readwrite		25	18CD
+	"Specifies the number of leads on the LVDT or RVDT. Some sensors require you to tie leads together to create a four- or five- wire sensor. Refer to the sensor documentation for more information."	"attr18CD.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Atten"
+	"Analog Input:General Properties:Signal Conditioning:Probe/Attenuator:Attenuation Value"
+	fD	readwrite		25	1801
+	"Specifies the amount of attenuation to use."	"attr1801.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Lowpass.Enable"
+	"Analog Input:General Properties:Filter:Analog Lowpass:Enable"
+	bool	readwrite		25	1802
+	"Specifies whether to enable the lowpass filter of the channel."	"attr1802.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.Lowpass.CutoffFreq"
+	"Analog Input:General Properties:Filter:Analog Lowpass:Cutoff Frequency"
+	fD	readwrite		25	1803
+	"Specifies the frequency in Hertz that corresponds to the -3dB cutoff of the filter."	"attr1803.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Lowpass.SwitchCap.ClkSrc"
+	"Analog Input:General Properties:Filter:Analog Lowpass:Advanced:Switched Capacitor:Clock Source"
+	iL enum { "Internal"=10200, "External"=10167 }	readwrite		25	1884
+	"Specifies the source of the filter clock. If you need a higher resolution for the filter, you can supply an external clock to increase the resolution. Refer to the SCXI-1141/1142/1143 User Manual for more information."	"attr1884.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.Lowpass.SwitchCap.ExtClkFreq"
+	"Analog Input:General Properties:Filter:Analog Lowpass:Advanced:Switched Capacitor:External Clock Frequency"
+	fD	readwrite		25	1885
+	"Specifies the frequency of the external clock when you set Analog Input:General Properties:Filter:Analog Lowpass:Advanced:Switched Capacitor:Clock Source to External.  NI-DAQmx uses this frequency to set the pre- and post- filters on the SCXI-1141, SCXI-1142, and SCXI-1143. On those devices, NI-DAQmx determines the filter cutoff by using the equation f/(100*n), where f is the external frequency, and n is the external clock divisor. Refer to the SCXI-1141/1142/1143 User Manual for more information."	"attr1885.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Lowpass.SwitchCap.ExtClkDiv"
+	"Analog Input:General Properties:Filter:Analog Lowpass:Advanced:Switched Capacitor:External Clock Divisor"
+	uL	readwrite		25	1886
+	"Specifies the divisor for the external clock when you set Analog Input:General Properties:Filter:Analog Lowpass:Advanced:Switched Capacitor:Clock Source to External. On the SCXI-1141, SCXI-1142, and SCXI-1143, NI-DAQmx determines the filter cutoff by using the equation f/(100*n), where f is the external frequency, and n is the external clock divisor. Refer to the SCXI-1141/1142/1143 User Manual for more information."	"attr1886.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "AI.Lowpass.SwitchCap.OutClkDiv"
+	"Analog Input:General Properties:Filter:Analog Lowpass:Advanced:Switched Capacitor:Output Clock Divisor"
+	uL	readwrite		25	1887
+	"Specifies the divisor for the output clock.  NI-DAQmx uses the cutoff frequency to determine the output clock frequency. Refer to the SCXI-1141/1142/1143 User Manual for more information."	"attr1887.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "AI.ResolutionUnits"
+	"Analog Input:General Properties:Digitizer/ADC:Resolution Units"
+	iL enum { "Bits"=10109 }	readonly		25	1764
+	"Indicates the units of Analog Input:General Properties:Digitizer/ADC:Resolution Value."	"attr1764.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	@NoReset
+
+attribute: "AI.Resolution"
+	"Analog Input:General Properties:Digitizer/ADC:Resolution Value"
+	fD	readonly		25	1765
+	"Indicates the resolution of the analog-to-digital converter of the channel. This value is in the units you specify with Analog Input:General Properties:Digitizer/ADC:Resolution Units."	"attr1765.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	@NoReset
+
+attribute: "AI.Dither.Enable"
+	"Analog Input:General Properties:Digitizer/ADC:Dither:Enable"
+	bool	readwrite		25	68
+	"Specifies whether to enable dithering.  Dithering adds Gaussian noise to the input signal. You can use dithering to achieve higher resolution measurements by over sampling the input signal and averaging the results."	"attr68.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.Rng.High"
+	"Analog Input:General Properties:Advanced:Range:High"
+	fD	readwrite		25	1815
+	"Specifies the upper limit of the input range of the device. This value is in the native units of the device. On E Series devices, for example, the native units is volts."	"attr1815.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Rng.Low"
+	"Analog Input:General Properties:Advanced:Range:Low"
+	fD	readwrite		25	1816
+	"Specifies the lower limit of the input range of the device. This value is in the native units of the device. On E Series devices, for example, the native units is volts."	"attr1816.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.Gain"
+	"Analog Input:General Properties:Advanced:Gain:Gain Value"
+	fD	readwrite		25	1818
+	"Specifies a gain factor to apply to the channel."	"attr1818.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AI.SampAndHold.Enable"
+	"Analog Input:General Properties:Advanced:Sample and Hold Enable"
+	bool	readwrite		25	181A
+	"Specifies whether to enable the sample and hold circuitry of the device. When you disable sample and hold circuitry, a small voltage offset might be introduced into the signal.  You can eliminate this offset by using Analog Input:General Properties:Advanced:High Accuracy Settings:Auto Zero Mode to perform an auto zero on the channel."	"attr181A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.AutoZeroMode"
+	"Analog Input:General Properties:Advanced:High Accuracy Settings:Auto Zero Mode"
+	iL enum { "None"=10230, "Once"=10244 }	readwrite		25	1760
+	"Specifies when to measure ground. NI-DAQmx subtracts the measured ground voltage from every sample."	"attr1760.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.DataXferMech"
+	"Analog Input:General Properties:Advanced:Data Transfer and Memory:Data Transfer Mechanism"
+	iL enum { "DMA"=10054, "Interrupts"=10204, "Programmed I/O"=10264 }	readwrite		25	1821
+	"Specifies the data transfer mode for the device."	"attr1821.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.DataXferReqCond"
+	"Analog Input:General Properties:Advanced:Data Transfer and Memory:Data Transfer Request Condition"
+	iL enum { "On Board Memory More than Half Full"=10237, "On Board Memory Not Empty"=10241 }	readwrite		25	188B
+	"Specifies under what condition to transfer data from the onboard memory of the device to the buffer."	"attr188B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AI.MemMapEnable"
+	"Analog Input:General Properties:Advanced:Data Transfer and Memory:Memory Mapping for Programmed IO Enable"
+	bool	readwrite		25	188C
+	"Specifies for NI-DAQmx to map hardware registers to the memory space of the customer process, if possible. Mapping to the memory space of the customer process increases performance. However, memory mapping can adversely affect the operation of the device and possibly result in a system crash if software in the process unintentionally accesses the mapped registers."	"attr188C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AI.DevScalingCoeff"
+	"Analog Input:General Properties:Advanced:Device Scaling Coefficients:Device Scaling Coefficients"
+	fD1D	readonly		25	1930
+	"Indicates the coefficients of a polynomial equation that NI-DAQmx uses to scale values from the native format of the device to volts. Each element of the array corresponds to a term of the equation. For example, if index two of the array is 4, the third term of the equation is 4x^2. Scaling coefficients do not account for any custom scales or sensors contained by the channel."	"attr1930.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64VtrAP	setChannelF64VtrAP	@NoReset
+
+attribute: "AO.Max"
+	"Analog Output:Maximum Value"
+	fD	readwrite		25	1186
+	"Specifies the maximum value you expect to generate. The value is in the units you specify with a units property. If you try to write a value larger than the maximum value, NI-DAQmx generates an error. NI-DAQmx might coerce this value to a smaller value if other task settings restrict the device from generating the desired maximum."	"attr1186.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.Min"
+	"Analog Output:Minimum Value"
+	fD	readwrite		25	1187
+	"Specifies the minimum value you expect to generate. The value is in the units you specify with a units property. If you try to write a value smaller than the minimum value, NI-DAQmx generates an error. NI-DAQmx might coerce this value to a larger value if other task settings restrict the device from generating the desired minimum."	"attr1187.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.CustomScaleName"
+	"Analog Output:Custom Scale Name"
+	DAQScale	readwrite		25	1188
+	"Specifies the name of a custom scale for the channel."	"attr1188.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelWstringScaleAP	setChannelWstringScaleAP	resetChannelWstringScaleAP
+
+attribute: "AO.OutputType"
+	"Analog Output:Output Type"
+	iL enum { "Voltage"=10322, "Current"=10134 }	readonly		25	1108
+	"Indicates whether the channel generates voltage or current."	"attr1108.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	@NoReset
+
+attribute: "AO.Voltage.Units"
+	"Analog Output:Voltage:Units"
+	iL enum { "Volts"=10348, "From Custom Scale"=10065 }	readwrite		25	1184
+	"Specifies in what units to generate voltage on the channel. Write data to the channel in the units you select."	"attr1184.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.Current.Units"
+	"Analog Output:Current:Units"
+	iL enum { "Amps"=10342, "From Custom Scale"=10065, "From TEDS"=12516 }	readwrite		25	1109
+	"Specifies in what units to generate current on the channel. Write data to the channel is in the units you select."	"attr1109.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.OutputImpedance"
+	"Analog Output:General Properties:Output Configuration:Output Impedance"
+	fD	readwrite		25	1490
+	"Specifies in ohms the impedance of the analog output stage of the device."	"attr1490.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.LoadImpedance"
+	"Analog Output:General Properties:Output Configuration:Load Impedance"
+	fD	readwrite		25	121
+	"Specifies in ohms the load impedance connected to the analog output channel."	"attr121.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.IdleOutputBehavior"
+	"Analog Output:General Properties:Output Configuration:Idle Output Behavior"
+	iL enum { "Zero Volts"=12526, "High Impedance"=12527, "Maintain Existing Value"=12528 }	readwrite		25	2240
+	"Specifies the state of the channel when no generation is in progress."	"attr2240.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.TermCfg"
+	"Analog Output:General Properties:Output Configuration:Terminal Configuration"
+	iL enum { "RSE"=10083, "Differential"=10106, "Pseudodifferential"=12529 }	readwrite		25	188E
+	"Specifies the terminal configuration of the channel."	"attr188E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.ResolutionUnits"
+	"Analog Output:General Properties:DAC:Resolution Units"
+	iL enum { "Bits"=10109 }	readwrite		25	182B
+	"Specifies the units of Analog Output:General Properties:DAC:Resolution Value."	"attr182B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.Resolution"
+	"Analog Output:General Properties:DAC:Resolution Value"
+	fD	readonly		25	182C
+	"Indicates the resolution of the digital-to-analog converter of the channel. This value is in the units you specify with Analog Output:General Properties:DAC:Resolution Units."	"attr182C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	@NoReset
+
+attribute: "AO.DAC.Rng.High"
+	"Analog Output:General Properties:DAC:Range:High"
+	fD	readwrite		25	182E
+	"Specifies the upper limit of the output range of the device. This value is in the native units of the device. On E Series devices, for example, the native units is volts."	"attr182E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.DAC.Rng.Low"
+	"Analog Output:General Properties:DAC:Range:Low"
+	fD	readwrite		25	182D
+	"Specifies the lower limit of the output range of the device. This value is in the native units of the device. On E Series devices, for example, the native units is volts."	"attr182D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.DAC.Ref.ConnToGnd"
+	"Analog Output:General Properties:DAC:Reference Voltage:Connect DAC Reference to Ground"
+	bool	readwrite		25	130
+	"Specifies whether to ground the internal DAC reference. Grounding the internal DAC reference has the effect of grounding all analog output channels and stopping waveform generation across all analog output channels regardless of whether the channels belong to the current task. You can ground the internal DAC reference only when Analog Output:General Properties:DAC:Reference Voltage:Source is Internal and Analog Output:General Properties:DAC:Reference Voltage:Allow Connecting DAC Reference to Ground at Runtime is TRUE."	"attr130.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AO.DAC.Ref.AllowConnToGnd"
+	"Analog Output:General Properties:DAC:Reference Voltage:Allow Connecting DAC Reference to Ground at Runtime"
+	bool	readwrite		25	1830
+	"Specifies whether to allow grounding the internal DAC reference at run time. You must set this property to TRUE and set Analog Output:General Properties:DAC:Reference Voltage:Source to Internal before you can set Analog Output:General Properties:DAC:Reference Voltage:Connect DAC Reference to Ground to TRUE."	"attr1830.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AO.DAC.Ref.Src"
+	"Analog Output:General Properties:DAC:Reference Voltage:Source"
+	iL enum { "Internal"=10200, "External"=10167 }	readwrite		25	132
+	"Specifies the source of the DAC reference voltage. The value of this voltage source determines the full-scale value of the DAC."	"attr132.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.DAC.Ref.ExtSrc"
+	"Analog Output:General Properties:DAC:Reference Voltage:External Source"
+	string	readwrite		25	2252
+	"Specifies the source of the DAC reference voltage if Analog Output:General Properties:DAC:Reference Voltage:Source is External."	"attr2252.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelWstringAP	setChannelWstringAP	resetChannelWstringAP
+
+attribute: "AO.DAC.Ref.Val"
+	"Analog Output:General Properties:DAC:Reference Voltage:Value"
+	fD	readwrite		25	1832
+	"Specifies in volts the value of the DAC reference voltage. This voltage determines the full-scale range of the DAC. Smaller reference voltages result in smaller ranges, but increased resolution."	"attr1832.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.DAC.Offset.Src"
+	"Analog Output:General Properties:DAC:Offset Voltage:Source"
+	iL enum { "Internal"=10200, "External"=10167 }	readwrite		25	2253
+	"Specifies the source of the DAC offset voltage. The value of this voltage source determines the full-scale value of the DAC."	"attr2253.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.DAC.Offset.ExtSrc"
+	"Analog Output:General Properties:DAC:Offset Voltage:External Source"
+	string	readwrite		25	2254
+	"Specifies the source of the DAC offset voltage if Analog Output:General Properties:DAC:Offset Voltage:Source is External."	"attr2254.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelWstringAP	setChannelWstringAP	resetChannelWstringAP
+
+attribute: "AO.DAC.Offset.Val"
+	"Analog Output:General Properties:DAC:Offset Voltage:Value"
+	fD	readwrite		25	2255
+	"Specifies in volts the value of the DAC offset voltage."	"attr2255.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.ReglitchEnable"
+	"Analog Output:General Properties:DAC:Reglitching Enable"
+	bool	readwrite		25	133
+	"Specifies whether to enable reglitching.  The output of a DAC normally glitches whenever the DAC is updated with a new value. The amount of glitching differs from code to code and is generally largest at major code transitions.  Reglitching generates uniform glitch energy at each code transition and provides for more uniform glitches.  Uniform glitch energy makes it easier to filter out the noise introduced from glitching during spectrum analysis."	"attr133.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AO.InterpEnable"
+	"Analog Output:General Properties:DAC:Interpolation Enable"
+	bool	readwrite		25	2241
+	"Specifies whether to enable the DAC interpolation filter. Disable the interpolation filter to improve DAC signal-to-noise ratio and reduce filter latency at the expense of degraded image rejection."	"attr2241.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AO.Gain"
+	"Analog Output:General Properties:Advanced:Gain:Gain Value"
+	fD	readwrite		25	118
+	"Specifies in decibels the gain factor to apply to the channel."	"attr118.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "AO.UseOnlyOnBrdMem"
+	"Analog Output:General Properties:Advanced:Data Transfer and Memory:Use Only On Board Memory"
+	bool	readwrite		25	183A
+	"Specifies whether to write samples directly to the onboard memory of the device, bypassing the memory buffer. Generally, you cannot update onboard memory after you start the task. Onboard memory includes data FIFOs."	"attr183A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AO.DataXferMech"
+	"Analog Output:General Properties:Advanced:Data Transfer and Memory:Data Transfer Mechanism"
+	iL enum { "DMA"=10054, "Interrupts"=10204, "Programmed I/O"=10264 }	readwrite		25	134
+	"Specifies the data transfer mode for the device."	"attr134.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.DataXferReqCond"
+	"Analog Output:General Properties:Advanced:Data Transfer and Memory:Data Transfer Request Condition"
+	iL enum { "On Board Memory Empty"=10235, "On Board Memory Half Full or Less"=10239, "On Board Memory Less than Full"=10242 }	readwrite		25	183C
+	"Specifies under what condition to transfer data from the buffer to the onboard memory of the device."	"attr183C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "AO.MemMapEnable"
+	"Analog Output:General Properties:Advanced:Data Transfer and Memory:Memory Mapping for Programmed IO Enable"
+	bool	readwrite		25	188F
+	"Specifies if NI-DAQmx maps hardware registers to the memory space of the customer process, if possible. Mapping to the memory space of the customer process increases performance. However, memory mapping can adversely affect the operation of the device and possibly result in a system crash if software in the process unintentionally accesses the mapped registers."	"attr188F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "AO.DevScalingCoeff"
+	"Analog Output:General Properties:Advanced:Device Scaling Coefficients:Device Scaling Coefficients"
+	fD1D	readonly		25	1931
+	"Indicates the coefficients of a linear equation that NI-DAQmx uses to scale values from a voltage to the native format of the device.  Each element of the array corresponds to a term of the equation. For example, if index two of the array is 4, the third term of the equation is 4x^2.  Scaling coefficients do not account for any custom scales that may be applied to the channel."	"attr1931.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64VtrAP	setChannelF64VtrAP	@NoReset
+
+attribute: "DI.InvertLines"
+	"Digital Input:Invert Lines"
+	bool	readwrite		25	793
+	"Specifies whether to invert the lines in the channel. If you set this property to TRUE, the lines are at high logic when off and at low logic when on."	"attr793.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "DI.NumLines"
+	"Digital Input:Number of Lines"
+	uL	readonly		25	2178
+	"Indicates the number of digital lines in the channel."	"attr2178.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	@NoReset
+
+attribute: "DI.DigFltr.Enable"
+	"Digital Input:Digital Filter:Enable"
+	bool	readwrite		25	21D6
+	"Specifies whether to enable the digital filter for the line(s) or port(s). You can enable the filter on a line-by-line basis. You do not have to enable the filter for all lines in a channel."	"attr21D6.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "DI.DigFltr.MinPulseWidth"
+	"Digital Input:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	21D7
+	"Specifies in seconds the minimum pulse width the filter recognizes as a valid high or low state transition."	"attr21D7.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "DI.Tristate"
+	"Digital Input:Tristate"
+	bool	readwrite		25	1890
+	"Specifies whether to tristate the lines in the channel. If you set this property to TRUE, NI-DAQmx tristates the lines in the channel. If you set this property to FALSE, NI-DAQmx does not modify the configuration of the lines even if the lines were previously tristated. Set this property to FALSE to read lines in other tasks or to read output-only lines."	"attr1890.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "DI.DataXferMech"
+	"Digital Input:General Properties:Advanced:Data Transfer and Memory:Data Transfer Mechanism"
+	iL enum { "DMA"=10054, "Interrupts"=10204, "Programmed I/O"=10264 }	readwrite		25	2263
+	"Specifies the data transfer mode for the device."	"attr2263.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "DI.DataXferReqCond"
+	"Digital Input:General Properties:Advanced:Data Transfer and Memory:Data Transfer Request Condition"
+	iL enum { "On Board Memory More than Half Full"=10237, "On Board Memory Not Empty"=10241 }	readwrite		25	2264
+	"Specifies under what condition to transfer data from the onboard memory of the device to the buffer."	"attr2264.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "DO.InvertLines"
+	"Digital Output:Invert Lines"
+	bool	readwrite		25	1133
+	"Specifies whether to invert the lines in the channel. If you set this property to TRUE, the lines are at high logic when off and at low logic when on."	"attr1133.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "DO.NumLines"
+	"Digital Output:Number of Lines"
+	uL	readonly		25	2179
+	"Indicates the number of digital lines in the channel."	"attr2179.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	@NoReset
+
+attribute: "DO.Tristate"
+	"Digital Output:Tristate"
+	bool	readwrite		25	18F3
+	"Specifies whether to stop driving the channel and set it to a Hi-Z state."	"attr18F3.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "DO.UseOnlyOnBrdMem"
+	"Digital Output:General Properties:Advanced:Data Transfer and Memory:Use Only On Board Memory"
+	bool	readwrite		25	2265
+	"Specifies whether to write samples directly to the onboard memory of the device, bypassing the memory buffer. Generally, you cannot update onboard memory after you start the task. Onboard memory includes data FIFOs."	"attr2265.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "DO.DataXferMech"
+	"Digital Output:General Properties:Advanced:Data Transfer and Memory:Data Transfer Mechanism"
+	iL enum { "DMA"=10054, "Interrupts"=10204, "Programmed I/O"=10264 }	readwrite		25	2266
+	"Specifies the data transfer mode for the device."	"attr2266.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "DO.DataXferReqCond"
+	"Digital Output:General Properties:Advanced:Data Transfer and Memory:Data Transfer Request Condition"
+	iL enum { "On Board Memory Empty"=10235, "On Board Memory Half Full or Less"=10239, "On Board Memory Less than Full"=10242 }	readwrite		25	2267
+	"Specifies under what condition to transfer data from the buffer to the onboard memory of the device."	"attr2267.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.Max"
+	"Counter Input:Maximum Value"
+	fD	readwrite		25	189C
+	"Specifies the maximum value you expect to measure. This value is in the units you specify with a units property. When you query this property, it returns the coerced maximum value that the hardware can measure with the current settings."	"attr189C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Min"
+	"Counter Input:Minimum Value"
+	fD	readwrite		25	189D
+	"Specifies the minimum value you expect to measure. This value is in the units you specify with a units property. When you query this property, it returns the coerced minimum value that the hardware can measure with the current settings."	"attr189D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.CustomScaleName"
+	"Counter Input:Custom Scale Name"
+	DAQScale	readwrite		25	189E
+	"Specifies the name of a custom scale for the channel."	"attr189E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelWstringScaleAP	setChannelWstringScaleAP	resetChannelWstringScaleAP
+
+attribute: "CI.MeasType"
+	"Counter Input:Measurement Type"
+	iL enum { "Count Edges"=10125, "Frequency"=10179, "Period"=10256, "Pulse Width"=10359, "Semi Period"=10289, "Position:Angular Encoder"=10360, "Position:Linear Encoder"=10361, "Two Edge Separation"=10267 }	readonly		25	18A0
+	"Indicates the measurement to take with the channel."	"attr18A0.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	@NoReset
+
+attribute: "CI.Freq.Units"
+	"Counter Input:Frequency:Units"
+	iL enum { "Hz"=10373, "Ticks"=10304, "From Custom Scale"=10065 }	readwrite		25	18A1
+	"Specifies the units to use to return frequency measurements."	"attr18A1.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.Freq.Term"
+	"Counter Input:Frequency:Input Terminal"
+	DAQTerminal	readwrite		25	18A2
+	"Specifies the input terminal of the signal to measure."	"attr18A2.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Freq.StartingEdge"
+	"Counter Input:Frequency:Starting Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	799
+	"Specifies between which edges to measure the frequency of the signal."	"attr799.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.Freq.MeasMeth"
+	"Counter Input:Frequency:Measurement Specifications:Method"
+	iL enum { "Low Frequency with 1 Counter"=10105, "High Frequency with 2 Counters"=10157, "Large Range with 2 Counters"=10205 }	readwrite		25	144
+	"Specifies the method to use to measure the frequency of the signal."	"attr144.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.Freq.MeasTime"
+	"Counter Input:Frequency:Measurement Specifications:High Frequency:Measurement Time"
+	fD	readwrite		25	145
+	"Specifies in seconds the length of time to measure the frequency of the signal if Counter Input:Frequency:Measurement Specifications:Method is High Frequency with 2 Counters. Measurement accuracy increases with increased measurement time and with increased signal frequency. If you measure a high-frequency signal for too long, however, the count register could roll over, which results in an incorrect measurement."	"attr145.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Freq.Div"
+	"Counter Input:Frequency:Measurement Specifications:Large Range:Divisor"
+	uL	readwrite		25	147
+	"Specifies the value by which to divide the input signal if  Counter Input:Frequency:Measurement Specifications:Method is Large Range with 2 Counters. The larger the divisor, the more accurate the measurement. However, too large a value could cause the count register to roll over, which results in an incorrect measurement."	"attr147.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CI.Freq.DigFltr.Enable"
+	"Counter Input:Frequency:Digital Filter:Enable"
+	bool	readwrite		25	21E7
+	"Specifies whether to apply the pulse width filter to the signal."	"attr21E7.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Freq.DigFltr.MinPulseWidth"
+	"Counter Input:Frequency:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	21E8
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr21E8.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Freq.DigFltr.TimebaseSrc"
+	"Counter Input:Frequency:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	21E9
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr21E9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Freq.DigFltr.TimebaseRate"
+	"Counter Input:Frequency:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	21EA
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr21EA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Freq.DigSync.Enable"
+	"Counter Input:Frequency:Digital Synchronization:Enable"
+	bool	readwrite		25	21EB
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr21EB.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Period.Units"
+	"Counter Input:Period:Units"
+	iL enum { "Seconds"=10364, "Ticks"=10304, "From Custom Scale"=10065 }	readwrite		25	18A3
+	"Specifies the unit to use to return period measurements."	"attr18A3.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.Period.Term"
+	"Counter Input:Period:Input Terminal"
+	DAQTerminal	readwrite		25	18A4
+	"Specifies the input terminal of the signal to measure."	"attr18A4.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Period.StartingEdge"
+	"Counter Input:Period:Starting Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	852
+	"Specifies between which edges to measure the period of the signal."	"attr852.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.Period.MeasMeth"
+	"Counter Input:Period:Measurement Specifications:Method"
+	iL enum { "Low Frequency with 1 Counter"=10105, "High Frequency with 2 Counters"=10157, "Large Range with 2 Counters"=10205 }	readwrite		25	192C
+	"Specifies the method to use to measure the period of the signal."	"attr192C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.Period.MeasTime"
+	"Counter Input:Period:Measurement Specifications:High Frequency:Measurement Time"
+	fD	readwrite		25	192D
+	"Specifies in seconds the length of time to measure the period of the signal if Counter Input:Period:Measurement Specifications:Method is High Frequency with 2 Counters. Measurement accuracy increases with increased measurement time and with increased signal frequency. If you measure a high-frequency signal for too long, however, the count register could roll over, which results in an incorrect measurement."	"attr192D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Period.Div"
+	"Counter Input:Period:Measurement Specifications:Large Range:Divisor"
+	uL	readwrite		25	192E
+	"Specifies the value by which to divide the input signal if Counter Input:Period:Measurement Specifications:Method is Large Range with 2 Counters. The larger the divisor, the more accurate the measurement. However, too large a value could cause the count register to roll over, which results in an incorrect measurement."	"attr192E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CI.Period.DigFltr.Enable"
+	"Counter Input:Period:Digital Filter:Enable"
+	bool	readwrite		25	21EC
+	"Specifies whether to apply the pulse width filter to the signal."	"attr21EC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Period.DigFltr.MinPulseWidth"
+	"Counter Input:Period:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	21ED
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr21ED.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Period.DigFltr.TimebaseSrc"
+	"Counter Input:Period:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	21EE
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr21EE.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Period.DigFltr.TimebaseRate"
+	"Counter Input:Period:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	21EF
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr21EF.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Period.DigSync.Enable"
+	"Counter Input:Period:Digital Synchronization:Enable"
+	bool	readwrite		25	21F0
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr21F0.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.CountEdges.Term"
+	"Counter Input:Count Edges:Input Terminal"
+	DAQTerminal	readwrite		25	18C7
+	"Specifies the input terminal of the signal to measure."	"attr18C7.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.CountEdges.Dir"
+	"Counter Input:Count Edges:Count Direction:Direction"
+	iL enum { "Count Up"=10128, "Count Down"=10124, "Externally Controlled"=10326 }	readwrite		25	696
+	"Specifies whether to increment or decrement the counter on each edge."	"attr696.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.CountEdges.DirTerm"
+	"Counter Input:Count Edges:Count Direction:Terminal"
+	DAQTerminal	readwrite		25	21E1
+	"Specifies the source terminal of the digital signal that controls the count direction if Counter Input:Count Edges:Count Direction:Direction is Externally Controlled."	"attr21E1.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.CountEdges.CountDir.DigFltr.Enable"
+	"Counter Input:Count Edges:Count Direction:Digital Filter:Enable"
+	bool	readwrite		25	21F1
+	"Specifies whether to apply the pulse width filter to the signal."	"attr21F1.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.CountEdges.CountDir.DigFltr.MinPulseWidth"
+	"Counter Input:Count Edges:Count Direction:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	21F2
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr21F2.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.CountEdges.CountDir.DigFltr.TimebaseSrc"
+	"Counter Input:Count Edges:Count Direction:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	21F3
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr21F3.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.CountEdges.CountDir.DigFltr.TimebaseRate"
+	"Counter Input:Count Edges:Count Direction:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	21F4
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr21F4.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.CountEdges.CountDir.DigSync.Enable"
+	"Counter Input:Count Edges:Count Direction:Digital Synchronization:Enable"
+	bool	readwrite		25	21F5
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr21F5.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.CountEdges.InitialCnt"
+	"Counter Input:Count Edges:Initial Count"
+	uL	readwrite		25	698
+	"Specifies the starting value from which to count."	"attr698.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CI.CountEdges.ActiveEdge"
+	"Counter Input:Count Edges:Active Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	697
+	"Specifies on which edges to increment or decrement the counter."	"attr697.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.CountEdges.DigFltr.Enable"
+	"Counter Input:Count Edges:Digital Filter:Enable"
+	bool	readwrite		25	21F6
+	"Specifies whether to apply the pulse width filter to the signal."	"attr21F6.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.CountEdges.DigFltr.MinPulseWidth"
+	"Counter Input:Count Edges:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	21F7
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr21F7.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.CountEdges.DigFltr.TimebaseSrc"
+	"Counter Input:Count Edges:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	21F8
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr21F8.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.CountEdges.DigFltr.TimebaseRate"
+	"Counter Input:Count Edges:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	21F9
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr21F9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.CountEdges.DigSync.Enable"
+	"Counter Input:Count Edges:Digital Synchronization:Enable"
+	bool	readwrite		25	21FA
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr21FA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.AngEncoder.Units"
+	"Counter Input:Position:Angular Encoder:Units"
+	iL enum { "Degrees"=10146, "Radians"=10273, "Ticks"=10304, "From Custom Scale"=10065 }	readwrite		25	18A6
+	"Specifies the units to use to return angular position measurements from the channel."	"attr18A6.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.AngEncoder.PulsesPerRev"
+	"Counter Input:Position:Angular Encoder:Pulses Per Revolution"
+	uL	readwrite		25	875
+	"Specifies the number of pulses the encoder generates per revolution. This value is the number of pulses on either signal A or signal B, not the total number of pulses on both signal A and signal B."	"attr875.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CI.AngEncoder.InitialAngle"
+	"Counter Input:Position:Angular Encoder:Initial Angle"
+	fD	readwrite		25	881
+	"Specifies the starting angle of the encoder. This value is in the units you specify with Counter Input:Position:Angular Encoder:Units."	"attr881.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.LinEncoder.Units"
+	"Counter Input:Position:Linear Encoder:Units"
+	iL enum { "Meters"=10219, "Inches"=10379, "Ticks"=10304, "From Custom Scale"=10065 }	readwrite		25	18A9
+	"Specifies the units to use to return linear encoder measurements from the channel."	"attr18A9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.LinEncoder.DistPerPulse"
+	"Counter Input:Position:Linear Encoder:Distance Per Pulse"
+	fD	readwrite		25	911
+	"Specifies the distance to measure for each pulse the encoder generates on signal A or signal B. This value is in the units you specify with Counter Input:Position:Linear Encoder:Units."	"attr911.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.LinEncoder.InitialPos"
+	"Counter Input:Position:Linear Encoder:Initial Position"
+	fD	readwrite		25	915
+	"Specifies the position of the encoder when the measurement begins. This value is in the units you specify with Counter Input:Position:Linear Encoder:Units."	"attr915.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Encoder.DecodingType"
+	"Counter Input:Position:Decoding Type"
+	iL enum { "X1"=10090, "X2"=10091, "X4"=10092, "Two Pulse Counting"=10313 }	readwrite		25	21E6
+	"Specifies how to count and interpret the pulses the encoder generates on signal A and signal B. X1, X2, and X4 are valid for quadrature encoders only. Two Pulse Counting is valid for two-pulse encoders only."	"attr21E6.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.Encoder.AInputTerm"
+	"Counter Input:Position:A Input:Terminal"
+	DAQTerminal	readwrite		25	219D
+	"Specifies the terminal to which signal A is connected."	"attr219D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Encoder.AInput.DigFltr.Enable"
+	"Counter Input:Position:A Input:Digital Filter:Enable"
+	bool	readwrite		25	21FB
+	"Specifies whether to apply the pulse width filter to the signal."	"attr21FB.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Encoder.AInput.DigFltr.MinPulseWidth"
+	"Counter Input:Position:A Input:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	21FC
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr21FC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Encoder.AInput.DigFltr.TimebaseSrc"
+	"Counter Input:Position:A Input:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	21FD
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr21FD.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Encoder.AInput.DigFltr.TimebaseRate"
+	"Counter Input:Position:A Input:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	21FE
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr21FE.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Encoder.AInput.DigSync.Enable"
+	"Counter Input:Position:A Input:Digital Synchronization:Enable"
+	bool	readwrite		25	21FF
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr21FF.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Encoder.BInputTerm"
+	"Counter Input:Position:B Input:Terminal"
+	DAQTerminal	readwrite		25	219E
+	"Specifies the terminal to which signal B is connected."	"attr219E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Encoder.BInput.DigFltr.Enable"
+	"Counter Input:Position:B Input:Digital Filter:Enable"
+	bool	readwrite		25	2200
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2200.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Encoder.BInput.DigFltr.MinPulseWidth"
+	"Counter Input:Position:B Input:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	2201
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr2201.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Encoder.BInput.DigFltr.TimebaseSrc"
+	"Counter Input:Position:B Input:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	2202
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr2202.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Encoder.BInput.DigFltr.TimebaseRate"
+	"Counter Input:Position:B Input:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2203
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2203.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Encoder.BInput.DigSync.Enable"
+	"Counter Input:Position:B Input:Digital Synchronization:Enable"
+	bool	readwrite		25	2204
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr2204.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Encoder.ZInputTerm"
+	"Counter Input:Position:Z Input:Terminal"
+	DAQTerminal	readwrite		25	219F
+	"Specifies the terminal to which signal Z is connected."	"attr219F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Encoder.ZInput.DigFltr.Enable"
+	"Counter Input:Position:Z Input:Digital Filter:Enable"
+	bool	readwrite		25	2205
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2205.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Encoder.ZInput.DigFltr.MinPulseWidth"
+	"Counter Input:Position:Z Input:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	2206
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr2206.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Encoder.ZInput.DigFltr.TimebaseSrc"
+	"Counter Input:Position:Z Input:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	2207
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr2207.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.Encoder.ZInput.DigFltr.TimebaseRate"
+	"Counter Input:Position:Z Input:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2208
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2208.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Encoder.ZInput.DigSync.Enable"
+	"Counter Input:Position:Z Input:Digital Synchronization:Enable"
+	bool	readwrite		25	2209
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr2209.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Encoder.ZIndexEnable"
+	"Counter Input:Position:Z Index Enable"
+	bool	readwrite		25	890
+	"Specifies whether to use Z indexing for the channel."	"attr890.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Encoder.ZIndexVal"
+	"Counter Input:Position:Z Index Value"
+	fD	readwrite		25	888
+	"Specifies the value to which to reset the measurement when signal Z is high and signal A and signal B are at the states you specify with Counter Input:Position:Z Index Phase. Specify this value in the units of the measurement."	"attr888.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.Encoder.ZIndexPhase"
+	"Counter Input:Position:Z Index Phase"
+	iL enum { "A High B High"=10040, "A High B Low"=10041, "A Low B High"=10042, "A Low B Low"=10043 }	readwrite		25	889
+	"Specifies the states at which signal A and signal B must be while signal Z is high for NI-DAQmx to reset the measurement. If signal Z is never high while signal A and signal B are high, for example, you must choose a phase other than A High B High."	"attr889.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.PulseWidth.Units"
+	"Counter Input:Pulse Width:Units"
+	iL enum { "Seconds"=10364, "Ticks"=10304, "From Custom Scale"=10065 }	readwrite		25	823
+	"Specifies the units to use to return pulse width measurements."	"attr823.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.PulseWidth.Term"
+	"Counter Input:Pulse Width:Input Terminal"
+	DAQTerminal	readwrite		25	18AA
+	"Specifies the input terminal of the signal to measure."	"attr18AA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.PulseWidth.StartingEdge"
+	"Counter Input:Pulse Width:Starting Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	825
+	"Specifies on which edge of the input signal to begin each pulse width measurement."	"attr825.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.PulseWidth.DigFltr.Enable"
+	"Counter Input:Pulse Width:Digital Filter:Enable"
+	bool	readwrite		25	220A
+	"Specifies whether to apply the pulse width filter to the signal."	"attr220A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.PulseWidth.DigFltr.MinPulseWidth"
+	"Counter Input:Pulse Width:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	220B
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr220B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.PulseWidth.DigFltr.TimebaseSrc"
+	"Counter Input:Pulse Width:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	220C
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr220C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.PulseWidth.DigFltr.TimebaseRate"
+	"Counter Input:Pulse Width:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	220D
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr220D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.PulseWidth.DigSync.Enable"
+	"Counter Input:Pulse Width:Digital Synchronization:Enable"
+	bool	readwrite		25	220E
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr220E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.TwoEdgeSep.Units"
+	"Counter Input:Two Edge Separation:Units"
+	iL enum { "Seconds"=10364, "Ticks"=10304, "From Custom Scale"=10065 }	readwrite		25	18AC
+	"Specifies the units to use to return two-edge separation measurements from the channel."	"attr18AC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.TwoEdgeSep.First.Term"
+	"Counter Input:Two Edge Separation:First:Input Terminal"
+	DAQTerminal	readwrite		25	18AD
+	"Specifies the source terminal of the digital signal that starts each measurement."	"attr18AD.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.TwoEdgeSep.First.Edge"
+	"Counter Input:Two Edge Separation:First:Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	833
+	"Specifies on which edge of the first signal to start each measurement."	"attr833.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.TwoEdgeSep.First.DigFltr.Enable"
+	"Counter Input:Two Edge Separation:First:Digital Filter:Enable"
+	bool	readwrite		25	220F
+	"Specifies whether to apply the pulse width filter to the signal."	"attr220F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.TwoEdgeSep.First.DigFltr.MinPulseWidth"
+	"Counter Input:Two Edge Separation:First:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	2210
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr2210.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.TwoEdgeSep.First.DigFltr.TimebaseSrc"
+	"Counter Input:Two Edge Separation:First:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	2211
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr2211.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.TwoEdgeSep.First.DigFltr.TimebaseRate"
+	"Counter Input:Two Edge Separation:First:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2212
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2212.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.TwoEdgeSep.First.DigSync.Enable"
+	"Counter Input:Two Edge Separation:First:Digital Synchronization:Enable"
+	bool	readwrite		25	2213
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr2213.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.TwoEdgeSep.Second.Term"
+	"Counter Input:Two Edge Separation:Second:Input Terminal"
+	DAQTerminal	readwrite		25	18AE
+	"Specifies the source terminal of the digital signal that stops each measurement."	"attr18AE.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.TwoEdgeSep.Second.Edge"
+	"Counter Input:Two Edge Separation:Second:Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	834
+	"Specifies on which edge of the second signal to stop each measurement."	"attr834.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.TwoEdgeSep.Second.DigFltr.Enable"
+	"Counter Input:Two Edge Separation:Second:Digital Filter:Enable"
+	bool	readwrite		25	2214
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2214.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.TwoEdgeSep.Second.DigFltr.MinPulseWidth"
+	"Counter Input:Two Edge Separation:Second:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	2215
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr2215.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.TwoEdgeSep.Second.DigFltr.TimebaseSrc"
+	"Counter Input:Two Edge Separation:Second:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	2216
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr2216.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.TwoEdgeSep.Second.DigFltr.TimebaseRate"
+	"Counter Input:Two Edge Separation:Second:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2217
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2217.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.TwoEdgeSep.Second.DigSync.Enable"
+	"Counter Input:Two Edge Separation:Second:Digital Synchronization:Enable"
+	bool	readwrite		25	2218
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr2218.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.SemiPeriod.Units"
+	"Counter Input:Semi-Period:Units"
+	iL enum { "Seconds"=10364, "Ticks"=10304, "From Custom Scale"=10065 }	readwrite		25	18AF
+	"Specifies the units to use to return semi-period measurements."	"attr18AF.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.SemiPeriod.Term"
+	"Counter Input:Semi-Period:Input Terminal"
+	DAQTerminal	readwrite		25	18B0
+	"Specifies the input terminal of the signal to measure."	"attr18B0.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.SemiPeriod.DigFltr.Enable"
+	"Counter Input:Semi-Period:Digital Filter:Enable"
+	bool	readwrite		25	2219
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2219.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.SemiPeriod.DigFltr.MinPulseWidth"
+	"Counter Input:Semi-Period:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	221A
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr221A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.SemiPeriod.DigFltr.TimebaseSrc"
+	"Counter Input:Semi-Period:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	221B
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr221B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.SemiPeriod.DigFltr.TimebaseRate"
+	"Counter Input:Semi-Period:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	221C
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr221C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.SemiPeriod.DigSync.Enable"
+	"Counter Input:Semi-Period:Digital Synchronization:Enable"
+	bool	readwrite		25	221D
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr221D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.CtrTimebaseSrc"
+	"Counter Input:General Properties:Counter Timebase:Source"
+	DAQTerminal	readwrite		25	143
+	"Specifies the terminal of the timebase to use for the counter."	"attr143.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.CtrTimebaseRate"
+	"Counter Input:General Properties:Counter Timebase:Rate"
+	fD	readwrite		25	18B2
+	"Specifies in Hertz the frequency of the counter timebase. Specifying the rate of a counter timebase allows you to take measurements in terms of time or frequency rather than in ticks of the timebase. If you use an external timebase and do not specify the rate, you can take measurements only in terms of ticks of the timebase."	"attr18B2.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.CtrTimebaseActiveEdge"
+	"Counter Input:General Properties:Counter Timebase:Active Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	142
+	"Specifies whether a timebase cycle is from rising edge to rising edge or from falling edge to falling edge."	"attr142.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.CtrTimebase.DigFltr.Enable"
+	"Counter Input:General Properties:Counter Timebase:Digital Filter:Enable"
+	bool	readwrite		25	2271
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2271.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.CtrTimebase.DigFltr.MinPulseWidth"
+	"Counter Input:General Properties:Counter Timebase:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	2272
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr2272.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.CtrTimebase.DigFltr.TimebaseSrc"
+	"Counter Input:General Properties:Counter Timebase:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	2273
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr2273.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CI.CtrTimebase.DigFltr.TimebaseRate"
+	"Counter Input:General Properties:Counter Timebase:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2274
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2274.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CI.CtrTimebase.DigSync.Enable"
+	"Counter Input:General Properties:Counter Timebase:Digital Synchronization:Enable"
+	bool	readwrite		25	2275
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr2275.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Count"
+	"Counter Input:General Properties:More:Count"
+	uL	readonly		25	148
+	"Indicates the current value of the count register."	"attr148.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	@NoReset
+
+attribute: "CI.OutputState"
+	"Counter Input:General Properties:More:Output State"
+	iL enum { "High"=10192, "Low"=10214 }	readonly		25	149
+	"Indicates the current state of the out terminal of the counter."	"attr149.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	@NoReset
+
+attribute: "CI.TCReached"
+	"Counter Input:General Properties:More:Terminal Count Reached"
+	bool	readonly		25	150
+	"Indicates whether the counter rolled over. When you query this property, NI-DAQmx resets it to FALSE."	"attr150.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	@NoReset
+
+attribute: "CI.CtrTimebaseMasterTimebaseDiv"
+	"Counter Input:General Properties:More:Counter Timebase Master Timebase Divisor"
+	uL enum { "1"=1, "200"=200 }	readwrite		25	18B3
+	"Specifies the divisor for an external counter timebase. You can divide the counter timebase in order to measure slower signals without causing the count register to roll over."	"attr18B3.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CI.DataXferMech"
+	"Counter Input:General Properties:More:Advanced:Data Transfer and Memory:Data Transfer Mechanism"
+	iL enum { "DMA"=10054, "Interrupts"=10204, "Programmed I/O"=10264 }	readwrite		25	200
+	"Specifies the data transfer mode for the channel."	"attr200.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CI.NumPossiblyInvalidSamps"
+	"Counter Input:General Properties:More:Advanced:Data Transfer and Memory:Number Of Possibly Invalid Samples"
+	uL	readonly		25	193C
+	"Indicates the number of samples that the device might have overwritten before it could transfer them to the buffer."	"attr193C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	@NoReset
+
+attribute: "CI.DupCountPrevention"
+	"Counter Input:General Properties:More:Advanced:Duplicate Count Prevention"
+	bool	readwrite		25	21AC
+	"Specifies whether to enable duplicate count prevention for the channel."	"attr21AC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CI.Prescaler"
+	"Counter Input:General Properties:More:Advanced:Prescaler"
+	uL enum { "1"=1, "2"=2, "8"=8 }	readwrite		25	2239
+	"Specifies the divisor to apply to the signal you connect to the counter source terminal. Scaled data that you read takes this setting into account. You should use a prescaler only when you connect an external signal to the counter source terminal and when that signal has a higher frequency than the fastest onboard timebase."	"attr2239.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CO.OutputType"
+	"Counter Output:Output Type"
+	iL enum { "Pulse:Time"=10269, "Pulse:Frequency"=10119, "Pulse:Ticks"=10268 }	readonly		25	18B5
+	"Indicates how to define pulses generated on the channel."	"attr18B5.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	@NoReset
+
+attribute: "CO.Pulse.IdleState"
+	"Counter Output:Pulse:Idle State"
+	iL enum { "High"=10192, "Low"=10214 }	readwrite		25	1170
+	"Specifies the resting state of the output terminal."	"attr1170.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CO.Pulse.Term"
+	"Counter Output:Pulse:Output Terminal"
+	DAQTerminal	readwrite		25	18E1
+	"Specifies on which terminal to generate pulses."	"attr18E1.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CO.Pulse.Time.Units"
+	"Counter Output:Pulse:Time:Units"
+	iL enum { "Seconds"=10364 }	readwrite		25	18D6
+	"Specifies the units in which to define high and low pulse time."	"attr18D6.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CO.Pulse.HighTime"
+	"Counter Output:Pulse:Time:High Time"
+	fD	readwrite		25	18BA
+	"Specifies the amount of time that the pulse is at a high voltage. This value is in the units you specify with Counter Output:Pulse:Time:Units or when you create the channel."	"attr18BA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.Pulse.LowTime"
+	"Counter Output:Pulse:Time:Low Time"
+	fD	readwrite		25	18BB
+	"Specifies the amount of time that the pulse is at a low voltage. This value is in the units you specify with Counter Output:Pulse:Time:Units or when you create the channel."	"attr18BB.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.Pulse.Time.InitialDelay"
+	"Counter Output:Pulse:Time:Initial Delay"
+	fD	readwrite		25	18BC
+	"Specifies in seconds the amount of time to wait before generating the first pulse."	"attr18BC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.Pulse.DutyCyc"
+	"Counter Output:Pulse:Frequency:Duty Cycle"
+	fD	readwrite		25	1176
+	"Specifies the duty cycle of the pulses. The duty cycle of a signal is the width of the pulse divided by period. NI-DAQmx uses this ratio and the pulse frequency to determine the width of the pulses and the delay between pulses."	"attr1176.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.Pulse.Freq.Units"
+	"Counter Output:Pulse:Frequency:Units"
+	iL enum { "Hz"=10373 }	readwrite		25	18D5
+	"Specifies the units in which to define pulse frequency."	"attr18D5.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CO.Pulse.Freq"
+	"Counter Output:Pulse:Frequency:Frequency"
+	fD	readwrite		25	1178
+	"Specifies the frequency of the pulses to generate. This value is in the units you specify with Counter Output:Pulse:Frequency:Units or when you create the channel."	"attr1178.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.Pulse.Freq.InitialDelay"
+	"Counter Output:Pulse:Frequency:Initial Delay"
+	fD	readwrite		25	299
+	"Specifies in seconds the amount of time to wait before generating the first pulse."	"attr299.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.Pulse.HighTicks"
+	"Counter Output:Pulse:Ticks:High Ticks"
+	uL	readwrite		25	1169
+	"Specifies the number of ticks the pulse is high."	"attr1169.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CO.Pulse.LowTicks"
+	"Counter Output:Pulse:Ticks:Low Ticks"
+	uL	readwrite		25	1171
+	"Specifies the number of ticks the pulse is low."	"attr1171.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CO.Pulse.Ticks.InitialDelay"
+	"Counter Output:Pulse:Ticks:Initial Delay"
+	uL	readwrite		25	298
+	"Specifies the number of ticks to wait before generating the first pulse."	"attr298.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CO.CtrTimebaseSrc"
+	"Counter Output:General Properties:Counter Timebase:Source"
+	DAQTerminal	readwrite		25	339
+	"Specifies the terminal of the timebase to use for the counter. Typically, NI-DAQmx uses one of the internal counter timebases when generating pulses. Use this property to specify an external timebase and produce custom pulse widths that are not possible using the internal timebases."	"attr339.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CO.CtrTimebaseRate"
+	"Counter Output:General Properties:Counter Timebase:Rate"
+	fD	readwrite		25	18C2
+	"Specifies in Hertz the frequency of the counter timebase. Specifying the rate of a counter timebase allows you to define output pulses in seconds rather than in ticks of the timebase. If you use an external timebase and do not specify the rate, you can define output pulses only in ticks of the timebase."	"attr18C2.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.CtrTimebaseActiveEdge"
+	"Counter Output:General Properties:Counter Timebase:Active Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	341
+	"Specifies whether a timebase cycle is from rising edge to rising edge or from falling edge to falling edge."	"attr341.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	resetChannelI32EnumAP
+
+attribute: "CO.CtrTimebase.DigFltr.Enable"
+	"Counter Output:General Properties:Counter Timebase:Digital Filter:Enable"
+	bool	readwrite		25	2276
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2276.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CO.CtrTimebase.DigFltr.MinPulseWidth"
+	"Counter Output:General Properties:Counter Timebase:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	2277
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr2277.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.CtrTimebase.DigFltr.TimebaseSrc"
+	"Counter Output:General Properties:Counter Timebase:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	2278
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr2278.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelTerminalAP	setChannelTerminalAP	resetChannelTerminalAP
+
+attribute: "CO.CtrTimebase.DigFltr.TimebaseRate"
+	"Counter Output:General Properties:Counter Timebase:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2279
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2279.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelF64AP	setChannelF64AP	resetChannelF64AP
+
+attribute: "CO.CtrTimebase.DigSync.Enable"
+	"Counter Output:General Properties:Counter Timebase:Digital Synchronization:Enable"
+	bool	readwrite		25	227A
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr227A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	resetChannelBoolAP
+
+attribute: "CO.Count"
+	"Counter Output:General Properties:More:Count"
+	uL	readonly		25	293
+	"Indicates the current value of the count register."	"attr293.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	@NoReset
+
+attribute: "CO.OutputState"
+	"Counter Output:General Properties:More:Output State"
+	iL enum { "High"=10192, "Low"=10214 }	readonly		25	294
+	"Indicates the current state of the output terminal of the counter."	"attr294.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelI32EnumAP	setChannelI32EnumAP	@NoReset
+
+attribute: "CO.AutoIncrCnt"
+	"Counter Output:General Properties:More:Auto Increment Count"
+	uL	readwrite		25	295
+	"Specifies a number of timebase ticks by which to increment each successive pulse."	"attr295.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CO.CtrTimebaseMasterTimebaseDiv"
+	"Counter Output:General Properties:More:Counter Timebase Master Timebase Divisor"
+	uL enum { "1"=1, "200"=200 }	readwrite		25	18C3
+	"Specifies the divisor for an external counter timebase. You can divide the counter timebase in order to generate slower signals without causing the count register to roll over."	"attr18C3.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+attribute: "CO.PulseDone"
+	"Counter Output:General Properties:More:Pulse Done"
+	bool	readonly		25	190E
+	"Indicates if the task completed pulse generation. Use this value for retriggerable pulse generation when you need to determine if the device generated the current pulse. When you query this property, NI-DAQmx resets it to FALSE."	"attr190E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelBoolAP	setChannelBoolAP	@NoReset
+
+attribute: "CO.Prescaler"
+	"Counter Output:General Properties:More:Advanced:Prescaler"
+	uL enum { "1"=1, "2"=2, "8"=8 }	readwrite		25	226D
+	"Specifies the divisor to apply to the signal you connect to the counter source terminal. Pulse generations defined by frequency or time take this setting into account, but pulse generations defined by ticks do not. You should use a prescaler only when you connect an external signal to the counter source terminal and when that signal has a higher frequency than the fastest onboard timebase."	"attr226D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getChannelU32AP	setChannelU32AP	resetChannelU32AP
+
+
+///// DAQmx Export Signal Class Definition /////
+class: "DAQmx Export Signal"
+genericType: NIDAQ
+termName: task
+hasActiveProp: yes
+className: "DAQmx Export Signal"
+super: "DAQ Object"
+flags: 2
+
+attribute: "AIConvClk.OutputTerm"
+	"Clocks:AI Convert Clock:Output Terminal"
+	DAQTerminal	readwrite		25	1687
+	"Specifies the terminal to which to route the AI Convert Clock."	"attr1687.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "AIConvClk.Pulse.Polarity"
+	"Clocks:AI Convert Clock:Pulse:Polarity"
+	iL enum { "Active High"=10095, "Active Low"=10096 }	readonly		25	1688
+	"Indicates the polarity of the exported AI Convert Clock. The polarity is fixed and independent of the active edge of the source of the AI Convert Clock."	"attr1688.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	@NoReset
+
+attribute: "10MHzClk.OutputTerm"
+	"Clocks:10MHz Clock:Output Terminal"
+	DAQTerminal	readwrite		25	226E
+	"Specifies the terminal to which to route the 10MHz Clock."	"attr226E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "20MHzTimebase.OutputTerm"
+	"Clocks:20MHz Timebase:Output Terminal"
+	DAQTerminal	readwrite		25	1657
+	"Specifies the terminal to which to route the 20MHz Timebase."	"attr1657.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "SampClk.OutputBehavior"
+	"Clocks:Sample Clock:Output Behavior"
+	iL enum { "Pulse"=10265, "Level"=10210 }	readwrite		25	186B
+	"Specifies whether the exported Sample Clock issues a pulse at the beginning of a sample or changes to a high state for the duration of the sample."	"attr186B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "SampClk.OutputTerm"
+	"Clocks:Sample Clock:Output Terminal"
+	DAQTerminal	readwrite		25	1663
+	"Specifies the terminal to which to route the Sample Clock."	"attr1663.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "SampClkTimebase.OutputTerm"
+	"Clocks:Sample Clock Timebase:Output Terminal"
+	DAQTerminal	readwrite		25	18F9
+	"Specifies the terminal to which to route the Sample Clock Timebase."	"attr18F9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "DividedSampClkTimebase.OutputTerm"
+	"Clocks:Divided Sample Clock Timebase:Output Terminal"
+	DAQTerminal	readwrite		25	21A1
+	"Specifies the terminal to which to route the Divided Sample Clock Timebase."	"attr21A1.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "AdvTrig.OutputTerm"
+	"Triggers:Advance Trigger:Output Terminal"
+	DAQTerminal	readwrite		25	1645
+	"Specifies the terminal to which to route the Advance Trigger."	"attr1645.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "AdvTrig.Pulse.Polarity"
+	"Triggers:Advance Trigger:Pulse:Polarity"
+	iL enum { "Active High"=10095, "Active Low"=10096 }	readonly		25	1646
+	"Indicates the polarity of the exported Advance Trigger."	"attr1646.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	@NoReset
+
+attribute: "AdvTrig.Pulse.WidthUnits"
+	"Triggers:Advance Trigger:Pulse:Width Units"
+	iL enum { "Seconds"=10364 }	readwrite		25	1647
+	"Specifies the units of Triggers:Advance Trigger:Pulse:Width Value."	"attr1647.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "AdvTrig.Pulse.Width"
+	"Triggers:Advance Trigger:Pulse:Width Value"
+	fD	readwrite		25	1648
+	"Specifies the width of an exported Advance Trigger pulse. Specify this value in the units you specify with Triggers:Advance Trigger:Pulse:Width Units."	"attr1648.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "RefTrig.OutputTerm"
+	"Triggers:Reference Trigger:Output Terminal"
+	DAQTerminal	readwrite		25	590
+	"Specifies the terminal to which to route the Reference Trigger."	"attr590.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "StartTrig.OutputTerm"
+	"Triggers:Start Trigger:Output Terminal"
+	DAQTerminal	readwrite		25	584
+	"Specifies the terminal to which to route the Start Trigger."	"attr584.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "AdvCmpltEvent.OutputTerm"
+	"Events:Advance Complete Event:Output Terminal"
+	DAQTerminal	readwrite		25	1651
+	"Specifies the terminal to which to route the Advance Complete Event."	"attr1651.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "AdvCmpltEvent.Delay"
+	"Events:Advance Complete Event:Delay Value"
+	fD	readwrite		25	1757
+	"Specifies the output signal delay in periods of the sample clock."	"attr1757.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "AdvCmpltEvent.Pulse.Polarity"
+	"Events:Advance Complete Event:Pulse:Polarity"
+	iL enum { "Active High"=10095, "Active Low"=10096 }	readwrite		25	1652
+	"Specifies the polarity of the exported Advance Complete Event."	"attr1652.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "AdvCmpltEvent.Pulse.Width"
+	"Events:Advance Complete Event:Pulse:Width Value"
+	fD	readwrite		25	1654
+	"Specifies the width of the exported Advance Complete Event pulse."	"attr1654.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "AIHoldCmpltEvent.OutputTerm"
+	"Events:AI Hold Complete Event:Output Terminal"
+	DAQTerminal	readwrite		25	18ED
+	"Specifies the terminal to which to route the AI Hold Complete Event."	"attr18ED.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "AIHoldCmpltEvent.Pulse.Polarity"
+	"Events:AI Hold Complete Event:Pulse:Polarity"
+	iL enum { "Active High"=10095, "Active Low"=10096 }	readwrite		25	18EE
+	"Specifies the polarity of an exported AI Hold Complete Event pulse."	"attr18EE.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "ChangeDetectEvent.OutputTerm"
+	"Events:Change Detection Event:Output Terminal"
+	DAQTerminal	readwrite		25	2197
+	"Specifies the terminal to which to route the Change Detection Event."	"attr2197.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "CtrOutEvent.OutputTerm"
+	"Events:Counter Output Event:Output Terminal"
+	DAQTerminal	readwrite		25	1717
+	"Specifies the terminal to which to route the Counter Output Event."	"attr1717.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "CtrOutEvent.OutputBehavior"
+	"Events:Counter Output Event:Output Behavior"
+	iL enum { "Pulse"=10265, "Toggle"=10307 }	readwrite		25	174F
+	"Specifies whether the exported Counter Output Event pulses or changes from one state to the other when the counter reaches terminal count."	"attr174F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "CtrOutEvent.Pulse.Polarity"
+	"Events:Counter Output Event:Pulse:Polarity"
+	iL enum { "Active High"=10095, "Active Low"=10096 }	readwrite		25	1718
+	"Specifies the polarity of the pulses at the output terminal of the counter when Events:Counter Output Event:Output Behavior is Pulse. NI-DAQmx ignores this property if Events:Counter Output Event:Output Behavior is Toggle."	"attr1718.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "CtrOutEvent.Toggle.IdleState"
+	"Events:Counter Output Event:Toggle:Idle State"
+	iL enum { "High"=10192, "Low"=10214 }	readwrite		25	186A
+	"Specifies the initial state of the output terminal of the counter when Events:Counter Output Event:Output Behavior is Toggle. The terminal enters this state when NI-DAQmx commits the task."	"attr186A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "SyncPulseEvent.OutputTerm"
+	"Events:Synchronization Pulse Event:Output Terminal"
+	DAQTerminal	readwrite		25	223C
+	"Specifies the terminal to which to route the Synchronization Pulse Event."	"attr223C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+attribute: "WatchdogExpiredEvent.OutputTerm"
+	"Events:Watchdog Timer Expired Event:Output Terminal"
+	DAQTerminal	readwrite		25	21AA
+	"Specifies the terminal  to which to route the Watchdog Timer Expired Event."	"attr21AA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalVtrAP	setTimingTerminalVtrAP	resetTimingTerminalVtrAP
+
+
+///// DAQmx Device Class Definition /////
+class: "DAQmx Device"
+genericType: NIDAQ
+termName: reference
+hasActiveProp: yes
+className: "DAQmx Device"
+super: "DAQ Object"
+flags: 10
+
+attribute: "ActiveDev"
+	"Active Device"
+	DAQDevice	writeonly		27	1854
+	"Specifies the device from which to retrieve properties."	"attr1854.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1854	set1854	@NoReset
+
+attribute: "ProductType"
+	"Product Type"
+	string	readonly		25	631
+	"Indicates the product name of the device."	"attr631.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get631	set631	@NoReset
+
+attribute: "DevSerialNum"
+	"Device Serial Number"
+	uL	readonly		25	632
+	"Indicates the serial number of the device. This value is zero if the device does not have a serial number."	"attr632.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get632	set632	@NoReset
+
+
+///// DAQmx Read Class Definition /////
+class: "DAQmx Read"
+genericType: NIDAQ
+termName: task
+hasActiveProp: yes
+className: "DAQmx Read"
+super: "DAQ Object"
+flags: 2
+
+attribute: "RelativeTo"
+	"RelativeTo"
+	iL enum { "First Sample"=10424, "Current Read Position"=10425, "Reference Trigger"=10426, "First Pretrigger Sample"=10427, "Most Recent Sample"=10428 }	readwrite		25	190A
+	"Specifies the point in the buffer at which to begin a read operation. If you also specify an offset with Offset, the read operation begins at that offset relative to the point you select with this property. The default value is Current Read Position unless you configure a Reference Trigger for the task. If you configure a Reference Trigger, the default value is First Pretrigger Sample."	"attr190A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getReaderI32EnumAP	setReaderI32EnumAP	resetReaderI32EnumAP
+
+attribute: "Offset"
+	"Offset"
+	iL	readwrite		25	190B
+	"Specifies an offset in samples per channel at which to begin a read operation. This offset is relative to the location you specify with RelativeTo."	"attr190B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getReaderI32AP	setReaderI32AP	resetReaderI32AP
+
+attribute: "ChannelsToRead"
+	"Channels to Read"
+	DAQChannel	readwrite		25	1823
+	"Specifies a subset of channels in the task from which to read."	"attr1823.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1823	set1823	reset1823
+
+attribute: "WfmAttr"
+	"Waveform Attributes"
+	iL enum { "Samples"=10287, "Samples and Timing"=10140, "Samples, Timing, and Attributes"=10141 }	readwrite		25	1225
+	"Specifies the waveform data type attributes to return. Returning fewer attributes increases performance."	"attr1225.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1225	set1225	reset1225
+
+attribute: "ReadAllAvailSamp"
+	"Read All Available Samples"
+	bool	readwrite		25	1215
+	"Specifies whether subsequent read operations read all samples currently available in the buffer or wait for the buffer to become full before reading. NI-DAQmx uses this setting for finite acquisitions and only when the number of samples to read is -1. For continuous acquisitions when the number of samples to read is -1, a read operation always reads all samples currently available in the buffer."	"attr1215.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1215	set1215	reset1215
+
+attribute: "AutoStart"
+	"Auto Start"
+	bool	readwrite		25	1826
+	"Specifies if DAQmx Read automatically starts the task  if you did not start the task explicitly by using DAQmx Start Task. The default value is TRUE. When  DAQmx Read starts a finite acquisition task, it also stops the task after reading the last sample."	"attr1826.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getReaderBoolAP	setReaderBoolAP	resetReaderBoolAP
+
+attribute: "OverWrite"
+	"Configure:OverWrite Mode"
+	iL enum { "Overwrite Unread Samples"=10252, "Do Not Overwrite Unread Samples"=10159 }	readwrite		25	1211
+	"Specifies whether to overwrite samples in the buffer that you have not yet read."	"attr1211.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceI32EnumAP	setDeviceI32EnumAP	resetDeviceI32EnumAP
+
+attribute: "CurrReadPos"
+	"Status:Current Read Position"
+	fD	readonly		25	1221
+	"Indicates in samples per channel the current position in the buffer."	"attr1221.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getReaderF64U64AP	setReaderF64U64AP	@NoReset
+
+attribute: "AvailSampPerChan"
+	"Status:Available Samples Per Channel"
+	uL	readonly		25	1223
+	"Indicates the number of samples available to read per channel. This value is the same for all channels in the task."	"attr1223.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getReaderU32AP	setReaderU32AP	@NoReset
+
+attribute: "TotalSampPerChanAcquired"
+	"Status:Total Samples Per Channel Acquired"
+	fD	readonly		25	192A
+	"Indicates the total number of samples acquired by each channel. NI-DAQmx returns a single value because this value is the same for all channels."	"attr192A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getReaderF64U64AP	setReaderF64U64AP	@NoReset
+
+attribute: "OverloadedChansExist"
+	"Status:Overload:Overloaded Channels Exist"
+	bool	readonly		25	2174
+	"Indicates if the device detected an overload in any channel in the task. Reading this property clears the overload status for all channels in the task. You must read this property before you read Status:Overload:Overloaded Channels. Otherwise, you will receive an error."	"attr2174.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceBoolAP	setDeviceBoolAP	@NoReset
+
+attribute: "OverloadedChans"
+	"Status:Overload:Overloaded Channels"
+	string1D	readonly		25	2175
+	"Indicates the names of any overloaded virtual channels in the task. You must read Status:Overload:Overloaded Channels Exist before you read this property. Otherwise, you will receive an error."	"attr2175.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceWstringVtrAP	setDeviceWstringVtrAP	@NoReset
+
+attribute: "ChangeDetect.Overflowed"
+	"Status:Advanced:ChangeDetection:Overflowed"
+	bool	readonly		25	2194
+	"Indicates if samples were missed because change detection events occurred faster than the device could handle them. Some devices detect overflows differently than others."	"attr2194.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	@NoReset
+
+attribute: "RawDataWidth"
+	"Advanced:Raw Data Width"
+	uL	readonly		25	217A
+	"Indicates in bytes the size of a raw sample from the task."	"attr217A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get217A	set217A	@NoReset
+
+attribute: "NumChans"
+	"Advanced:Number of Channels"
+	uL	readonly		25	217B
+	"Indicates the number of channels that DAQmx Read reads from the task. This value is the number of channels in the task or the number of channels you specify with Channels to Read."	"attr217B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get217B	set217B	@NoReset
+
+attribute: "DI.NumBooleansPerChan"
+	"Advanced:Digital Input:Number of Booleans Per Channel"
+	uL	readonly		25	217C
+	"Indicates the number of Booleans per channel that NI-DAQmx returns in a sample for line-based reads. If a channel has fewer lines than this number, the extra Booleans are FALSE."	"attr217C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get217C	set217C	@NoReset
+
+attribute: "WaitMode"
+	"Advanced:Wait Mode"
+	iL enum { "Wait For Interrupt"=12523, "Poll"=12524, "Yield"=12525 }	readwrite		25	2232
+	"Specifies how DAQmx Read waits for samples to become available."	"attr2232.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceI32EnumAP	setDeviceI32EnumAP	resetDeviceI32EnumAP
+
+
+///// DAQmx Switch Channel Class Definition /////
+class: "DAQmx Switch Channel"
+genericType: NIDAQ
+termName: reference
+hasActiveProp: yes
+className: "DAQmx Switch Channel"
+super: "DAQ Object"
+flags: 10
+
+attribute: "ActiveSwitchChan"
+	"Active Switch Channel"
+	DAQSwitch	writeonly		27	18E3
+	"Specifies the switch channel to which the subsequent properties apply."	"attr18E3.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18E3	set18E3	@NoReset
+
+attribute: "Usage"
+	"Usage"
+	iL enum { "Source"=10439, "Load"=10440, "Reserved for Routing"=10441 }	readwrite		25	18E4
+	"Specifies how you can use the channel. Using this property acts as a safety mechanism to prevent you from connecting two source channels, for example."	"attr18E4.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18E4	set18E4	@NoReset
+
+attribute: "MaxACCarryCurrent"
+	"Capability:Max AC Carry Current"
+	fD	readonly		25	648
+	"Indicates in amperes the maximum AC current that the device can carry."	"attr648.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get648	set648	@NoReset
+
+attribute: "MaxACSwitchCurrent"
+	"Capability:Max AC Switching Current"
+	fD	readonly		25	646
+	"Indicates in amperes the maximum AC current that the device can switch. This current is always against an RMS voltage level."	"attr646.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get646	set646	@NoReset
+
+attribute: "MaxACCarryPwr"
+	"Capability:Max AC Carry Power"
+	fD	readonly		25	642
+	"Indicates in watts the maximum AC power that the device can carry."	"attr642.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get642	set642	@NoReset
+
+attribute: "MaxACSwitchPwr"
+	"Capability:Max AC Switching Power"
+	fD	readonly		25	644
+	"Indicates in watts the maximum AC power that the device can switch."	"attr644.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get644	set644	@NoReset
+
+attribute: "MaxDCCarryCurrent"
+	"Capability:Max DC Carry Current"
+	fD	readonly		25	647
+	"Indicates in amperes the maximum DC current that the device can carry."	"attr647.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get647	set647	@NoReset
+
+attribute: "MaxDCSwitchCurrent"
+	"Capability:Max DC Switching Current"
+	fD	readonly		25	645
+	"Indicates in amperes the maximum DC current that the device can switch. This current is always against a DC voltage level."	"attr645.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get645	set645	@NoReset
+
+attribute: "MaxDCCarryPwr"
+	"Capability:Max DC Carry Power"
+	fD	readonly		25	643
+	"Indicates in watts the maximum DC power that the device can carry."	"attr643.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get643	set643	@NoReset
+
+attribute: "MaxDCSwitchPwr"
+	"Capability:Max DC Switching Power"
+	fD	readonly		25	649
+	"Indicates in watts the maximum DC power that the device can switch."	"attr649.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get649	set649	@NoReset
+
+attribute: "MaxACVoltage"
+	"Capability:Max AC Voltage"
+	fD	readonly		25	651
+	"Indicates in volts the maximum AC RMS voltage that the device can switch."	"attr651.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get651	set651	@NoReset
+
+attribute: "MaxDCVoltage"
+	"Capability:Max DC Voltage"
+	fD	readonly		25	650
+	"Indicates in volts the maximum DC voltage that the device can switch."	"attr650.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get650	set650	@NoReset
+
+attribute: "WireMode"
+	"Capability:Wire Mode"
+	uL	readonly		25	18E5
+	"Indicates the number of wires that the channel switches."	"attr18E5.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18E5	set18E5	@NoReset
+
+attribute: "Bandwidth"
+	"Capability:Bandwidth"
+	fD	readonly		25	640
+	"Indicates in Hertz the maximum frequency of a signal that can pass through the switch without significant deterioration."	"attr640.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get640	set640	@NoReset
+
+attribute: "Impedance"
+	"Capability:Impedance"
+	fD	readonly		25	641
+	"Indicates in ohms the switch impedance. This value is important in the RF domain and should match the impedance of the sources and loads."	"attr641.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get641	set641	@NoReset
+
+
+///// DAQmx Switch Device Class Definition /////
+class: "DAQmx Switch Device"
+genericType: NIDAQ
+termName: reference
+hasActiveProp: yes
+className: "DAQmx Switch Device"
+super: "DAQ Object"
+flags: 10
+
+attribute: "ActiveDev"
+	"Active Device"
+	DAQDevice	writeonly		27	1869
+	"Specifies the switch device to which the subsequent properties apply."	"attr1869.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1869	set1869	@NoReset
+
+attribute: "SettlingTime"
+	"Settling Time"
+	fD	readwrite		25	1244
+	"Specifies in seconds the amount of time to wait for the switch to settle (or debounce). NI-DAQmx adds this time to the settling time of the motherboard. Modify this property only if the switch does not settle within the settling time of the motherboard. Refer to device documentation for supported settling times."	"attr1244.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1244	set1244	@NoReset
+
+attribute: "AutoConnAnlgBus"
+	"Auto Connect Analog Bus"
+	bool	readwrite		25	17DA
+	"Specifies if NI-DAQmx routes multiplexed channels to the analog bus backplane. Only the SCXI-1127 and SCXI-1128 support this property."	"attr17DA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get17DA	set17DA	@NoReset
+
+attribute: "Settled"
+	"Is Settled"
+	bool	readonly		25	1243
+	"Indicates when Settling Time expires."	"attr1243.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1243	set1243	@NoReset
+
+attribute: "RelayList"
+	"Capability:Relay List"
+	string	readonly		25	17DC
+	"Indicates a comma-delimited list of relay names."	"attr17DC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get17DC	set17DC	@NoReset
+
+attribute: "NumRelays"
+	"Capability:Number of Relays"
+	uL	readonly		25	18E6
+	"Indicates the number of relays on the device. This value matches the number of relay names in Capability:Relay List."	"attr18E6.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18E6	set18E6	@NoReset
+
+attribute: "SwitchChanList"
+	"Capability:Switch Channel List"
+	string	readonly		25	18E7
+	"Indicates a comma-delimited list of channel names for the current topology of the device."	"attr18E7.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18E7	set18E7	@NoReset
+
+attribute: "NumSwitchChans"
+	"Capability:Number of Switch Channels"
+	uL	readonly		25	18E8
+	"Indicates the number of switch channels for the current topology of the device. This value matches the number of channel names in Capability:Switch Channel List."	"attr18E8.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18E8	set18E8	@NoReset
+
+attribute: "NumRows"
+	"Capability:Number of Rows"
+	uL	readonly		25	18E9
+	"Indicates the number of rows on a device in a matrix switch topology. Indicates the number of multiplexed channels on a device in a mux topology."	"attr18E9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18E9	set18E9	@NoReset
+
+attribute: "NumColumns"
+	"Capability:Number of Columns"
+	uL	readonly		25	18EA
+	"Indicates the number of columns on a device in a matrix switch topology. This value is always 1 if the device is in a mux topology."	"attr18EA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18EA	set18EA	@NoReset
+
+attribute: "Topology"
+	"Topology"
+	string	readonly		25	193D
+	"Indicates the current topology of the device. This value is one of the topology options in DAQmx Switch Set Topology and Reset."	"attr193D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get193D	set193D	@NoReset
+
+
+///// DAQmx Switch Scan Class Definition /////
+class: "DAQmx Switch Scan"
+genericType: NIDAQ
+termName: task
+hasActiveProp: yes
+className: "DAQmx Switch Scan"
+super: "DAQ Object"
+flags: 2
+
+attribute: "BreakMode"
+	"Break Mode"
+	iL enum { "No Action"=10227, "Break Before Make"=10110 }	readwrite		25	1247
+	"Specifies the break mode between each entry in a scan list."	"attr1247.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceI32EnumAP	setDeviceI32EnumAP	resetDeviceI32EnumAP
+
+attribute: "RepeatMode"
+	"Repeat Mode"
+	iL enum { "Finite"=10172, "Continuous"=10117 }	readwrite		25	1248
+	"Specifies if the task advances through the scan list multiple times."	"attr1248.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceI32EnumAP	setDeviceI32EnumAP	resetDeviceI32EnumAP
+
+attribute: "WaitingForAdv"
+	"Is Waiting For Advance"
+	bool	readonly		25	17D9
+	"Indicates if the switch hardware is waiting for an  Advance Trigger. If the hardware is waiting, it completed the previous entry in the scan list."	"attr17D9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceBoolAP	setDeviceBoolAP	@NoReset
+
+
+///// DAQmx Scale Class Definition /////
+class: "DAQmx Scale"
+genericType: NIDAQ
+termName: reference
+hasActiveProp: yes
+className: "DAQmx Scale"
+super: "DAQ Object"
+flags: 10
+
+attribute: "ActiveScale"
+	"Active Scale"
+	DAQScale	writeonly		27	175C
+	"Specifies the name of the custom scale to modify."	"attr175C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get175C	set175C	@NoReset
+
+attribute: "Descr"
+	"Description"
+	string	readwrite		25	1226
+	"Specifies a description for the scale."	"attr1226.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1226	set1226	@NoReset
+
+attribute: "ScaledUnits"
+	"Scaled Units"
+	string	readwrite		25	191B
+	"Specifies the units to use for scaled values. You can use an arbitrary string."	"attr191B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get191B	set191B	@NoReset
+
+attribute: "PreScaledUnits"
+	"Pre-Scaled Units"
+	iL enum { "Volts"=10348, "Amps"=10342, "Deg F"=10144, "Deg C"=10143, "Deg R"=10145, "Kelvins"=10325, "Strain"=10299, "Ohms"=10384, "Hz"=10373, "Seconds"=10364, "Meters"=10219, "Inches"=10379, "Degrees"=10146, "Radians"=10273, "g"=10186, "Pascals"=10081, "From TEDS"=12516 }	readwrite		25	18F7
+	"Specifies the units of the values that you want to scale."	"attr18F7.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get18F7	set18F7	@NoReset
+
+attribute: "ScaleType"
+	"Scale Type"
+	iL enum { "Linear"=10447, "Map Ranges"=10448, "Polynomial"=10449, "Table"=10450 }	readonly		25	1929
+	"Indicates the method or equation form that the custom scale uses."	"attr1929.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1929	set1929	@NoReset
+
+attribute: "Lin.Slope"
+	"Linear:Slope"
+	fD	readwrite		25	1227
+	"Specifies the slope, m, in the equation y=mx+b."	"attr1227.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1227	set1227	@NoReset
+
+attribute: "Lin.YIntercept"
+	"Linear:Y-Intercept"
+	fD	readwrite		25	1228
+	"Specifies the y-intercept, b, in the equation y=mx+b."	"attr1228.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1228	set1228	@NoReset
+
+attribute: "Map.ScaledMax"
+	"Map:Scaled Maximum Value"
+	fD	readwrite		25	1229
+	"Specifies the largest value in the range of scaled values. NI-DAQmx maps this value to Map:Pre-Scaled Maximum Value. Reads clip samples that are larger than this value. Writes generate errors for samples that are larger than this value."	"attr1229.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1229	set1229	@NoReset
+
+attribute: "Map.PreScaledMax"
+	"Map:Pre-Scaled Maximum Value"
+	fD	readwrite		25	1231
+	"Specifies the largest value in the range of pre-scaled values. NI-DAQmx maps this value to Map:Scaled Maximum Value."	"attr1231.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1231	set1231	@NoReset
+
+attribute: "Map.ScaledMin"
+	"Map:Scaled Minimum Value"
+	fD	readwrite		25	1230
+	"Specifies the smallest value in the range of scaled values. NI-DAQmx maps this value to Map:Pre-Scaled Minimum Value. Reads clip samples that are smaller than this value. Writes generate errors for samples that are smaller than this value."	"attr1230.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1230	set1230	@NoReset
+
+attribute: "Map.PreScaledMin"
+	"Map:Pre-Scaled Minimum Value"
+	fD	readwrite		25	1232
+	"Specifies the smallest value in the range of pre-scaled values. NI-DAQmx maps this value to Map:Scaled Minimum Value."	"attr1232.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1232	set1232	@NoReset
+
+attribute: "Poly.ForwardCoeff"
+	"Polynomial:Forward Coefficients"
+	fD1D	readwrite		25	1234
+	"Specifies an array of coefficients for the polynomial that converts pre-scaled values to scaled values. Each element of the array corresponds to a term of the equation. For example, if index three of the array is 9, the fourth term of the equation is 9x^3."	"attr1234.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1234	set1234	@NoReset
+
+attribute: "Poly.ReverseCoeff"
+	"Polynomial:Reverse Coefficients"
+	fD1D	readwrite		25	1235
+	"Specifies an array of coefficients for the polynomial that converts scaled values to pre-scaled values. Each element of the array corresponds to a term of the equation. For example, if index three of the array is 9, the fourth term of the equation is 9y^3."	"attr1235.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1235	set1235	@NoReset
+
+attribute: "Table.ScaledVals"
+	"Table:Scaled Values"
+	fD1D	readwrite		25	1236
+	"Specifies an array of scaled values. These values map directly to the values in Table:Pre-Scaled Values."	"attr1236.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1236	set1236	@NoReset
+
+attribute: "Table.PreScaledVals"
+	"Table:Pre-Scaled Values"
+	fD1D	readwrite		25	1237
+	"Specifies an array of pre-scaled values. These values map directly to the values in Table:Scaled Values."	"attr1237.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1237	set1237	@NoReset
+
+
+///// DAQmx System Class Definition /////
+class: "DAQmx System"
+genericType: NIDAQ
+termName: reference
+hasActiveProp: no
+className: "DAQmx System"
+super: "DAQ Object"
+flags: 10
+
+attribute: "GlobalChans"
+	"Global Channels"
+	array {1, DAQChannel}	readonly		25	1265
+	"Indicates an array that contains the names of all global channels saved on the system."	"attr1265.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1265	set1265	@NoReset
+
+attribute: "Scales"
+	"Scales"
+	array {1, DAQScale}	readonly		25	1266
+	"Indicates an array that contains the names of all custom scales saved on the system."	"attr1266.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1266	set1266	@NoReset
+
+attribute: "Tasks"
+	"Tasks"
+	array {1, DAQTask}	readonly		25	1267
+	"Indicates an array that contains the names of all tasks saved on the system."	"attr1267.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1267	set1267	@NoReset
+
+attribute: "DevNames"
+	"Device Names"
+	array {1, DAQDevice}	readonly		25	193B
+	"Indicates an array that contains the names of all devices installed in the system."	"attr193B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get193B	set193B	@NoReset
+
+attribute: "MajorVersion"
+	"System:NI-DAQ Version:Major"
+	uL	readonly		25	1272
+	"Indicates the major portion of the installed version of NI-DAQ, such as 7 for version 7.0."	"attr1272.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1272	set1272	@NoReset
+
+attribute: "MinorVersion"
+	"System:NI-DAQ Version:Minor"
+	uL	readonly		25	1923
+	"Indicates the minor portion of the installed version of NI-DAQ, such as 0 for version 7.0."	"attr1923.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1923	set1923	@NoReset
+
+
+///// DAQmx Task Class Definition /////
+class: "DAQmx Task"
+genericType: NIDAQ
+termName: task
+hasActiveProp: no
+className: "DAQmx Task"
+super: "DAQ Object"
+flags: 2
+
+attribute: "Name"
+	"Task Name"
+	DAQTask	readonly		25	1276
+	"Indicates the name of the task."	"attr1276.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1276	set1276	@NoReset
+
+attribute: "Channels"
+	"Channels"
+	array {1, DAQChannel}	readonly		25	1273
+	"Indicates the names of all virtual channels in the task."	"attr1273.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1273	set1273	@NoReset
+
+attribute: "NumChans"
+	"Number of Channels"
+	uL	readonly		25	2181
+	"Indicates the number of virtual channels in the task."	"attr2181.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get2181	set2181	@NoReset
+
+attribute: "Done"
+	"Task Done"
+	bool	readonly		25	1274
+	"Indicates whether the task completed execution."	"attr1274.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get1274	set1274	@NoReset
+
+
+///// DAQmx Timing Class Definition /////
+class: "DAQmx Timing"
+genericType: NIDAQ
+termName: task
+hasActiveProp: yes
+className: "DAQmx Timing"
+super: "DAQ Object"
+flags: 2
+
+attribute: "SampQuant.SampMode"
+	"Sample Quantity:Sample Mode"
+	iL enum { "Finite Samples"=10178, "Continuous Samples"=10123, "Hardware Timed Single Point"=12522 }	readwrite		25	1300
+	"Specifies if a task acquires or generates a finite number of samples or if it continuously acquires or generates samples."	"attr1300.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "SampQuant.SampPerChan"
+	"Sample Quantity:Samples Per Channel"
+	fD	readwrite		25	1310
+	"Specifies the number of samples to acquire or generate for each channel if Sample Quantity:Sample Mode is finite."	"attr1310.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64U64AP	setTimingF64U64AP	resetTimingF64U64AP
+
+attribute: "SampTimingType"
+	"Sample Timing Type"
+	iL enum { "Sample Clock"=10388, "Handshake"=10389, "Implicit"=10451, "On Demand"=10390, "Change Detection"=12504 }	readwrite		25	1347
+	"Specifies the type of sample timing to use for the task."	"attr1347.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "SampClk.Rate"
+	"Sample Clock:Rate"
+	fD	readwrite		25	1344
+	"Specifies the sampling rate in samples per channel per second. If you use an external source for the Sample Clock, set this input to the maximum expected rate of that clock."	"attr1344.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "SampClk.Src"
+	"Sample Clock:Source"
+	DAQTerminal	readwrite		25	1852
+	"Specifies the terminal of the signal to use as the Sample Clock."	"attr1852.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "SampClk.ActiveEdge"
+	"Sample Clock:Active Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	1301
+	"Specifies on which edge of a clock pulse sampling takes place. This property is useful primarily when the signal you use as the Sample Clock is not a periodic clock."	"attr1301.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "SampClk.TimebaseDiv"
+	"Sample Clock:Timebase Divisor"
+	uL	readwrite		25	18EB
+	"Specifies the number of Sample Clock Timebase pulses needed to produce a single Sample Clock pulse."	"attr18EB.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingU32AP	setTimingU32AP	resetTimingU32AP
+
+attribute: "SampClk.Timebase.Rate"
+	"Sample Clock:Timebase:Rate"
+	fD	readwrite		25	1303
+	"Specifies the rate of the Sample Clock Timebase. Some applications require that you specify a rate when you use any signal other than the onboard Sample Clock Timebase. NI-DAQmx requires this rate to calculate other timing parameters."	"attr1303.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "SampClk.Timebase.Src"
+	"Sample Clock:Timebase:Source"
+	DAQTerminal	readwrite		25	1308
+	"Specifies the terminal of the signal to use as the Sample Clock Timebase."	"attr1308.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "SampClk.Timebase.ActiveEdge"
+	"Sample Clock:Timebase:Active Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	18EC
+	"Specifies on which edge to recognize a Sample Clock Timebase pulse. This property is useful primarily when the signal you use as the Sample Clock Timebase is not a periodic clock."	"attr18EC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "SampClk.Timebase.MasterTimebaseDiv"
+	"Sample Clock:Timebase:Master Timebase Divisor"
+	uL	readwrite		25	1305
+	"Specifies the number of pulses of the Master Timebase needed to produce a single pulse of the Sample Clock Timebase."	"attr1305.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingU32AP	setTimingU32AP	resetTimingU32AP
+
+attribute: "SampClk.DigFltr.Enable"
+	"Sample Clock:Digital Filter:Enable"
+	bool	readwrite		25	221E
+	"Specifies whether to apply the pulse width filter to the signal."	"attr221E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "SampClk.DigFltr.MinPulseWidth"
+	"Sample Clock:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	221F
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr221F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "SampClk.DigFltr.TimebaseSrc"
+	"Sample Clock:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	2220
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr2220.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "SampClk.DigFltr.TimebaseRate"
+	"Sample Clock:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2221
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2221.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "SampClk.DigSync.Enable"
+	"Sample Clock:Digital Synchronization:Enable"
+	bool	readwrite		25	2222
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr2222.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "ChangeDetect.DI.RisingEdgePhysicalChans"
+	"Change Detection:Digital Input:Rising Edge Physical Channels"
+	DAQPhysChan	readwrite		25	2195
+	"Specifies the names of the digital lines or ports on which to detect rising edges. The lines or ports must be used by virtual channels in the task. You also can specify a string that contains a list or range of digital lines or ports."	"attr2195.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingPhysChanVtrAP	setTimingPhysChanVtrAP	resetTimingPhysChanVtrAP
+
+attribute: "ChangeDetect.DI.FallingEdgePhysicalChans"
+	"Change Detection:Digital Input:Falling Edge Physical Channels"
+	DAQPhysChan	readwrite		25	2196
+	"Specifies the names of the digital lines or ports on which to detect rising edges. The lines or ports must be used by virtual channels in the task. You also can specify a string that contains a list or range of digital lines or ports."	"attr2196.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingPhysChanVtrAP	setTimingPhysChanVtrAP	resetTimingPhysChanVtrAP
+
+attribute: "SimultaneousAOEnable"
+	"On Demand:Simultaneous Analog Output Enable"
+	bool	readwrite		25	21A0
+	"Specifies whether to update all channels in the task simultaneously, rather than updating channels independently when you write a sample to that channel."	"attr21A0.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "AIConv.Rate"
+	"More:AI Convert:Rate"
+	fD	readwrite		25	1848
+	"Specifies the rate at which to clock the analog-to-digital converter. This clock is specific to the analog input section of an E Series device."	"attr1848.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "AIConv.Src"
+	"More:AI Convert:Source"
+	DAQTerminal	readwrite		25	1502
+	"Specifies the terminal of the signal to use as the AI Convert Clock."	"attr1502.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "AIConv.ActiveEdge"
+	"More:AI Convert:Active Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	1853
+	"Specifies on which edge of the clock pulse an analog-to-digital conversion takes place."	"attr1853.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "AIConv.TimebaseDiv"
+	"More:AI Convert:Timebase Divisor"
+	uL	readwrite		25	1335
+	"Specifies the number of AI Convert Clock Timebase pulses needed to produce a single AI Convert Clock pulse."	"attr1335.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingU32AP	setTimingU32AP	resetTimingU32AP
+
+attribute: "AIConv.Timebase.Src"
+	"More:AI Convert:Timebase:Source"
+	iL enum { "Same as Sample Timebase"=10284, "Same as Master Timebase"=10282 }	readwrite		25	1339
+	"Specifies the terminal  of the signal to use as the AI Convert Clock Timebase."	"attr1339.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "MasterTimebase.Rate"
+	"More:Master Timebase:Rate"
+	fD	readwrite		25	1495
+	"Specifies the rate of the Master Timebase."	"attr1495.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "MasterTimebase.Src"
+	"More:Master Timebase:Source"
+	DAQTerminal	readwrite		25	1343
+	"Specifies the terminal of the signal to use as the Master Timebase. On an E Series device, you can choose only between the onboard 20MHz Timebase or the RTSI7 terminal."	"attr1343.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "RefClk.Rate"
+	"More:Reference Clock:Rate"
+	fD	readwrite		25	1315
+	"Specifies the frequency of the Reference Clock."	"attr1315.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "RefClk.Src"
+	"More:Reference Clock:Source"
+	DAQTerminal	readwrite		25	1316
+	"Specifies the terminal of the signal to use as the Reference Clock."	"attr1316.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "SyncPulse.Src"
+	"More:Synchronization Pulse:Source"
+	DAQTerminal	readwrite		25	223D
+	"Specifies the terminal of the signal to use as the synchronization pulse. The synchronization pulse resets the clock dividers and the ADCs/DACs on the device."	"attr223D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "SyncPulse.SyncTime"
+	"More:Synchronization Pulse:Synchronization Time"
+	fD	readonly		25	223E
+	"Indicates in seconds the delay required to reset the ADCs/DACs after the device receives the synchronization pulse."	"attr223E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	@NoReset
+
+attribute: "SyncPulse.MinDelayToStart"
+	"More:Synchronization Pulse:Minimum Delay To Start"
+	fD	readwrite		25	223F
+	"Specifies in seconds the amount of time that elapses after the master device issues the synchronization pulse before the task starts."	"attr223F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "DelayFromSampClk.DelayUnits"
+	"More:Delay From Sample Clock:Delay Units"
+	iL enum { "Seconds"=10364, "Ticks"=10304 }	readwrite		25	1304
+	"Specifies the units of More:Delay From Sample Clock:Delay."	"attr1304.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "DelayFromSampClk.Delay"
+	"More:Delay From Sample Clock:Delay"
+	fD	readwrite		25	1317
+	"Specifies the amount of time to wait after receiving a Sample Clock edge before beginning to acquire the sample. This value is in the units you specify with More:Delay From Sample Clock:Delay Units."	"attr1317.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+
+///// DAQmx Trigger Class Definition /////
+class: "DAQmx Trigger"
+genericType: NIDAQ
+termName: task
+hasActiveProp: yes
+className: "DAQmx Trigger"
+super: "DAQ Object"
+flags: 2
+
+attribute: "Start.TrigType"
+	"Start:Trigger Type"
+	iL enum { "Analog Edge"=10099, "Digital Edge"=10150, "Analog Window"=10103, "None"=10230 }	readwrite		25	1393
+	"Specifies the type of trigger to use to start a task."	"attr1393.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumObservableAP	setTimingI32EnumObservableAP	resetTimingI32EnumObservableAP
+
+attribute: "Start.DigEdge.Src"
+	"Start:Digital Edge:Source"
+	DAQTerminal	readwrite		25	1407
+	"Specifies the name of a terminal where there is a digital signal to use as the source of the Start Trigger."	"attr1407.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "Start.DigEdge.Edge"
+	"Start:Digital Edge:Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	1404
+	"Specifies on which edge of a digital pulse to start acquiring or generating samples."	"attr1404.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Start.DigEdge.DigFltr.Enable"
+	"Start:Digital Edge:Digital Filter:Enable"
+	bool	readwrite		25	2223
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2223.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "Start.DigEdge.DigFltr.MinPulseWidth"
+	"Start:Digital Edge:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	2224
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr2224.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "Start.DigEdge.DigFltr.TimebaseSrc"
+	"Start:Digital Edge:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	2225
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr2225.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "Start.DigEdge.DigFltr.TimebaseRate"
+	"Start:Digital Edge:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2226
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2226.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "Start.DigEdge.DigSync.Enable"
+	"Start:Digital Edge:Digital Synchronization:Enable"
+	bool	readwrite		25	2227
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr2227.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "Start.AnlgEdge.Src"
+	"Start:Analog Edge:Source"
+	string	readwrite		25	1398
+	"Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the Start Trigger."	"attr1398.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingWstringObservableChanAP	setTimingWstringObservableChanAP	resetTimingWstringObservableChanAP
+
+attribute: "Start.AnlgEdge.Slope"
+	"Start:Analog Edge:Slope"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	1397
+	"Specifies on which slope of the trigger signal to start acquiring or generating samples."	"attr1397.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Start.AnlgEdge.Lvl"
+	"Start:Analog Edge:Level"
+	fD	readwrite		25	1396
+	"Specifies at what threshold in the units of the measurement or generation to start acquiring or generating samples. Use Start:Analog Edge:Slope to specify on which slope to trigger on this threshold."	"attr1396.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Start.AnlgEdge.Hyst"
+	"Start:Analog Edge:Hysteresis"
+	fD	readwrite		25	1395
+	"Specifies a hysteresis level in the units of the measurement or generation. If Start:Analog Edge:Slope is Rising, the trigger does not deassert until the source signal passes below  Start:Analog Edge:Level minus the hysteresis. If Start:Analog Edge:Slope is Falling, the trigger does not deassert until the source signal passes above Start:Analog Edge:Level plus the hysteresis."	"attr1395.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Start.AnlgEdge.Coupling"
+	"Start:Analog Edge:Coupling"
+	iL enum { "AC"=10045, "DC"=10050 }	readwrite		25	2233
+	"Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel."	"attr2233.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Start.AnlgWin.Src"
+	"Start:Analog Window:Source"
+	string	readwrite		25	1400
+	"Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the Start Trigger."	"attr1400.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingWstringObservableChanAP	setTimingWstringObservableChanAP	resetTimingWstringObservableChanAP
+
+attribute: "Start.AnlgWin.TrigWhen"
+	"Start:Analog Window:Trigger When"
+	iL enum { "Entering Window"=10163, "Leaving Window"=10208 }	readwrite		25	1401
+	"Specifies whether the task starts acquiring or generating samples when the signal enters or leaves the window you specify with Start:Analog Window:Bottom and Start:Analog Window:Top."	"attr1401.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Start.AnlgWin.Top"
+	"Start:Analog Window:Top"
+	fD	readwrite		25	1403
+	"Specifies the upper limit of the window. Specify this value in the units of the measurement or generation."	"attr1403.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Start.AnlgWin.Btm"
+	"Start:Analog Window:Bottom"
+	fD	readwrite		25	1402
+	"Specifies the lower limit of the window. Specify this value in the units of the measurement or generation."	"attr1402.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Start.AnlgWin.Coupling"
+	"Start:Analog Window:Coupling"
+	iL enum { "AC"=10045, "DC"=10050 }	readwrite		25	2234
+	"Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel."	"attr2234.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Start.Delay"
+	"Start:More:Delay"
+	fD	readwrite		25	1856
+	"Specifies an amount of time to wait after the Start Trigger is received before acquiring or generating the first sample. This value is in the units you specify with Start:More:Delay Units."	"attr1856.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "Start.DelayUnits"
+	"Start:More:Delay Units"
+	iL enum { "Sample Clock Periods"=10286, "Seconds"=10364, "Ticks"=10304 }	readwrite		25	18C8
+	"Specifies the units of Start:More:Delay."	"attr18C8.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Start.Retriggerable"
+	"Start:More:Retriggerable"
+	bool	readwrite		25	190F
+	"Specifies whether to enable retriggerable counter pulse generation. When you set this property to TRUE, the device generates pulses each time it receives a trigger. The device ignores a trigger if it is in the process of generating pulses."	"attr190F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "Ref.TrigType"
+	"Reference:Trigger Type"
+	iL enum { "Analog Edge"=10099, "Digital Edge"=10150, "Analog Window"=10103, "None"=10230 }	readwrite		25	1419
+	"Specifies the type of trigger to use to mark a reference point for the measurement."	"attr1419.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumObservableAP	setTimingI32EnumObservableAP	resetTimingI32EnumObservableAP
+
+attribute: "Ref.PretrigSamples"
+	"Reference:Pretrigger Samples per Channel"
+	uL	readwrite		25	1445
+	"Specifies the minimum number of pretrigger samples to acquire from each channel before recognizing the reference trigger. Post-trigger samples per channel are equal to Sample Quantity:Samples Per Channel minus the number of pretrigger samples per channel."	"attr1445.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingU32AP	setTimingU32AP	resetTimingU32AP
+
+attribute: "Ref.DigEdge.Src"
+	"Reference:Digital Edge:Source"
+	DAQTerminal	readwrite		25	1434
+	"Specifies the name of a terminal where there is a digital signal to use as the source of the Reference Trigger."	"attr1434.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "Ref.DigEdge.Edge"
+	"Reference:Digital Edge:Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	1430
+	"Specifies on what edge of a digital pulse the Reference Trigger occurs."	"attr1430.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Ref.AnlgEdge.Src"
+	"Reference:Analog Edge:Source"
+	string	readwrite		25	1424
+	"Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the Reference Trigger."	"attr1424.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingWstringObservableChanAP	setTimingWstringObservableChanAP	resetTimingWstringObservableChanAP
+
+attribute: "Ref.AnlgEdge.Slope"
+	"Reference:Analog Edge:Slope"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	1423
+	"Specifies on which slope of the source signal the Reference Trigger occurs."	"attr1423.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Ref.AnlgEdge.Lvl"
+	"Reference:Analog Edge:Level"
+	fD	readwrite		25	1422
+	"Specifies in the units of the measurement the threshold at which the Reference Trigger occurs.  Use Reference:Analog Edge:Slope to specify on which slope to trigger at this threshold."	"attr1422.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Ref.AnlgEdge.Hyst"
+	"Reference:Analog Edge:Hysteresis"
+	fD	readwrite		25	1421
+	"Specifies a hysteresis level in the units of the measurement. If Reference:Analog Edge:Slope is Rising, the trigger does not deassert until the source signal passes below Reference:Analog Edge:Level minus the hysteresis. If Reference:Analog Edge:Slope is Falling, the trigger does not deassert until the source signal passes above Reference:Analog Edge:Level plus the hysteresis."	"attr1421.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Ref.AnlgEdge.Coupling"
+	"Reference:Analog Edge:Coupling"
+	iL enum { "AC"=10045, "DC"=10050 }	readwrite		25	2235
+	"Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel."	"attr2235.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Ref.AnlgWin.Src"
+	"Reference:Analog Window:Source"
+	string	readwrite		25	1426
+	"Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the Reference Trigger."	"attr1426.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingWstringObservableChanAP	setTimingWstringObservableChanAP	resetTimingWstringObservableChanAP
+
+attribute: "Ref.AnlgWin.TrigWhen"
+	"Reference:Analog Window:Trigger When"
+	iL enum { "Entering Window"=10163, "Leaving Window"=10208 }	readwrite		25	1427
+	"Specifies whether the Reference Trigger occurs when the source signal enters the window or when it leaves the window. Use Reference:Analog Window:Bottom and Reference:Analog Window:Top to specify the window."	"attr1427.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Ref.AnlgWin.Top"
+	"Reference:Analog Window:Top"
+	fD	readwrite		25	1429
+	"Specifies the upper limit of the window. Specify this value in the units of the measurement."	"attr1429.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Ref.AnlgWin.Btm"
+	"Reference:Analog Window:Bottom"
+	fD	readwrite		25	1428
+	"Specifies the lower limit of the window. Specify this value in the units of the measurement."	"attr1428.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Ref.AnlgWin.Coupling"
+	"Reference:Analog Window:Coupling"
+	iL enum { "AC"=10045, "DC"=10050 }	readwrite		25	1857
+	"Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel."	"attr1857.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Adv.TrigType"
+	"More:Advance:Trigger Type"
+	iL enum { "Digital Edge"=10150, "Software"=10292, "None"=10230 }	readwrite		25	1365
+	"Specifies the type of trigger to use to advance to the next entry in a scan list."	"attr1365.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Adv.DigEdge.Src"
+	"More:Advance:Digital Edge:Source"
+	DAQTerminal	readwrite		25	1362
+	"Specifies the name of a terminal where there is a digital signal to use as the source of the Advance Trigger."	"attr1362.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "Adv.DigEdge.Edge"
+	"More:Advance:Digital Edge:Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	1360
+	"Specifies on which edge of a digital signal to advance to the next entry in a scan list."	"attr1360.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Adv.DigEdge.DigFltr.Enable"
+	"More:Advance:Digital Edge:Digital Filter:Enable"
+	bool	readwrite		25	2238
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2238.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "Pause.TrigType"
+	"More:Pause:Trigger Type"
+	iL enum { "Analog Level"=10101, "Analog Window"=10103, "Digital Level"=10152, "None"=10230 }	readwrite		25	1366
+	"Specifies the type of trigger to use to pause a task."	"attr1366.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumObservableAP	setTimingI32EnumObservableAP	resetTimingI32EnumObservableAP
+
+attribute: "Pause.AnlgLvl.Src"
+	"More:Pause:Analog Level:Source"
+	string	readwrite		25	1370
+	"Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the trigger."	"attr1370.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingWstringObservableChanAP	setTimingWstringObservableChanAP	resetTimingWstringObservableChanAP
+
+attribute: "Pause.AnlgLvl.When"
+	"More:Pause:Analog Level:Pause When"
+	iL enum { "Above Level"=10093, "Below Level"=10107 }	readwrite		25	1371
+	"Specifies whether the task pauses above or below the threshold you specify with More:Pause:Analog Level:Level."	"attr1371.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Pause.AnlgLvl.Lvl"
+	"More:Pause:Analog Level:Level"
+	fD	readwrite		25	1369
+	"Specifies the threshold at which to pause the task. Specify this value in the units of the measurement or generation. Use More:Pause:Analog Level:Pause When to specify whether the task pauses above or below this threshold."	"attr1369.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Pause.AnlgLvl.Hyst"
+	"More:Pause:Analog Level:Hysteresis"
+	fD	readwrite		25	1368
+	"Specifies a hysteresis level in the units of the measurement or generation. If More:Pause:Analog Level:Pause When is Above Level, the trigger does not deassert until the source signal passes below More:Pause:Analog Level:Level minus the hysteresis. If More:Pause:Analog Level:Pause When is Below Level, the trigger does not deassert until the source signal passes above More:Pause:Analog Level:Level plus the hysteresis."	"attr1368.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Pause.AnlgLvl.Coupling"
+	"More:Pause:Analog Level:Coupling"
+	iL enum { "AC"=10045, "DC"=10050 }	readwrite		25	2236
+	"Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel."	"attr2236.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Pause.AnlgWin.Src"
+	"More:Pause:Analog Window:Source"
+	string	readwrite		25	1373
+	"Specifies the name of a virtual channel or terminal where there is an analog signal to use as the source of the trigger."	"attr1373.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingWstringObservableChanAP	setTimingWstringObservableChanAP	resetTimingWstringObservableChanAP
+
+attribute: "Pause.AnlgWin.When"
+	"More:Pause:Analog Window:Pause When"
+	iL enum { "Inside Window"=10199, "Outside Window"=10251 }	readwrite		25	1374
+	"Specifies whether the task pauses while the trigger signal is inside or outside the window you specify with More:Pause:Analog Window:Bottom and More:Pause:Analog Window:Top."	"attr1374.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Pause.AnlgWin.Top"
+	"More:Pause:Analog Window:Top"
+	fD	readwrite		25	1376
+	"Specifies the upper limit of the window. Specify this value in the units of the measurement or generation."	"attr1376.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Pause.AnlgWin.Btm"
+	"More:Pause:Analog Window:Bottom"
+	fD	readwrite		25	1375
+	"Specifies the lower limit of the window. Specify this value in the units of the measurement or generation."	"attr1375.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64ObservableAP	setTimingF64ObservableAP	resetTimingF64ObservableAP
+
+attribute: "Pause.AnlgWin.Coupling"
+	"More:Pause:Analog Window:Coupling"
+	iL enum { "AC"=10045, "DC"=10050 }	readwrite		25	2237
+	"Specifies the coupling for the source signal of the trigger if the source is a terminal rather than a virtual channel."	"attr2237.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Pause.DigLvl.Src"
+	"More:Pause:Digital Level:Source"
+	DAQTerminal	readwrite		25	1379
+	"Specifies the name of a terminal where there is a digital signal to use as the source of the Pause Trigger."	"attr1379.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "Pause.DigLvl.When"
+	"More:Pause:Digital Level:Pause When"
+	iL enum { "High"=10192, "Low"=10214 }	readwrite		25	1380
+	"Specifies whether the task pauses while the signal is high or low."	"attr1380.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "Pause.DigLvl.DigFltr.Enable"
+	"More:Pause:Digital Level:Digital Filter:Enable"
+	bool	readwrite		25	2228
+	"Specifies whether to apply the pulse width filter to the signal."	"attr2228.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "Pause.DigLvl.DigFltr.MinPulseWidth"
+	"More:Pause:Digital Level:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	2229
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr2229.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "Pause.DigLvl.DigFltr.TimebaseSrc"
+	"More:Pause:Digital Level:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	222A
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr222A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "Pause.DigLvl.DigFltr.TimebaseRate"
+	"More:Pause:Digital Level:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	222B
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr222B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "Pause.DigLvl.DigSync.Enable"
+	"More:Pause:Digital Level:Digital Synchronization:Enable"
+	bool	readwrite		25	222C
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr222C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "ArmStart.TrigType"
+	"More:Arm Start:Trigger Type"
+	iL enum { "Digital Edge"=10150, "None"=10230 }	readwrite		25	1414
+	"Specifies the type of trigger to use to arm the task for a Start Trigger. If you configure an Arm Start Trigger, the task does not respond to a Start Trigger until the device receives the Arm Start Trigger."	"attr1414.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "ArmStart.DigEdge.Src"
+	"More:Arm Start:Digital Edge:Source"
+	DAQTerminal	readwrite		25	1417
+	"Specifies the name of a terminal where there is a digital signal to use as the source of the Arm Start Trigger."	"attr1417.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "ArmStart.DigEdge.Edge"
+	"More:Arm Start:Digital Edge:Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	1415
+	"Specifies on which edge of a digital signal to arm the task for a Start Trigger."	"attr1415.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "ArmStart.DigEdge.DigFltr.Enable"
+	"More:Arm Start:Digital Edge:Digital Filter:Enable"
+	bool	readwrite		25	222D
+	"Specifies whether to apply the pulse width filter to the signal."	"attr222D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+attribute: "ArmStart.DigEdge.DigFltr.MinPulseWidth"
+	"More:Arm Start:Digital Edge:Digital Filter:Minimum Pulse Width"
+	fD	readwrite		25	222E
+	"Specifies in seconds the minimum pulse width the filter recognizes."	"attr222E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "ArmStart.DigEdge.DigFltr.TimebaseSrc"
+	"More:Arm Start:Digital Edge:Digital Filter:Timebase:Source"
+	DAQTerminal	readwrite		25	222F
+	"Specifies the input terminal of the signal to use as the timebase of the pulse width filter."	"attr222F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "ArmStart.DigEdge.DigFltr.TimebaseRate"
+	"More:Arm Start:Digital Edge:Digital Filter:Timebase:Rate"
+	fD	readwrite		25	2230
+	"Specifies in hertz the rate of the pulse width filter timebase. NI-DAQmx uses this value to compute settings for the filter."	"attr2230.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingF64AP	setTimingF64AP	resetTimingF64AP
+
+attribute: "ArmStart.DigEdge.DigSync.Enable"
+	"More:Arm Start:Digital Edge:Digital Synchronization:Enable"
+	bool	readwrite		25	2231
+	"Specifies whether to synchronize recognition of transitions in the signal to the internal timebase of the device."	"attr2231.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingBoolAP	setTimingBoolAP	resetTimingBoolAP
+
+
+///// DAQmx Watchdog Class Definition /////
+class: "DAQmx Watchdog"
+genericType: NIDAQ
+termName: task
+hasActiveProp: yes
+className: "DAQmx Watchdog"
+super: "DAQ Object"
+flags: 2
+
+attribute: "Timeout"
+	"Timeout"
+	fD	readwrite		25	21A9
+	"Specifies in seconds the amount of time until the watchdog timer expires. A value of -1 means the internal timer never expires. Set this input to -1 if you use an Expiration Trigger to expire the watchdog task."	"attr21A9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceF64AP	setDeviceF64AP	resetDeviceF64AP
+
+attribute: "ExpirTrig.TrigType"
+	"Expiration Trigger:Trigger Type"
+	iL enum { "Digital Edge"=10150, "None"=10230 }	readwrite		25	21A3
+	"Specifies the type of trigger to use to expire a watchdog task."	"attr21A3.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "ExpirTrig.DigEdge.Src"
+	"Expiration Trigger:Digital Edge:Source"
+	DAQTerminal	readwrite		25	21A4
+	"Specifies the name of a terminal where a digital signal exists to use as the source of the Expiration Trigger."	"attr21A4.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingTerminalAP	setTimingTerminalAP	resetTimingTerminalAP
+
+attribute: "ExpirTrig.DigEdge.Edge"
+	"Expiration Trigger:Digital Edge:Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readwrite		25	21A5
+	"Specifies on which edge of a digital signal to expire the watchdog task."	"attr21A5.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getTimingI32EnumAP	setTimingI32EnumAP	resetTimingI32EnumAP
+
+attribute: "ExpirStates.ActivePhysicalChans"
+	"Expiration States:Active Physical Channels"
+	DAQPhysChan	writeonly		27	21A6
+	"Specifies a physical channel or list of physical channels to modify. You cannot modify the expiration state of dedicated digital input physical channels."	"attr21A6.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21A6	set21A6	@NoReset
+
+attribute: "ExpirStates.DO.State"
+	"Expiration States:Digital Output:Expiration State"
+	iL enum { "High"=10192, "Low"=10214, "Tristate"=10310, "No Change"=10160 }	readwrite		25	21A7
+	"Specifies the state to which to set the digital physical channels when the watchdog task expires.  You cannot modify the expiration state of dedicated digital input physical channels."	"attr21A7.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceMultiI32EnumAP	setDeviceMultiI32EnumAP	resetDeviceMultiI32EnumAP
+
+attribute: "Expired"
+	"Status:Expired"
+	bool	readonly		25	21A8
+	"Indicates if the watchdog timer expired. You can read this property only while the task is running."	"attr21A8.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceBoolAP	setDeviceBoolAP	@NoReset
+
+
+///// DAQmx Write Class Definition /////
+class: "DAQmx Write"
+genericType: NIDAQ
+termName: task
+hasActiveProp: yes
+className: "DAQmx Write"
+super: "DAQ Object"
+flags: 2
+
+attribute: "RelativeTo"
+	"Relative To"
+	iL enum { "First Sample"=10424, "Current Write Position"=10430 }	readwrite		25	190C
+	"Specifies the point in the buffer at which to write data. If you also specify an offset with Offset, the write operation begins at that offset relative to this point you select with this property."	"attr190C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getWriterI32EnumAP	setWriterI32EnumAP	resetWriterI32EnumAP
+
+attribute: "Offset"
+	"Offset"
+	iL	readwrite		25	190D
+	"Specifies in samples per channel an offset at which a write operation begins. This offset is relative to the location you specify with Relative To."	"attr190D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getWriterI32AP	setWriterI32AP	resetWriterI32AP
+
+attribute: "RegenMode"
+	"Configure:Regeneration Mode"
+	iL enum { "Allow Regeneration"=10097, "Do Not Allow Regeneration"=10158 }	readwrite		25	1453
+	"Specifies whether to allow NI-DAQmx to generate the same data multiple times."	"attr1453.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getDeviceI32EnumAP	setDeviceI32EnumAP	resetDeviceI32EnumAP
+
+attribute: "CurrWritePos"
+	"Status:Current Write Position"
+	fD	readonly		25	1458
+	"Indicates the number of the next sample for the device to generate. This value is identical for all channels in the task."	"attr1458.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getWriterF64U64AP	setWriterF64U64AP	@NoReset
+
+attribute: "SpaceAvail"
+	"Status:Space Available in Buffer"
+	uL	readonly		25	1460
+	"Indicates in samples per channel the amount of available space in the buffer."	"attr1460.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getWriterU32AP	setWriterU32AP	@NoReset
+
+attribute: "TotalSampPerChanGenerated"
+	"Status:Total Samples Per Channel Generated"
+	fD	readonly		25	192B
+	"Indicates the total number of samples generated by each channel in the task. This value is identical for all channels in the task."	"attr192B.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	getWriterF64U64AP	setWriterF64U64AP	@NoReset
+
+attribute: "RawDataWidth"
+	"Advanced:Raw Data Width"
+	uL	readonly		25	217D
+	"Indicates in bytes the required size of a raw sample to write to the task."	"attr217D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get217D	set217D	@NoReset
+
+attribute: "NumChans"
+	"Advanced:Number of Channels"
+	uL	readonly		25	217E
+	"Indicates the number of channels that DAQmx Write writes to the task. This value is the number of channels in the task."	"attr217E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get217E	set217E	@NoReset
+
+attribute: "DO.NumBooleansPerChan"
+	"Advanced:Digital Output:Number of Booleans Per Channel"
+	uL	readonly		25	217F
+	"Indicates the number of Booleans expected per channel in a sample for line-based writes. If a channel has fewer lines than this number, NI-DAQmx ignores the extra Booleans."	"attr217F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get217F	set217F	@NoReset
+
+
+///// DAQmx Physical Channel Class Definition /////
+class: "DAQmx Physical Channel"
+genericType: NIDAQ
+termName: reference
+hasActiveProp: yes
+className: "DAQmx Physical Channel"
+super: "DAQ Object"
+flags: 10
+
+attribute: "ActivePhysicalChans"
+	"Active Physical Channels"
+	DAQPhysChan	writeonly		27	21D9
+	"Specifies the physical channel from which to retrieve properties."	"attr21D9.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21D9	set21D9	@NoReset
+
+attribute: "TEDS.MfgID"
+	"TEDS:ManufacturerID"
+	uL	readonly		25	21DA
+	"Indicates the manufacturer ID of the sensor."	"attr21DA.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21DA	set21DA	@NoReset
+
+attribute: "TEDS.ModelNum"
+	"TEDS:Model Number"
+	uL	readonly		25	21DB
+	"Indicates the model number of the sensor."	"attr21DB.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21DB	set21DB	@NoReset
+
+attribute: "TEDS.SerialNum"
+	"TEDS:Serial Number"
+	uL	readonly		25	21DC
+	"Indicates the serial number of the sensor."	"attr21DC.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21DC	set21DC	@NoReset
+
+attribute: "TEDS.VersionNum"
+	"TEDS:Version Number"
+	uL	readonly		25	21DD
+	"Indicates the version number of the sensor."	"attr21DD.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21DD	set21DD	@NoReset
+
+attribute: "TEDS.VersionLetter"
+	"TEDS:Version Letter"
+	string	readonly		25	21DE
+	"Indicates the version letter of the sensor."	"attr21DE.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21DE	set21DE	@NoReset
+
+attribute: "TEDS.BitStream"
+	"TEDS:BitStream"
+	uB1D	readonly		25	21DF
+	"Indicates the TEDS binary bitstream without checksums."	"attr21DF.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get21DF	set21DF	@NoReset
+
+attribute: "TEDS.TemplateIDs"
+	"TEDS:TemplateIDs"
+	uL1D	readonly		25	228F
+	"Indicates the IDs of the templates in the bitstream in TEDS:BitStream."	"attr228F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get228F	set228F	@NoReset
+
+
+///// DAQmx Timing Source Class Definition /////
+class: "DAQmx Timing Source"
+genericType: NIDAQ
+termName: reference
+hasActiveProp: yes
+className: "DAQmx Timing Source"
+super: "DAQ Object"
+flags: 10
+
+attribute: "ActiveTimingSrc"
+	"Active Timing Source"
+	string	writeonly		27	2249
+	"Specifies the timing source from which to retrieve properties."	"attr2249.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get2249	set2249	@NoReset
+
+attribute: "TimingSrcType"
+	"Timing Source Type"
+	iL enum { "Frequency"=12532, "Digital Change Detection"=12533, "Digital Edge using Counter"=12534, "Signal From Task"=12535 }	readonly		25	2269
+	"Indicates the type of timing source."	"attr2269.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get2269	set2269	@NoReset
+
+attribute: "Freq.Counter"
+	"Frequency:Counter"
+	DAQPhysChan	readonly		25	226A
+	"Indicates the counter the timing source uses."	"attr226A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get226A	set226A	@NoReset
+
+attribute: "Freq.Freq"
+	"Frequency:Frequency"
+	fD	readonly		25	224A
+	"Indicates the frequency of the timing source."	"attr224A.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get224A	set224A	@NoReset
+
+attribute: "DigChangeDetect.RisingEdgePhysicalChans"
+	"Digital Change Detection:Rising Edge Physical Channels"
+	DAQPhysChan	readonly		25	226F
+	"Indicates the names of the digital lines or ports on which to detect rising edges."	"attr226F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get226F	set226F	@NoReset
+
+attribute: "DigChangeDetect.FallingEdgePhysicalChans"
+	"Digital Change Detection:Falling Edge Physical Channels"
+	DAQPhysChan	readonly		25	2270
+	"Indicates the names of the digital lines or ports on which to detect falling edges."	"attr2270.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get2270	set2270	@NoReset
+
+attribute: "DigitalEdgeCtr.Counter"
+	"Digital Edge using Counter:Counter"
+	DAQPhysChan	readonly		25	226C
+	"Indicates the counter the timing source uses."	"attr226C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get226C	set226C	@NoReset
+
+attribute: "DigitalEdgeCtr.Edge"
+	"Digital Edge using Counter:Edge"
+	iL enum { "Rising"=10280, "Falling"=10171 }	readonly		25	224C
+	"Indicates on which edges of the digital signal each iteration of the Timed Loop executes."	"attr224C.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get224C	set224C	@NoReset
+
+attribute: "DigitalEdgeCtr.EdgeCount"
+	"Digital Edge using Counter:Edge Count"
+	uL	readonly		25	224D
+	"Indicates the number of edges of the digital signal that must occur for each iteration of the Timed Loop to execute."	"attr224D.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get224D	set224D	@NoReset
+
+attribute: "DigitalEdgeCtr.Term"
+	"Digital Edge using Counter:Terminal"
+	DAQTerminal	readonly		25	224E
+	"Indicates the terminal to which you connect the digital signal you want to use for the timing source."	"attr224E.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get224E	set224E	@NoReset
+
+attribute: "SignalFromTask.Signal"
+	"Signal From Task:Signal"
+	iL enum { "Sample Complete Event"=12530, "Counter Output Event"=12494, "Change Detection Event"=12511, "Sample Clock"=12487 }	readonly		25	224F
+	"Indicates the signal the timing source uses."	"attr224F.html"	"..\..\help\daqmxprop.chm"
+	nilvaiu.dll	get224F	set224F	@NoReset
+

@@ -1,0 +1,34 @@
+<?XML Version="1.0">
+<nidocument>
+<nicomment>
+<nifamily familyname="LabVIEW FPGA" displayname="LabVIEW FPGA">
+</nifamily>
+</nicomment>
+<nierror code="-61014">
+LabVIEW FPGA:  An error occured when trying to access the device.
+</nierror>
+<nierror code="-61013">
+LabVIEW FPGA:  The FIFO Method Node reached the timeout before being able to access the FIFO. This error is due to another FIFO Method Node accessing the same FIFO and not completing before the current method timed out.
+</nierror>
+<nierror code="-61012">
+LabVIEW FPGA:  The FPGA VI reference used to initialize the FIFO is no longer valid.
+</nierror>
+<nierror code="-61011">
+LabVIEW FPGA:  The FIFO size must be greater than or equal to two.
+</nierror>
+<nierror code="-61010">
+LabVIEW FPGA:  You are trying to read from, write to or close a FIFO that has not been initialized by the InitFIFO method.
+</nierror>
+<nierror code="61000">
+LabVIEW FPGA:  A duplicate DB ID addition was attempted and consequently failed. Delete the duplicate or use another ID.
+</nierror>
+<nierror code="61001">
+LabVIEW FPGA:  Error retrieving data from the board database.
+</nierror>
+<nierror code="61002">
+LabVIEW FPGA:  Database ID not found.
+</nierror>
+<nierror code="61003">
+LabVIEW FPGA:  Warning: a call to the run method has been made while the VI is already running.
+</nierror>
+</nidocument>

@@ -1,0 +1,331 @@
+EVALUATION AGREEMENT
+JKI TOOLKITS FOR LABVIEW
+JAMES KRING, INC.
+
+NOTICE TO CUSTOMER:  PLEASE READ THIS CONTRACT CAREFULLY.  BY DOWNLOADING, 
+INSTALLING OR USING ALL OR ANY PORTION OF THE PRODUCT, INCLUDING ANY UPDATE 
+THERETO, YOU AKNOWLEDGE AND AGREE THAT YOU ACCEPT ALL THE TERMS AND CONDITIONS 
+OF THIS AGREEMENT.  YOU AGREE THAT THIS AGREEMENT IS ENFORCEABLE LIKE ANY 
+WRITTEN NEGOTIATED AGREEMENT SIGNED BY YOU.  YOU AGREE THAT THIS AGREEMENT, 
+INCLUDING ALL ATTACHMENTS AND EXHIBITS, CONSTITUTES THE COMPLETE AND EXCLUSIVE 
+UNDERSTANDING BETWEEN US, AND SUPERSEDES ALL PRIOR SALES PROPOSALS, 
+NEGOTIATIONS, AGREEMENTS AND OTHER REPRESENTATIONS OR COMMUNICATIONS, WHETHER 
+ORAL OR WRITTEN. THIS AGREEMENT IS ENFORCEABLE AGAINST YOU AND ANY LEGAL 
+ENTITY THAT OBTAINED THE SOFTWARE OR ON WHOSE BEHALF IT IS USED.  IF YOU DO 
+NOT AGREE, DO NOT INSTALL, DOWNLOAD NOR USE THIS SOFTWARE.  
+
+This Evaluation Agreement (the "Agreement") is made by and between James 
+Kring, Inc. and you as the customer. In this Agreement, the customer will be 
+referred to as "you" and "your"; James Kring, Inc. will be referred to as 
+"JKI" or as "we", "us" and "our". 
+WHEREAS, JKI has developed and is willing to supply the computer software, 
+documentation, and related materials that you are downloading and which form 
+all or a part of the JKI products known as the JKI Toolkits for LabVIEW ("the 
+Product") to you solely for testing and evaluation purposes;  
+WHEREAS, You desire to have access to the Product and are aware of the 
+experimental and untested nature of the Product, and you are willing to use 
+the Product subject to the terms and conditions stated herein;
+NOW, THEREFORE, in consideration of the foregoing and the mutual covenants 
+hereinafter set forth, you agree as follows:
+
+1.	Use of the Product and Software License.  
+
+1.1	Scope of License.  JKI grants to you a personal, worldwide, fully-paid, 
+non-exclusive, non-transferable (except as permitted under Section 12(a)), 
+nonsublicensable, revocable license to use the Product that you obtain under 
+this Agreement, in accordance with the documentation and instructions supplied 
+by JKI, and for your own internal use and evaluation purposes.  You may make a 
+reasonable number of copies of the Product subject to the license terms herein 
+and solely for non-production archival or back-up purposes.  All titles, 
+trademarks, and copyright and restricted rights notices shall be reproduced in 
+such copies.  No other copies shall be made without JKI's prior written 
+consent.
+
+1.2		Restrictions on License.  You will not, directly or through others: (a) 
+market, license, distribute, transfer, sublicense or otherwise commercially 
+exploit the Product, except as expressly permitted herein; (b) permit the use 
+of the Product by others, except that you may permit your third party 
+subcontractors and agents ("Agents") to use the Product for your internal 
+business purposes only as described above so long as you ensure that your 
+Agents are bound by appropriate restrictions on nondisclosure of JKI's 
+Confidential Information and will use the Product only in accordance with the 
+terms of this Agreement; (c) modify or create derivative works of the Product 
+nor translate or port the Product into any other computer or human language 
+without the prior written consent of JKI; (d) disassemble, reverse engineer or 
+decompile the Product or otherwise attempt to discover any portion of the 
+object or source code or trade secrets related to the Product; (e) reproduce 
+the Product without JKI's copyright and trademark notices; or (f) sell, lend, 
+rent, give, assign or otherwise transfer or dispose of the Product.   
+
+1.3		Ownership; Proprietary Rights.    The Product is licensed, not sold, to 
+you and any and all rights not specifically granted to you by this Agreement, 
+remain in JKI and its suppliers.  The Product is protected by copyright, 
+trademark, trade secret and other proprietary rights of JKI, and you do not 
+acquire any rights, express or implied, in the Product, other than those 
+specified in this Agreement.  No title to or ownership of the Product, or 
+copyright, trademark, trade secret or other proprietary rights in any Product 
+are transferred to you under this Agreement.  All modifications, adjustments, 
+error corrections or other updates to the Product will become part of the 
+Product, as applicable, and will remain the exclusive property of JKI.
+
+2.	Use of Third Party Software:  
+(a)  You understand that the Product is or includes tools that access, 
+interact with and/or utilize software object and/or source code obtained by 
+JKI from third parties and that are separate from the Product (the "Third 
+Party Software").  (For purposes of this Agreement, the Product and any Third 
+Party Software shall be referred to as the "Software".)  Together with its 
+distribution to you of the Product, JKI is making some Third Party Software 
+available to you via download or other distribution.   In addition, following 
+your installation of the Product, the Product will be able to and will, based 
+on your instruction, connect to the internet and identify additional Third 
+Party Software for download and installation on your computer on your behalf.  
+You understand and agree that all such Third Party Software is made available 
+to you by JKI for the sole purpose of facilitating your download, 
+installation, use, evaluation and testing of the Product.  You further 
+acknowledge and agree that your use and distribution of any such Third Party 
+Software is subject to the terms of the applicable Third Party Software 
+license(s), and that you will comply with the terms of such Third Party 
+Software license(s). You expressly acknowledge and agree that, prior to using 
+the Third Party Software for any other purpose, and in any case before 
+copying, modifying, or distributing any Third Party Software, you will confirm 
+that you have all necessary rights and permissions to do so from the 
+applicable third party licensor (the "Licensor"), which confirmation may 
+include obtaining a separate license from the Licensor expressly authorizing 
+you to do so.  
+
+3.	You Will Not Use nor Disclose Our Confidential Information.  Confidential 
+Information hereunder includes, but is not limited to, JKI Product 
+specifications, Product source code, trade secrets, know-how, inventions 
+(whether or not patentable), techniques, processes, programs, ideas, 
+algorithms, schematics, testing procedures, software design and architecture, 
+internal documentation, design and function specifications, product 
+requirements, analysis and performance information, benchmarks, software 
+documents, and other non-public technical, business, product, marketing and 
+financial information, plans and data of JKI (the "Confidential Information"). 
+ You agree that all Confidential Information is the confidential property of 
+JKI and, except with JKI's prior written consent or as required (and then only 
+to the extent required) by law, you agree to use any Confidential Information 
+you obtain only as permitted by this Agreement, and not to disclose any 
+Confidential Information to third parties.  Notwithstanding the foregoing, you 
+may disclose Confidential Information only to those of your employees and 
+consultants as is necessary for the use expressly and unambiguously licensed 
+hereunder, and only after such employees and contractors have agreed in 
+writing to be bound by the obligations of nondisclosure at least as 
+restrictive as those contained in this Agreement. Your nondisclosure 
+obligations hereunder shall not apply to information you can document: (i) is 
+generally available to the public other than through breach of this Agreement; 
+(ii) is rightfully disclosed to you by a third party without any associated 
+obligation of confidentiality; or (iii) is independently developed by you 
+without use of any JKI Confidential Information. Because of the unique and 
+proprietary nature of the Confidential Information, you understand and agree 
+that JKI's remedies at law for your breach of your obligations under this 
+Section may be inadequate and that JKI shall be entitled to seek equitable 
+relief (including without limitation provisional and permanent injunctive 
+relief and specific performance). Nothing stated herein shall limit any other 
+remedies provided under this Agreement or available to JKI at law. Upon 
+expiration or termination of this Agreement for any reason, you will return or 
+destroy all copies of all JKI Confidential Information in your possession or 
+control.
+
+4.	Communications and Feedback.
+
+(a)  Feedback.  In the course of your evaluation of the Product, you may 
+provide JKI with comments and feedback regarding your use and evaluation of 
+the Product, including any defects found therein and any recommendations for 
+changes or modifications to the Product (the "Feedback"). Such Feedback may 
+include, but will not be limited to, any communications from you to JKI, 
+including (i) any messages, content, materials or other communications posted 
+to the www.jkisoft.com, www.jameskring.com or any other website(s) owned or 
+maintained by JKI; and/or (ii) relating to your use and evaluation of the 
+Product.  Feedback may include communications regarding: (1) which portions of 
+the Product have been used, (2) the nature of that use, (3) the extent or 
+amount of use, (4) any errors or difficulties discovered and (5) the 
+characteristic conditions and symptoms of the errors and difficulties.  You 
+acknowledge and agree that (i) JKI may use, in any manner and for any purpose, 
+the information gained as a result of your use and evaluation of the Product, 
+including but not limited to the Feedback;  (ii) any corrections, 
+modifications, upgrades or improvements to the Product based on such Feedback 
+or other input shall be owned and retained entirely by JKI; and (iii) JKI 
+shall have no obligation to correct, upgrade, modify, or otherwise support or 
+maintain the Product pursuant to this license.  
+(b)  Assignment.  If you are ever held or deemed to hold any right, title or 
+interest (including, without limitation, any intellectual property rights, 
+moral rights or trade secret rights) in or to: (a) the Product (including any 
+changes, modifications or corrections thereto) and/or (b) the Feedback, 
+whether by virtue of your provision of Feedback to JKI or otherwise, then you 
+hereby irrevocably assign to JKI all such right, title and interest. Such 
+assignment includes all rights in or to any invention, work of authorship, 
+mask work, idea, information, feedback or know-how (whether or not patentable) 
+that is conceived, learned or reduced to practice in the course of performance 
+under this Agreement and any patent rights, copyrights (including moral 
+rights; provided that any non-assignable moral rights are waived to the extent 
+permitted by law), trade secret rights, mask work rights, sui generis database 
+rights and all other intellectual and industrial property rights of any sort 
+with respect thereto that in any way relate to or constitute the Feedback or 
+the Product. In the event that any such rights (including, by way of example 
+and without limitation, "moral rights," or other similar rights) cannot be 
+assigned, you hereby agree to waive enforcement worldwide of such rights 
+against JKI and hereby grant to JKI an exclusive, fully paid, worldwide, 
+irrevocable, perpetual license, with right to sublicense through multiple 
+tiers of sub-licensees, to use, reproduce, create derivative works of, 
+publicly perform, publicly display, transfer, assign and distribute in any 
+medium or format, whether now known or later developed, any and all property 
+that is subject to such rights.  You agree to take any action reasonably 
+requested by JKI to evidence, perfect, obtain, maintain, enforce or defend the 
+foregoing, including executing any and all documents necessary to implement 
+and confirm the letter and intent of this Agreement.
+
+5.	WARRANTY DISCLAIMERS;
+
+(a)  You acknowledge that the Product is a test product which is experimental 
+in nature and that the Product is provided "AS IS".  The Product's accuracy or 
+reliability are not guaranteed, it may not be functional on any machine or in 
+any environment, and it may be modified substantially prior to the first 
+commercial shipment, if any.   You waive any and all claims you may have 
+against JKI arising out of the performance or nonperformance of the Product.  
+JKI DISCLAIMS ALL WARRANTIES RELATING TO THE PRODUCT AND ANY SOFTWARE, EXPRESS 
+OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY WARRANTIES AGAINST INFRINGEMENT 
+OF THIRD-PARTY RIGHTS, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. 
+JKI DOES NOT WARRANT THAT THE USE OF THE PRODUCT WILL BE, NOR THAT ANY 
+SOFTWARE IS, UNINTERRUPTED OR ERROR-FREE.
+
+(b)  HIGH RISK ACTIVITIES.  THE PRODUCT IS NOT DESIGNED, MANUFACTURED OR 
+INTENDED FOR USE IN CONNECTION WITH HAZARDOUS OR "HIGH RISK" ACTIVITIES NOR 
+WITH APPLICATIONS THAT REQUIRE FAIL-SAFE PERFORMANCE (TOGETHER, "HIGH RISK" 
+ACTIVITIES).  HIGH RISK ACTIVITIES INCLUDE BUT ARE NOT LIMITED TO ACTIVITIES 
+OR APPLICATIONS RELATING TO THE OPERATION OF NUCLEAR FACILITIES, AIR TRAFFIC 
+CONTROL, AEROSPACE OPERATIONS, OR DIRECT LIFE SUPPORT MACHINES, AND ANY OTHER 
+ACTIVITIES OR APPLICATIONS IN WHICH THE FAILURE OF THE SOFTWARE COULD LEAD 
+DIRECTLY TO DEATH, PERSONAL INJURY, OR SEVERE PHYSICAL OR ENVIRONMENTAL 
+DAMAGE.  ACCORDINGLY, WE SPECIFICALLY DISCLAIM ANY AND ALL EXPRESS OR IMPLIED 
+WARRANTIES OF FITNESS FOR HIGH RISK ACTIVITIES, AND YOU AGREE THAT JKI WILL 
+HAVE NO LIABILITY OR RESPONSIBILITY RELATING TO YOUR USE OR OPERATION OF THE 
+SOFTWARE IN CONNECTION WITH HIGH RISK ACTIVITIES. 
+
+6.	Indemnification by You.
+
+YOU AGREE TO, AT YOUR EXPENSE, INDEMNIFY AND HOLD HARMLESS JKI FROM AND 
+AGAINST ANY AND ALL LIABILITIES, LOSSES, ACTIONS, DAMAGES, OR CLAIMS 
+(INCLUDING ALL REASONABLE EXPENSES, COSTS, AND ATTORNEYS FEES)  THAT RESULT 
+FROM YOUR MISAPPROPRIATION OF ANY INTELLECTUAL PROPERTY RIGHTS CONTAINED IN 
+THE SOFTWARE OR YOUR USE OF THE SOFTWARE IN CONNECTION WITH ANY HIGH RISK 
+ACTIVITIES.
+
+7.	Termination.  This Agreement shall be terminated (a) automatically thirty 
+(30) days from the date of your download of the Product; or (b) at any time 
+upon any breach by you of the provisions of this Agreement, with or without 
+notice from JKI.  
+Upon termination, the license granted hereunder shall terminate and you shall 
+immediately cease all use of the Product.  Upon any such termination, you 
+shall immediately destroy all copies of the Product, together with any and all 
+documentation regarding the Product, any other Confidential Information and 
+any and all copies and extracts of the foregoing.  All other terms of this 
+Agreement shall remain in effect following termination.
+
+8.	OUR LIABILITY IS LIMITED. BY DOWNLOADING, INSTALLING AND/OR USING THE 
+PRODUCT, YOU AGREE THAT, DESPITE ANY OTHER PROVISION OF THIS AGREEMENT OR 
+OTHERWISE, JKI WILL NOT  BE LIABLE OR OBLIGATED WITH RESPECT TO THE SUBJECT 
+MATTER OF THIS AGREEMENT UNDER ANY CONTRACT, NEGLIGENCE, STRICT LIABILITY OR 
+OTHER LEGAL OR EQUITABLE THEORY: (I) FOR ANY AMOUNTS IN EXCESS OF THE TOTAL OF 
+THE FEES PAID TO US HEREUNDER IN THE TWELVE (12) MONTHS PRECEDING ANY CLAIM; 
+(II) FOR ANY COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES OR 
+RIGHTS; OR (III) FOR INTERRUPTION OF USE OR LOSS OR CORRUPTION OF DATA.  
+DESPITE ANY OTHER PROVISION OF THIS AGREEMENT, WE SHALL NOT BE LIABLE NOR 
+OBLIGATED WITH RESPECT TO THE SUBJECT MATTER OF THIS AGREEMENT OR UNDER ANY 
+CONTRACT, NEGLIGENCE, STRICT LIABILITY OR OTHER LEGAL OR EQUITABLE THEORY: (I) 
+FOR ANY MATTER BEYOND OUR REASONABLE CONTROL, OR (II) FOR ANY SPECIAL, 
+INCIDENTAL, INDIRECT OR CONSEQUENTIAL DAMAGES, LOST DATA OR LOST PROFITS, EVEN 
+IF WE ARE INFORMED OF THEIR POSSIBILITY.  THESE LIMITATIONS SHALL APPLY 
+DESPITE THE FAILURE OF THE ESSENTIAL PURPOSE OF ANY LIMITED REMEDY.  ANY 
+ACTIONS BASED ON OR ARISING OUT OF THIS AGREEMENT, OR THE SOFTWARE SUPPLIED 
+HEREUNDER, MUST BE BROUGHT WITHIN ONE YEAR OF THE DATE OF TERMINATION OF THIS 
+AGREEMENT.
+
+9.	Publicity.  Except as provided under Section 4 hereof, neither party may 
+issue press releases or endorsements which reference the other party or make 
+any use of the other party's name, logo or trademark without the prior written 
+consent of the other party.
+
+10.	You Will Comply with Export Regulations and other Applicable Laws; 
+Transfer of Personal Data.  You agree that the Software will not be shipped, 
+transferred or exported into any country or used in any manner prohibited by 
+the United States Export Administration Act or any other applicable laws, 
+restrictions or regulations (collectively the "Laws")  In addition, if all or 
+any portion of the Software is identified as an export controlled items under 
+any export Laws, you represent and warrant that you are not a citizen, or 
+otherwise located within, an embargoed nation (including without limitation 
+Iran, Iraq, Syria, Sudan, Libya, Cuba, North Korea, and Serbia) and that you 
+are not otherwise prohibited under any Laws from receiving or using the 
+Software.   If you reside in any part of the European Union or any other 
+jurisdiction in which the transfer of your personal data may apply, you 
+expressly consent to the transfer of any personal or other data identifying or 
+relating to you or the entity on whose behalf you are accepting this Agreement.
+
+11.	U.S. Government Users.  The Product is a "Commercial Item," as that term 
+is defined at 48 C.F.R. §2.101, consisting of "Commercial Computer Software" 
+and "Commercial Computer Software Documentation," as such terms are used in 48 
+C.F.R. §12.212 or 48 C.F.R. §227.7202, as applicable. Consistent with 48 
+C.F.R. §12.212 and 48 C.F.R. §§227.7202-1 through 227.7202-4, as applicable, 
+the Product is being provided to U.S. Government end users (1) only as a 
+Commercial Item, and (2) with only those rights as are granted to all other 
+end users pursuant to the terms and conditions of this Agreement.  
+
+12.	Miscellaneous. 
+
+(a)  You may not assign, transfer, or sublicense any obligations or benefit 
+under this Agreement without the written consent of JKI.   This restriction 
+shall not apply to any redistribution of software provided under a separate 
+Third Party Software license allowing for such redistribution. 
+
+(b)  We agree that we are independent contractors and neither of us has the 
+right or authority to assume or create any obligation or responsibility on 
+behalf of the other. 
+
+(c)  All notices under this Agreement shall be in writing, and shall be deemed 
+given when personally delivered or three (3) days after being sent by prepaid 
+certified or registered mail to the address of the party to be noticed as set 
+forth herein or such other address as such party last provided to the other by 
+written notice.  
+
+(d)  No failure or delay in exercising any right hereunder will operate as a 
+waiver thereof, nor will any partial exercise of any right or power hereunder 
+preclude further exercise. 
+
+(e)  If any provision of this Agreement shall be adjudged by any court of 
+competent jurisdiction to be unenforceable or invalid, that provision shall be 
+limited or eliminated to the minimum extent necessary so that this Agreement 
+shall otherwise remain in full force and effect and enforceable. 
+
+(f)  This Agreement shall be deemed to have been made in, and shall be 
+construed pursuant to the laws of, the State of California and the United 
+States without regard to the conflict of law provisions thereof.   The United 
+Nation's Convention on Contracts for the International Sale of Goods is 
+expressly excluded from application to this Agreement.  The sole venue for all 
+disputes relating to this Agreement shall be in San Francisco County, 
+California.  
+
+(g)  This Agreement may be executed in any number of counterparts, each of 
+which shall be considered an original, but all of which together will 
+constitute one and the same instrument. 
+
+(h)  This Agreement constitutes the entire agreement between us pertaining to 
+the subject matter hereof, and any and all written or oral agreements 
+previously existing between the parties are expressly cancelled.  This 
+Agreement may be modified, replaced or rescinded only in writing, and signed 
+by a duly authorized representative of each party.  
+
+(i)  In any action to enforce this Agreement the prevailing party will be 
+entitled to reasonable costs and attorneys' fees. In the event that any of the 
+provisions of this Agreement shall be held by a court or other tribunal of 
+competent jurisdiction to be unenforceable, such provisions shall be limited 
+or eliminated to the minimum extent necessary so that this Agreement shall 
+otherwise remain in full force and effect and enforceable.
+
+14.	BASIS OF BARGAIN.  EACH PARTY RECOGNIZES AND AGREES THAT THE WARRANTY 
+DISCLAIMERS AND LIABILITY AND REMEDY LIMITATIONS IN THIS AGREEMENT ARE 
+MATERIAL, BARGAINED FOR BASES OF THIS AGREEMENT AND THAT THEY HAVE BEEN TAKEN 
+INTO ACCOUNT AND REFLECTED IN DETERMINING THE CONSIDERATION TO BE GIVEN BY 
+EACH PARTY UNDER THIS AGREEMENT AND IN THE DECISION BY EACH PARTY TO ENTER 
+INTO THIS AGREEMENT.
+
+February 2008

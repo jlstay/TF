@@ -1,0 +1,161 @@
+The OpenG Toolkit "Dynamic Palette View" resource (ogrsc_dynamicpalette) synchronizes the following folders and menus:
+
+Controls Palette Menu Paths
+----------------------------
+3dnum             Controls::Numeric
+3dbool            Controls::Boolean
+3dstring          Controls::String & Path
+3darray           Controls::Array & Cluster
+3dlist            Controls::List & Table
+3dgraph           Controls::Graph
+3dpicture         Controls::Graph::Controls
+picttype          Controls::Graph::Controls::Datatypes
+3dring            Controls::Ring & Enum
+3dContainer       Controls::Containers
+3dio              Controls::I/O
+dialog            Controls::Dialog Controls
+3drefnum          Controls::Refnum
+3ddecor           Controls::Decorations
+2dctrls           Controls::Classic Controls
+numeric           Controls::Classic Controls::Numeric
+boolean           Controls::Classic Controls::Boolean
+strctl            Controls::Classic Controls::String & Path
+arrclctl          Controls::Classic Controls::Array & Cluster
+list              Controls::Classic Controls::List & Table
+graph             Controls::Classic Controls::Graph
+graphics          Controls::Classic Controls::Graph::Picture
+picttype          Controls::Classic Controls::Graph::Picture::Datatypes
+ring              Controls::Classic Controls::Ring & Enum
+io                Controls::Classic Controls::I/O
+refnum            Controls::Classic Controls::Refnum
+container         Controls::Classic Controls::Containers
+
+Functions Palette Menu Paths
+----------------------------
+structs           Functions::Structures
+math              Functions::Numeric
+convert           Functions::Numeric::Conversion
+trig              Functions::Numeric::Trigonometric
+log               Functions::Numeric::Logarithmic
+complex           Functions::Numeric::Complex
+constant          Functions::Numeric::Additional Numeric Constants
+boolfunc          Functions::Boolean
+string            Functions::String
+advstring         Functions::String::Additional String Functions
+altstrng          Functions::String::String/Number Conversion
+strcvt            Functions::String::String/Array/Path Conversion
+arrclust          Functions::Array
+cluster           Functions::Cluster
+compare           Functions::Comparison
+timedlg           Functions::Time & Dialog
+file              Functions::File I/O
+binfile           Functions::File I/O::Binary File VIs
+advfile           Functions::File I/O::Advanced File Functions
+filecnst          Functions::File I/O::File Constants
+config            Functions::File I/O::Configuration File VIs
+storage0          Functions::File I/O::Storage
+storage1          Functions::File I/O::Storage::Advanced Storage
+waveforms         Functions::Waveform
+AnalogWDT         Functions::Waveform::Analog Waveform
+mamain            Functions::Waveform::Analog Waveform::Waveform Measurements
+magenr            Functions::Waveform::Analog Waveform::Waveform Generation
+DigitalWDT        Functions::Waveform::Digital Waveform
+WDTFile           Functions::Waveform::Waveform File I/O
+anmeas            Functions::Analyze
+mamain            Functions::Analyze::Waveform Measurements
+macond            Functions::Analyze::Waveform Conditioning
+mamon             Functions::Analyze::Waveform Monitoring
+magenr            Functions::Analyze::Waveform Generation
+analysis          Functions::Analyze::Signal Processing
+ansiggen          Functions::Analyze::Signal Processing::Signal Generation
+andsp             Functions::Analyze::Signal Processing::Time Domain
+antrans           Functions::Analyze::Signal Processing::Frequency Domain
+anfilt            Functions::Analyze::Signal Processing::Filters
+anfltiir          Functions::Analyze::Signal Processing::Filters::Advanced IIR Filtering
+anfltfir          Functions::Analyze::Signal Processing::Filters::Advanced FIR Filtering
+anwind            Functions::Analyze::Signal Processing::Windows
+pt_by_pt          Functions::Analyze::Point By Point
+PtByPt_siggen     Functions::Analyze::Point By Point::Signal Generation PtByPt
+PtByPt_dsp        Functions::Analyze::Point By Point::Time Domain PtByPt
+PtByPt_trans      Functions::Analyze::Point By Point::Frequency Domain PtByPt
+PtByPt_filt       Functions::Analyze::Point By Point::Filters PtByPt
+PtByPt_probstat   Functions::Analyze::Point By Point::Probablility and Statistics PtByPt
+PtByPt_fit        Functions::Analyze::Point By Point::Curve Fitting PtByPt
+PtByPt_linalg     Functions::Analyze::Point By Point::Linear Algebra PtByPt
+PtByPt_arr        Functions::Analyze::Point By Point::Array Operations PtByPt
+PtByPt_otherFunc  Functions::Analyze::Point By Point::Other Functions PtByPt
+gmath             Functions::Analyze::Mathematics
+mathform          Functions::Analyze::Mathematics::Formula
+mathpars          Functions::Analyze::Mathematics::Formula::Advanced Formula Parsing
+math1d2d          Functions::Analyze::Mathematics::1D and 2D Evaluation
+mathcalc          Functions::Analyze::Mathematics::Calculus
+mathode           Functions::Analyze::Mathematics::Calculus::Differential Equations
+anstat            Functions::Analyze::Mathematics::Probability and Statistics
+anprob            Functions::Analyze::Mathematics::Probability and Statistics::Probability
+ananova           Functions::Analyze::Mathematics::Probability and Statistics::Analysis of Variance
+anfit             Functions::Analyze::Mathematics::Curve Fitting
+anlinalg          Functions::Analyze::Mathematics::Linear Algebra
+anlaradv          Functions::Analyze::Mathematics::Linear Algebra::Advanced Linear Algebra
+anlacx            Functions::Analyze::Mathematics::Linear Algebra::Complex Linear Algebra
+anlacadv          Functions::Analyze::Mathematics::Linear Algebra::Complex Linear Algebra::Advanced Complex Linear Algebra
+anarr             Functions::Analyze::Mathematics::Array Operations
+mathopt           Functions::Analyze::Mathematics::Optimization
+mathzero          Functions::Analyze::Mathematics::Zeroes
+mathfunc          Functions::Analyze::Mathematics::Special and Numeric Functions
+mathpoly          Functions::Analyze::Mathematics::Polynomial
+mathpolyrat       Functions::Analyze::Mathematics::Polynomial::Rational Polynomial
+instr             Functions::Instrument I/O
+gpib              Functions::Instrument I/O::GPIB
+gpib4882          Functions::Instrument I/O::GPIB::GPIB 488.2
+serial            Functions::Instrument I/O::Serial
+visa              Functions::Instrument I/O::VISA
+visaadv           Functions::Instrument I/O::VISA::VISA Advanced
+vserial           Functions::Instrument I/O::VISA::VISA Advanced::Interface Specific
+serial            Functions::Instrument I/O::VISA::VISA Advanced::Interface Specific::Serial
+vusb              Functions::Instrument I/O::VISA::VISA Advanced::Interface Specific::VISA USB
+vevent            Functions::Instrument I/O::VISA::VISA Advanced::Event Handling
+vhlreg            Functions::Instrument I/O::VISA::VISA Advanced::High Level Register Access
+vllreg            Functions::Instrument I/O::VISA::VISA Advanced::Low Level Register Access
+appctl            Functions::Application Control
+lvmenu            Functions::Application Control::Menu
+help              Functions::Application Control::Help
+cursor            Functions::Application Control::Cursor
+events            Functions::Application Control::Events
+graphics          Functions::Graphics & Sound
+3dprops           Functions::Graphics & Sound::3D Graph Properties
+pictplots         Functions::Graphics & Sound::Picture Plots
+picture           Functions::Graphics & Sound::Picture Functions
+graphicsfmt       Functions::Graphics & Sound::Graphics Formats
+sound             Functions::Graphics & Sound::Sound
+soundfile         Functions::Graphics & Sound::Sound::Sound File
+soundinput        Functions::Graphics & Sound::Sound::Sound Input
+soundoutput       Functions::Graphics & Sound::Sound::Sound Output
+comm              Functions::Communication
+dot-net           Functions::Communication::.NET
+ole               Functions::Communication::ActiveX
+dsocket           Functions::Communication::Data Socket
+variant           Functions::Communication::Data Socket::Variant
+SMTPEmail         Functions::Communication::SMTP E-mail
+tcp               Functions::Communication::TCP
+udp               Functions::Communication::UDP
+irda              Functions::Communication::IrDA
+bt                Functions::Communication::Bluetooth
+nireport          Functions::Report Generation
+repdocs           Functions::Report Generation::VI Documentation
+htmlrep           Functions::Report Generation::HTML Reports Only
+nireplay          Functions::Report Generation::Report Layout
+nirepadv          Functions::Report Generation::Advanced Report Generation
+adv               Functions::Advanced
+inputDevice       Functions::Advanced::Input Device Control
+advdata           Functions::Advanced::Data Manipulation
+variant           Functions::Advanced::Data Manipulation::Variant
+xml               Functions::Advanced::Data Manipulation::XML
+synch             Functions::Advanced::Synchronization
+NotifierPrim      Functions::Advanced::Synchronization::Notifier Operations
+QueuePrim         Functions::Advanced::Synchronization::Queue Operations
+semaphor          Functions::Advanced::Synchronization::Semaphore
+rendezvs          Functions::Advanced::Synchronization::Rendezvous
+occur             Functions::Advanced::Synchronization::Occurrences
+advmem            Functions::Advanced::Port I/O
+registry          Functions::Advanced::Windows Registry Access VIs
+diagdec           Functions::Decorations

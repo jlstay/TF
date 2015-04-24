@@ -1,0 +1,2 @@
+4.0	6.0	31.0	195.43	0.099	-6.5
+lsr P   scale   V ofst  ref f   fsr	threshold

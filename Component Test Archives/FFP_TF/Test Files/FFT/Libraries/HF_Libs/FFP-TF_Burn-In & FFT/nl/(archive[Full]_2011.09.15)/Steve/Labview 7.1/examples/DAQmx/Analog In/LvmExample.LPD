@@ -1,0 +1,250 @@
+Begin_PictureDefinition
+ Begin_Info('{@C:16987929 {@P:DIAdem {@R:810')
+ End_Info;
+ Begin_ScaleParameter
+  Ratio: 0.7;
+  Scaled: 'False';
+  Width: 25.4;
+  Height: 17.78;
+  Clip: 'against axes and graphs';
+ End_ScaleParameter;
+ Begin_GlobPalette(1)
+  Begin_Colors
+   Begin_Ctrl(1)
+   End_Ctrl;
+   Begin_Ctrl(2)
+   End_Ctrl;
+  End_Colors;
+  Begin_Values
+   Type: 'scaling domain of axis';
+  End_Values;
+  Begin_Lines
+   LineType: 'solid';
+  End_Lines;
+ End_GlobPalette;
+ Begin_GlobPalette(2)
+  Begin_Colors
+   Begin_Ctrl(1)
+   End_Ctrl;
+   Begin_Ctrl(2)
+   End_Ctrl;
+  End_Colors;
+  Begin_Values
+   Type: 'scaling domain of axis';
+  End_Values;
+  Begin_Lines
+   LineType: 'solid';
+  End_Lines;
+ End_GlobPalette;
+ Begin_GlobPalette(3)
+  Begin_Colors
+   Begin_Ctrl(1)
+   End_Ctrl;
+   Begin_Ctrl(2)
+   End_Ctrl;
+  End_Colors;
+  Begin_Values
+   Type: 'scaling domain of axis';
+  End_Values;
+  Begin_Lines
+   LineType: 'solid';
+  End_Lines;
+ End_GlobPalette;
+ Begin_PicDefByChnName
+  Expand: 'True';
+  Begin_ExpList
+  End_ExpList;
+ End_PicDefByChnName;
+ Begin_FreeFrame
+  Begin_Frame(1)
+   Rect: 0,0,100,15;
+   Width: 3;
+  End_Frame;
+ End_FreeFrame;
+ Begin_FreeText
+  Begin_Text(1)
+   Contents: 'DIAdem LVM example';
+   Point: 4.45,13.06;
+   Begin_Textparams('')
+    Size: 7;
+    Position: 'r-bot.';
+    Weight: 'True';
+   End_Textparams;
+  End_Text;
+  Begin_Text(2)
+   Contents: '@CurrDateTime@';
+   Point: 4.91,5.76;
+   Begin_Textparams('')
+    Size: 4;
+    Position: 'r-bot.';
+   End_Textparams;
+  End_Text;
+  Begin_Text(3)
+   Point: 2.734375,2.186046511;
+   Begin_Textparams('Times New Roman')
+    Family: 0;
+    Size: 3;
+    Position: 'r-bot.';
+   End_Textparams;
+  End_Text;
+ End_FreeText;
+ Begin_Metalist
+  Begin_Metafile(1)
+   Name: 'libr\gra\example1.wmf';
+   Point: 64.81,12.6;
+   Height: 11.03;
+   Width: 32.13;
+   Position: 'r-bot.';
+  End_Metafile;
+  Begin_Metafile(2)
+   Point: 57.01,89.99;
+   Height: 11.98;
+   Width: 27.98;
+   Position: 'r-bot.';
+   UseRatio: 'False';
+   Clip: 'against the axes';
+  End_Metafile;
+ End_Metalist;
+ Begin_AdditionalGraphObject
+ End_AdditionalGraphObject;
+ Begin_2D-Axis('2DAxis_1')
+  Rect: 7.53,57.65,9.93,14.08;
+  Point: 7.62,7.62;
+  Scaled: 'False';
+  Width: 5;
+  DispType: 'Frame';
+  Begin_X-AxisGlobal
+   Type: 'Grid';
+  End_X-AxisGlobal;
+  Begin_Y-AxisGlobal
+   Type: 'Grid';
+  End_Y-AxisGlobal;
+  Begin_MiniTick
+  End_MiniTick;
+  Begin_Axis(1)
+   X-Number: 1;
+   Y-Number: 1;
+  End_Axis;
+  Begin_X-Axis(1)
+   End: 2;
+   Delta: 0.25;
+   OffsetOrigin: 'AxisBegin';
+   Units/cm: 25;
+   Begin_NumericLabel
+    Begin_Textparams('')
+     Color: 'black';
+    End_Textparams;
+   End_NumericLabel;
+   Begin_FreeLabel
+    Contents: 'Time [s]';
+    Delta-x: 98.49;
+    Delta-y: -4.5;
+    Begin_Textparams('')
+    End_Textparams;
+   End_FreeLabel;
+   Color: 'black';
+   Width: 3;
+  End_X-Axis;
+  Begin_Y-Axis(1)
+   Begin: -1.5;
+   End: 1.5;
+   Origin: -1.5;
+   Delta: 0.5;
+   TickType: 'no Ticks';
+   Channel: 1 'X_Value';
+   Units/cm: 25;
+   Begin_NumericLabel
+    Begin_Textparams('')
+     Color: 'black';
+    End_Textparams;
+   End_NumericLabel;
+   Begin_FreeLabel
+    Contents: 'Amplitude';
+    Delta-x: -6.5;
+    Delta-y: 67.05;
+    Begin_Textparams('')
+     Color: 'blue';
+    End_Textparams;
+   End_FreeLabel;
+   Color: 'black';
+   Width: 3;
+  End_Y-Axis;
+  Begin_CurveList
+   Begin_Curve(1)
+    DisplayType: 'Line and symbol';
+    LegTxt: '@CN(CCN)@';
+    AxisNumber: 1;
+    X-Channel: 1 'X_Value';
+    Y-Channel: 2 'PXI1Slot2/ai1';
+    Begin_CurveParams('Curve_1')
+    End_CurveParams;
+   End_Curve;
+  End_CurveList;
+  Begin_Legend
+   Begin_Globals
+    Legend: 'True';
+    FrameWidth: 1;
+    Clip: 'True';
+    Text: 'curve defined text';
+   End_Globals;
+   Begin_Text
+    Begin_Textparams('')
+     Color: 'black';
+    End_Textparams;
+   End_Text;
+   Begin_Title
+    Size: 0;
+    Begin_Textparams('')
+    End_Textparams;
+   End_Title;
+   Begin_Pos
+    PosX: 85.64;
+    PosY: 99.18;
+    RelPos: 'top right';
+    SizeGlX: 23;
+    SizeGlY: 6.16;
+    SizeCol: 20;
+    Orient: 'vertical';
+   End_Pos;
+  End_Legend;
+ End_2D-Axis;
+ Begin_2D-Table('2DTable1')
+  Begin_Globals
+   Rect: 51.09,17.63,10.32,13.85;
+   Orientation: 'vertical';
+   X-Color: 'black';
+   Y-Color: 'black';
+   Size: 18.73;
+   TxtAuto: 'True';
+   ColHeight: 2.54;
+   Contents: '@cn(CCN)@';
+   Begin_Textparams('')
+    Size: 5.27;
+   End_Textparams;
+  End_Globals;
+  Begin_Scale
+  End_Scale;
+  Begin_Numeric
+   Begin_Param(1)
+    Begin_Textparams('Times New Roman')
+     Size: 2.51;
+    End_Textparams;
+   End_Param;
+   Begin_Param(2)
+    Begin_Textparams('Times New Roman')
+     Size: 2.51;
+    End_Textparams;
+   End_Param;
+  End_Numeric;
+  Begin_Palette
+  End_Palette;
+  Begin_Channels
+   Begin_Channel(1)
+    No: 1 'X_Value';
+   End_Channel;
+   Begin_Channel(2)
+    No: 2 'PXI1Slot2/ai1';
+   End_Channel;
+  End_Channels;
+ End_2D-Table;
+End_PictureDefinition;

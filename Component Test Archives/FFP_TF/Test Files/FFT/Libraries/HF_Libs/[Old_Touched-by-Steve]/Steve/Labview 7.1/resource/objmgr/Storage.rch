@@ -1,0 +1,20 @@
+///// Storage Type Definition /////
+genericType: Storage
+genericTypeName: Storage
+refnum: Generic
+sorted: yes
+adapt: yes
+matchExact: strict
+menuSelect: no
+setFunction: SetDataObj
+getFunction: GetDataObj
+library: lvStorage.dll
+openFunction: OpenDataObj
+closeFunction: CloseDataObj
+cleanup: idle
+calling: C
+passAttributeError: stringLast
+passMethodError: stringLast
+hasActiveProp: yes
+passEventRegError: none
+
